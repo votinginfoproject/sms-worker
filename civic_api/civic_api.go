@@ -50,9 +50,9 @@ func New(key string, electionId string) *CivicApi {
 	return &CivicApi{endpoint, key, electionId}
 }
 
-type Requestor func(endpoint string) ([]byte, error)
+type requestor func(endpoint string) ([]byte, error)
 
-func (c *CivicApi) Query(address string, makeRequest Requestor) (*Response, error) {
+func (c *CivicApi) Query(address string, makeRequest requestor) (*Response, error) {
 	parameters := url.Values{}
 	parameters.Add("key", c.key)
 	parameters.Add("electionId", c.electionId)
