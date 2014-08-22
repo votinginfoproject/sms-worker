@@ -20,15 +20,15 @@ var makeRequestError = func(endpoint string) ([]byte, error) {
 }
 
 func TestQuerySuccess(t *testing.T) {
-	c := New("", "")
-	res, _ := c.Query("", makeRequestSuccess)
+	c := New("", "", makeRequestSuccess)
+	res, _ := c.Query("")
 	assert.Equal(t, len(res.Error.Errors), 0)
 	assert.Equal(t, res.PollingLocations[0].Address.Line1, "115 W 6th St")
 }
 
 func TestQueryError(t *testing.T) {
-	c := New("", "")
-	res, _ := c.Query("", makeRequestError)
+	c := New("", "", makeRequestError)
+	res, _ := c.Query("")
 	assert.Equal(t, len(res.Error.Errors), 1)
 	assert.Equal(t, res.Error.Errors[0].Reason, "keyInvalid")
 }

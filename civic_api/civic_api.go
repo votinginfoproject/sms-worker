@@ -37,29 +37,30 @@ type Querier interface {
 	Query(address string) (*Response, error)
 }
 
+type requestor func(endpoint string) ([]byte, error)
+
 type CivicApi struct {
-	endpoint   *url.URL
-	key        string
-	electionId string
+	endpoint    *url.URL
+	key         string
+	electionId  string
+	makeRequest requestor
 }
 
-func New(key string, electionId string) *CivicApi {
+func New(key string, electionId string, makeRequest requestor) *CivicApi {
 	endpoint, _ := url.Parse("https://www.googleapis.com/")
 	endpoint.Path += "civicinfo/v2/voterinfo"
 
-	return &CivicApi{endpoint, key, electionId}
+	return &CivicApi{endpoint, key, electionId, makeRequest}
 }
 
-type requestor func(endpoint string) ([]byte, error)
-
-func (c *CivicApi) Query(address string, makeRequest requestor) (*Response, error) {
+func (c *CivicApi) Query(address string) (*Response, error) {
 	parameters := url.Values{}
 	parameters.Add("key", c.key)
 	parameters.Add("electionId", c.electionId)
 	parameters.Add("address", address)
 	c.endpoint.RawQuery = parameters.Encode()
 
-	body, err := makeRequest(c.endpoint.String())
+	body, err := c.makeRequest(c.endpoint.String())
 	if err != nil {
 		return nil, err
 	}
