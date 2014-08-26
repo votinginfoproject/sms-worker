@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
+	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/crowdmob/goamz/aws"
@@ -25,6 +28,17 @@ type Data struct {
 func main() {
 	env.Load()
 
+	procs, err := strconv.Atoi(os.Getenv("PROCS"))
+	if err != nil {
+		log.Fatal("[ERROR] you must specify procs in the .env file")
+	}
+	runtime.GOMAXPROCS(procs)
+
+	routines, err := strconv.Atoi(os.Getenv("ROUTINES"))
+	if err != nil {
+		log.Fatal("[ERROR] you must specify routines in the .env file")
+	}
+
 	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
 	res := response.New(api)
 
@@ -38,31 +52,42 @@ func main() {
 
 	queueName := os.Getenv("QUEUE_PREFIX") + "-" + strings.ToLower(os.Getenv("ENVIRONMENT"))
 
-	queue, err := sqs.GetQueue(queueName)
-	if err != nil {
-		log.Panic("Failed to get queue: ", err)
+	var wg sync.WaitGroup
+
+	for i := 0; i < routines; i++ {
+		wg.Add(1)
+
+		go func(wg *sync.WaitGroup, routine int) {
+			defer wg.Done()
+			queue, err := sqs.GetQueue(queueName)
+			if err != nil {
+				log.Panic("Failed to get queue: ", err)
+			}
+
+			for {
+				message, getErr := getMessage(queue)
+				if getErr != nil {
+					fmt.Println(getErr)
+					continue
+				}
+
+				data := &Data{}
+				json.Unmarshal([]byte(message.Body), data)
+
+				msg := res.Generate(data.Message)
+				fmt.Println(msg)
+				sms.Send(msg, data.Number)
+
+				_, delErr := queue.DeleteMessage(message)
+				if delErr != nil {
+					fmt.Println(getErr)
+					continue
+				}
+			}
+		}(&wg, i)
 	}
 
-	for {
-		message, getErr := getMessage(queue)
-		if getErr != nil {
-			fmt.Println(getErr)
-			continue
-		}
-
-		data := &Data{}
-		json.Unmarshal([]byte(message.Body), data)
-
-		msg := res.Generate(data.Message)
-		fmt.Println(msg)
-		sms.Send(msg, data.Number)
-
-		_, delErr := queue.DeleteMessage(message)
-		if delErr != nil {
-			fmt.Println(getErr)
-			continue
-		}
-	}
+	wg.Wait()
 }
 
 func getMessage(queue *sqs.Queue) (*sqs.Message, error) {
@@ -73,8 +98,7 @@ func getMessage(queue *sqs.Queue) (*sqs.Message, error) {
 		}
 
 		if len(received.Messages) == 0 {
-			fmt.Println("Queue is empty, waiting...")
-			time.Sleep(5 * time.Second)
+			time.Sleep(3 * time.Second)
 		} else {
 			return &received.Messages[0], nil
 		}
