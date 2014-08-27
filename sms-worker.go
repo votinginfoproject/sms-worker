@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"runtime"
@@ -15,6 +14,7 @@ import (
 	"github.com/crowdmob/goamz/sqs"
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/env"
+	"github.com/votinginfoproject/sms-worker/logger"
 	"github.com/votinginfoproject/sms-worker/response"
 	"github.com/votinginfoproject/sms-worker/sms"
 	"github.com/votinginfoproject/sms-worker/util"
@@ -39,6 +39,8 @@ func main() {
 		log.Fatal("[ERROR] you must specify routines in the .env file")
 	}
 
+	log.SetOutput(logger.New())
+
 	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
 	res := response.New(api)
 
@@ -60,27 +62,31 @@ func main() {
 		go func(wg *sync.WaitGroup, routine int) {
 			defer wg.Done()
 			queue, err := sqs.GetQueue(queueName)
+
 			if err != nil {
-				log.Panic("Failed to get queue: ", err)
+				log.Fatal("[ERROR] Failed to get queue ", err)
 			}
+
+			log.Print("[INFO] Started routine ", routine)
 
 			for {
 				message, getErr := getMessage(queue)
 				if getErr != nil {
-					fmt.Println(getErr)
+					log.Printf("[ERROR] [%d] %s", routine, getErr)
 					continue
 				}
 
 				data := &Data{}
+				log.Printf("[INFO] [%d] Received %s", routine, string(message.Body))
 				json.Unmarshal([]byte(message.Body), data)
 
 				msg := res.Generate(data.Message)
-				fmt.Println(msg)
+				log.Printf("[INFO] [%d] Sending '%s' To %s", routine, msg, data.Number)
 				sms.Send(msg, data.Number)
 
 				_, delErr := queue.DeleteMessage(message)
 				if delErr != nil {
-					fmt.Println(getErr)
+					log.Printf("[ERROR] [%d] %s", routine, delErr)
 					continue
 				}
 			}
