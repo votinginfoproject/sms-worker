@@ -18,6 +18,7 @@ import (
 	"github.com/votinginfoproject/sms-worker/response"
 	"github.com/votinginfoproject/sms-worker/sms"
 	"github.com/votinginfoproject/sms-worker/util"
+	"github.com/yvasiyarov/gorelic"
 )
 
 type Data struct {
@@ -27,6 +28,15 @@ type Data struct {
 
 func main() {
 	env.Load()
+	host, _ := os.Hostname()
+
+	if os.Getenv("ENVIRONMENT") == "production" {
+		agent := gorelic.NewAgent()
+		agent.NewrelicName = "sms-worker" + "-" + host
+		agent.NewrelicLicense = os.Getenv("NEWRELIC_TOKEN")
+		agent.NewrelicPollInterval = 15
+		agent.Run()
+	}
 
 	procs, err := strconv.Atoi(os.Getenv("PROCS"))
 	if err != nil {
