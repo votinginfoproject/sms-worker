@@ -71,7 +71,11 @@ func main() {
 
 				log.Printf("[INFO] [%d] Sending '%s' To %s", routine, reply, number)
 
-				sms.Send(reply, number)
+				smsErr := sms.Send(reply, number)
+				if smsErr != nil {
+					log.Printf("[ERROR] [%d] %s", routine, smsErr)
+					continue
+				}
 
 				delErr := queue.DeleteMessage(rawMsg)
 				if delErr != nil {
