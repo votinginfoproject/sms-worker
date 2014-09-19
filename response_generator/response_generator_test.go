@@ -1,4 +1,4 @@
-package response
+package responseGenerator
 
 import (
 	"errors"
@@ -27,24 +27,24 @@ var makeRequestFailure = func(endpoint string) ([]byte, error) {
 
 func TestResponsePollingLocationSuccess(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
-	r := New(c)
+	g := New(c)
 
 	expected := "Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"
-	assert.Equal(t, expected, r.Generate(""))
+	assert.Equal(t, expected, g.Generate(""))
 }
 
 func TestResponsePollingLocationError(t *testing.T) {
 	c := civicApi.New("", "", makeRequestError)
-	r := New(c)
+	g := New(c)
 
 	expected := "the civic api returned an error"
-	assert.Equal(t, expected, r.Generate(""))
+	assert.Equal(t, expected, g.Generate(""))
 }
 
 func TestResponsePollingLocationFailure(t *testing.T) {
 	c := civicApi.New("", "", makeRequestFailure)
-	r := New(c)
+	g := New(c)
 
 	expected := "an error has occurred"
-	assert.Equal(t, expected, r.Generate(""))
+	assert.Equal(t, expected, g.Generate(""))
 }

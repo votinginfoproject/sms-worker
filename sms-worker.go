@@ -12,7 +12,7 @@ import (
 	"github.com/votinginfoproject/sms-worker/logger"
 	"github.com/votinginfoproject/sms-worker/poll"
 	"github.com/votinginfoproject/sms-worker/queue"
-	"github.com/votinginfoproject/sms-worker/response"
+	"github.com/votinginfoproject/sms-worker/response_generator"
 	"github.com/votinginfoproject/sms-worker/sms"
 	"github.com/votinginfoproject/sms-worker/util"
 	"github.com/yvasiyarov/gorelic"
@@ -44,7 +44,7 @@ func main() {
 	log.SetOutput(logger.New())
 
 	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
-	res := response.New(api)
+	rg := responseGenerator.New(api)
 
 	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))
 
@@ -55,7 +55,7 @@ func main() {
 
 	for i := 0; i < routines; i++ {
 		wg.Add(1)
-		go poll.Start(q, res, sms, &wg, i)
+		go poll.Start(q, rg, sms, &wg, i)
 	}
 
 	wg.Wait()
