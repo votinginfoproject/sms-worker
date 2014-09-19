@@ -13,8 +13,11 @@ import (
 
 type ExternalQueueService interface {
 	Connect()
-	GetMessage(routine int) (string, string, *sqs.Message, error)
-	DeleteMessage(message *sqs.Message) error
+	GetMessage(routine int) (string, string, rawMessage, error)
+	DeleteMessage(message rawMessage) error
+}
+
+type rawMessage interface {
 }
 
 type SQS struct {
@@ -47,7 +50,7 @@ func (s *SQS) Connect() {
 	s.q = queue
 }
 
-func (s *SQS) GetMessage(routine int) (string, string, *sqs.Message, error) {
+func (s *SQS) GetMessage(routine int) (string, string, rawMessage, error) {
 	for {
 		received, err := s.q.ReceiveMessage(1)
 
@@ -69,8 +72,8 @@ func (s *SQS) GetMessage(routine int) (string, string, *sqs.Message, error) {
 	}
 }
 
-func (s *SQS) DeleteMessage(message *sqs.Message) error {
-	_, delErr := s.q.DeleteMessage(message)
+func (s *SQS) DeleteMessage(message rawMessage) error {
+	_, delErr := s.q.DeleteMessage(message.(*sqs.Message))
 	if delErr != nil {
 		return delErr
 	}
