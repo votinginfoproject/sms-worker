@@ -10,6 +10,7 @@ import (
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/env"
 	"github.com/votinginfoproject/sms-worker/logger"
+	"github.com/votinginfoproject/sms-worker/poll"
 	"github.com/votinginfoproject/sms-worker/queue"
 	"github.com/votinginfoproject/sms-worker/response"
 	"github.com/votinginfoproject/sms-worker/sms"
@@ -47,43 +48,14 @@ func main() {
 
 	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))
 
-	queue := queue.New()
-	queue.Connect()
+	q := queue.New()
+	q.Connect()
 
 	var wg sync.WaitGroup
 
 	for i := 0; i < routines; i++ {
 		wg.Add(1)
-
-		go func(wg *sync.WaitGroup, routine int) {
-			defer wg.Done()
-
-			log.Print("[INFO] Started routine ", routine)
-
-			for {
-				message, number, rawMsg, getErr := queue.GetMessage(routine)
-				if getErr != nil {
-					log.Printf("[ERROR] [%d] %s", routine, getErr)
-					continue
-				}
-
-				reply := res.Generate(message)
-
-				log.Printf("[INFO] [%d] Sending '%s' To %s", routine, reply, number)
-
-				smsErr := sms.Send(reply, number)
-				if smsErr != nil {
-					log.Printf("[ERROR] [%d] %s", routine, smsErr)
-					continue
-				}
-
-				delErr := queue.DeleteMessage(rawMsg)
-				if delErr != nil {
-					log.Printf("[ERROR] [%d] %s", routine, delErr)
-					continue
-				}
-			}
-		}(&wg, i)
+		go poll.Start(q, res, sms, &wg, i)
 	}
 
 	wg.Wait()

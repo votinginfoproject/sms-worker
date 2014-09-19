@@ -11,6 +11,12 @@ import (
 	"github.com/crowdmob/goamz/sqs"
 )
 
+type ExternalQueueService interface {
+	Connect()
+	GetMessage(routine int) (string, string, *sqs.Message, error)
+	DeleteMessage(message *sqs.Message) error
+}
+
 type SQS struct {
 	q *sqs.Queue
 }
