@@ -30,7 +30,7 @@ func TesPollingLocationSuccess(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := "Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"
+	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
 	assert.Equal(t, expected, g.Generate(""))
 }
 
@@ -38,7 +38,7 @@ func TestPollingLocationError(t *testing.T) {
 	c := civicApi.New("", "", makeRequestError)
 	g := responseGenerator.New(c)
 
-	expected := "the civic api returned an error"
+	expected := []string{"the civic api returned an error"}
 	assert.Equal(t, expected, g.Generate(""))
 }
 
@@ -46,6 +46,6 @@ func TestPollingLocationFailure(t *testing.T) {
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
-	expected := "an error has occurred"
+	expected := []string{"an error has occurred"}
 	assert.Equal(t, expected, g.Generate(""))
 }

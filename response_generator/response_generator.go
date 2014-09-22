@@ -13,10 +13,10 @@ func New(civic civicApi.Querier) *Generator {
 	return &Generator{civic}
 }
 
-func (r *Generator) Generate(message string) string {
+func (r *Generator) Generate(message string) []string {
 	res, err := r.civic.Query(message)
 	if err != nil {
-		return "an error has occurred"
+		return []string{"an error has occurred"}
 	}
 
 	return pollingLocation.BuildMessage(res)

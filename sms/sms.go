@@ -7,7 +7,7 @@ import (
 )
 
 type ExternalSmsServce interface {
-	Send(message string, to string) error
+	Send(messages []string, to string) error
 }
 
 type Twilio struct {
@@ -22,15 +22,17 @@ func New(sid string, token string, from string) *Twilio {
 	return &Twilio{endpoint, from}
 }
 
-func (t *Twilio) Send(message string, to string) error {
-	data := url.Values{}
-	data.Set("From", t.from)
-	data.Set("To", to)
-	data.Set("Body", message)
+func (t *Twilio) Send(messages []string, to string) error {
+	for _, message := range messages {
+		data := url.Values{}
+		data.Set("From", t.from)
+		data.Set("To", to)
+		data.Set("Body", message)
 
-	_, err := http.PostForm(t.endpoint.String(), data)
-	if err != nil {
-		return err
+		_, err := http.PostForm(t.endpoint.String(), data)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

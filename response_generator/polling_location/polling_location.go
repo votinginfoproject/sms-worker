@@ -2,7 +2,7 @@ package pollingLocation
 
 import "github.com/votinginfoproject/sms-worker/civic_api"
 
-func BuildMessage(res *civicApi.Response) string {
+func BuildMessage(res *civicApi.Response) []string {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
 		return success(res)
 	} else {
@@ -10,7 +10,7 @@ func BuildMessage(res *civicApi.Response) string {
 	}
 }
 
-func success(res *civicApi.Response) string {
+func success(res *civicApi.Response) []string {
 	pl := res.PollingLocations[0]
 	response := "Your polling place is:\n"
 
@@ -29,9 +29,9 @@ func success(res *civicApi.Response) string {
 		response = response + "\nHours: " + pl.PollingHours
 	}
 
-	return response
+	return []string{response}
 }
 
-func failure(res *civicApi.Response) string {
-	return "the civic api returned an error"
+func failure(res *civicApi.Response) []string {
+	return []string{"the civic api returned an error"}
 }
