@@ -75,6 +75,17 @@ task :test, [:environment, :number, :message] => :aws_auth do |_, args|
   puts "Response code: #{response.code}"
 end
 
+desc 'Generate updated data asset file'
+task :gen_asset do
+  Dir.chdir('data')
+  system('rm -f data.go')
+  system('go-bindata -o data.go raw')
+  file = IO.read('data.go')
+  file = file.gsub('package main', 'package data')
+  IO.write('data.go', file)
+  system('go fmt data.go')
+end
+
 desc 'AWS auth config'
 task :aws_auth => :dotenv do
   AWS.config(
