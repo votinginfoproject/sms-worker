@@ -26,7 +26,7 @@ var makeRequestFailure = func(endpoint string) ([]byte, error) {
 	return nil, errors.New("something bad has happened")
 }
 
-func TesPollingLocationSuccess(t *testing.T) {
+func TestPollingLocationSuccess(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
