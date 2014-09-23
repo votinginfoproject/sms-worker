@@ -1,0 +1,30 @@
+pollingLocation:
+  text:
+    en:
+      first: testa
+      last: testz
+    es:
+      first: atest
+      last: ztest
+  triggers:
+    en:
+      - one
+      - two
+    es:
+      - uno
+      - dos
+electionOfficial:
+  text:
+    en:
+      alpha: a
+      beta: z
+    es:
+      alpha: b
+      beta: y
+  triggers:
+    en:
+      - two
+      - three
+    es:
+      - dos
+      - tres
