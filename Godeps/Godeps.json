@@ -43,6 +43,10 @@
 		{
 			"ImportPath": "github.com/yvasiyarov/newrelic_platform_go",
 			"Rev": "2d5b3d6e6db42e361ca5a5b6376a1368f7067236"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v1",
+			"Rev": "c11897f0ba79d8a35d8a124ff0d76e13d9dccb9b"
 		}
 	]
 }
