@@ -14,6 +14,10 @@
 			"Rev": "63104b5280730a4afe788d572e276aae6be32724"
 		},
 		{
+			"ImportPath": "github.com/fatih/structs",
+			"Rev": "401898349142b8e85bd628cb685541e6fb9a7585"
+		},
+		{
 			"ImportPath": "github.com/joho/godotenv",
 			"Rev": "aab3ea4ba68f8fe7492604240b01190d9efc4db4"
 		},
