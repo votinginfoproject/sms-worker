@@ -3,6 +3,7 @@ package responses
 import (
 	"log"
 
+	"github.com/fatih/structs"
 	"gopkg.in/yaml.v1"
 )
 
@@ -16,7 +17,7 @@ type Responses struct {
 	ElectionOfficial Response "electionOfficial"
 }
 
-func Load(raw []byte) *Responses {
+func Load(raw []byte) (*Responses, map[string]map[string]string) {
 	r := &Responses{}
 
 	err := yaml.Unmarshal(raw, r)
@@ -24,5 +25,26 @@ func Load(raw []byte) *Responses {
 		log.Panic("[ERROR] Failed to parse responses : ", err)
 	}
 
-	return r
+	return r, buildTriggerLookup(r)
+}
+
+func buildTriggerLookup(r *Responses) map[string]map[string]string {
+	lookup := make(map[string]map[string]string)
+
+	for _, field := range structs.New(r).Fields() {
+		name := field.Name()
+
+		triggers := field.Value().(Response).Triggers
+
+		for language, words := range triggers {
+			if lookup[language] == nil {
+				lookup[language] = make(map[string]string)
+			}
+			for _, word := range words {
+				lookup[language][word] = name
+			}
+		}
+	}
+
+	return lookup
 }

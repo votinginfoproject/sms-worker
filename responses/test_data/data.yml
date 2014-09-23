@@ -23,8 +23,8 @@ electionOfficial:
       beta: y
   triggers:
     en:
-      - two
       - three
+      - four
     es:
-      - dos
       - tres
+      - cuatro
