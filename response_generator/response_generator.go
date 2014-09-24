@@ -7,6 +7,7 @@ import (
 	"github.com/votinginfoproject/sms-worker/data"
 	"github.com/votinginfoproject/sms-worker/response_generator/polling_location"
 	"github.com/votinginfoproject/sms-worker/responses"
+	"github.com/votinginfoproject/sms-worker/users"
 )
 
 type Generator struct {
@@ -25,7 +26,7 @@ func New(civic civicApi.Querier) *Generator {
 	return &Generator{civic, content, triggers}
 }
 
-func (r *Generator) Generate(number string, message string, routine int) []string {
+func (r *Generator) Generate(user *users.Users, number string, message string, routine int) []string {
 	res, err := r.civic.Query(message)
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)

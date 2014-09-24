@@ -14,6 +14,8 @@ import (
 	"github.com/votinginfoproject/sms-worker/queue"
 	"github.com/votinginfoproject/sms-worker/response_generator"
 	"github.com/votinginfoproject/sms-worker/sms"
+	"github.com/votinginfoproject/sms-worker/storage"
+	"github.com/votinginfoproject/sms-worker/users"
 	"github.com/votinginfoproject/sms-worker/util"
 	"github.com/yvasiyarov/gorelic"
 )
@@ -48,6 +50,9 @@ func main() {
 
 	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))
 
+	st := storage.New()
+	user := users.New(st)
+
 	q := queue.New()
 	q.Connect()
 
@@ -55,7 +60,7 @@ func main() {
 
 	for i := 0; i < routines; i++ {
 		wg.Add(1)
-		go poll.Start(q, rg, sms, &wg, i)
+		go poll.Start(user, q, rg, sms, &wg, i)
 	}
 
 	wg.Wait()

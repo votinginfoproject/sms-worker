@@ -8,7 +8,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/fake_storage"
 	"github.com/votinginfoproject/sms-worker/response_generator"
+	"github.com/votinginfoproject/sms-worker/users"
 )
 
 func setup() {
@@ -33,27 +35,36 @@ var makeRequestFailure = func(endpoint string) ([]byte, error) {
 
 func TestPollingLocationSuccess(t *testing.T) {
 	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
 	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
-	assert.Equal(t, expected, g.Generate("", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "", "", 0))
 }
 
 func TestPollingLocationError(t *testing.T) {
 	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
 	c := civicApi.New("", "", makeRequestError)
 	g := responseGenerator.New(c)
 
 	expected := []string{"That isn’t a recognized command. Text HELP to see all options."}
-	assert.Equal(t, expected, g.Generate("", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "", "", 0))
 }
 
 func TestPollingLocationFailure(t *testing.T) {
 	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
 	expected := []string{"Sorry, we were unable to find your election day polling location."}
-	assert.Equal(t, expected, g.Generate("", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "", "", 0))
 }
