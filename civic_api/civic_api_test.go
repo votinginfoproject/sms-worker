@@ -24,6 +24,8 @@ func TestQuerySuccess(t *testing.T) {
 	res, _ := c.Query("")
 	assert.Equal(t, len(res.Error.Errors), 0)
 	assert.Equal(t, res.PollingLocations[0].Address.Line1, "115 W 6th St")
+	assert.Equal(t, res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl, "http://nvsos.gov/index.aspx?page=703")
+	assert.Equal(t, res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionOfficials[0].Name, "Dan Burk")
 }
 
 func TestQueryError(t *testing.T) {

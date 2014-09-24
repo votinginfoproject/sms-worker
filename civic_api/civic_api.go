@@ -31,6 +31,20 @@ type Response struct {
 		Code    int    `json:"code"`
 		Message string `json:"message"`
 	} `json:"error"`
+	State []struct {
+		ElectionAdministrationBody struct {
+			ElectionRegistrationUrl string `json:"electionRegistrationUrl"`
+		} `json:"electionAdministrationBody"`
+		LocalJurisdiction struct {
+			ElectionAdministrationBody struct {
+				ElectionOfficials []struct {
+					Name              string `json:"name"`
+					OfficePhoneNumber string `json:"officePhoneNumber"`
+					EmailAddress      string `json:"emailAddress"`
+				} `json:"electionOfficials"`
+			} `json:"electionAdministrationBody"`
+		} `json:"local_jurisdiction"`
+	} `json:"state"`
 }
 
 type Querier interface {
