@@ -11,25 +11,25 @@ import (
 
 type Generator struct {
 	civic    civicApi.Querier
-	messages *responses.Responses
+	content  *responses.Content
 	triggers map[string]map[string]string
 }
 
 func New(civic civicApi.Querier) *Generator {
-	rawMessages, err := data.Asset("raw/data.yml")
+	rawContent, err := data.Asset("raw/data.yml")
 	if err != nil {
 		log.Panic("[ERROR] Failed to load responses : ", err)
 	}
 
-	messages, triggers := responses.Load(rawMessages)
-	return &Generator{civic, messages, triggers}
+	content, triggers := responses.Load(rawContent)
+	return &Generator{civic, content, triggers}
 }
 
 func (r *Generator) Generate(message string) []string {
 	res, err := r.civic.Query(message)
 	if err != nil {
-		return []string{r.messages.Errors.Text["en"]["generalBackend"]}
+		return []string{r.content.Errors.Text["en"]["generalBackend"]}
 	}
 
-	return pollingLocation.BuildMessage(res, r.messages)
+	return pollingLocation.BuildMessage(res, r.content)
 }

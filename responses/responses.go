@@ -12,27 +12,27 @@ type Response struct {
 	Triggers map[string][]string          "triggers"
 }
 
-type Responses struct {
+type Content struct {
 	PollingLocation  Response "pollingLocation"
 	ElectionOfficial Response "electionOfficial"
 	Errors           Response "errors"
 }
 
-func Load(raw []byte) (*Responses, map[string]map[string]string) {
-	r := &Responses{}
+func Load(raw []byte) (*Content, map[string]map[string]string) {
+	c := &Content{}
 
-	err := yaml.Unmarshal(raw, r)
+	err := yaml.Unmarshal(raw, c)
 	if err != nil {
 		log.Panic("[ERROR] Failed to parse responses : ", err)
 	}
 
-	return r, buildTriggerLookup(r)
+	return c, buildTriggerLookup(c)
 }
 
-func buildTriggerLookup(r *Responses) map[string]map[string]string {
+func buildTriggerLookup(c *Content) map[string]map[string]string {
 	lookup := make(map[string]map[string]string)
 
-	for _, field := range structs.New(r).Fields() {
+	for _, field := range structs.New(c).Fields() {
 		name := field.Name()
 
 		triggers := field.Value().(Response).Triggers
