@@ -57,3 +57,13 @@ func (u *User) ChangeLanguage(key, language string) error {
 
 	return nil
 }
+
+func (u *User) SetAddress(key, address string) error {
+	err := u.s.UpdateItem(key, map[string]string{"address": address})
+	if err != nil {
+		log.Printf("[ERROR] unable to set address for user with number: '%s' : %s", key, err)
+		return err
+	}
+
+	return nil
+}

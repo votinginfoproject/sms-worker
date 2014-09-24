@@ -40,3 +40,13 @@ func TestChangeLanguage(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "xx", item["language"])
 }
+
+func TestSetAddress(t *testing.T) {
+	s := fakeStorage.New()
+	s.CreateItem("+12318384215", map[string]string{"language": "es", "last_contact": "0"})
+	u := New(s)
+	u.SetAddress("+12318384215", "123 test street test city test 12345")
+	item, err := u.GetOrCreate("+12318384215")
+	assert.Nil(t, err)
+	assert.Equal(t, "123 test street test city test 12345", item["address"])
+}
