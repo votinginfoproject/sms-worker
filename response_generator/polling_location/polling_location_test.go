@@ -64,9 +64,26 @@ func TestPollingLocationSuccessExistingUser(t *testing.T) {
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
 
-func TestPollingLocationError(t *testing.T) {
+func TestPollingLocationParseErrorNewUser(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestError)
+	g := responseGenerator.New(c)
+
+	expected := []string{"We need your address to provide you with local voting information. We didn’t recognize that address, please try again."}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+}
+
+func TestPollingLocationParseErrorExistingUser(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "address": "123 valid street", "last_contact": timeString})
+
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestError)

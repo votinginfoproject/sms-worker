@@ -5,11 +5,11 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, language string, messages *responses.Content) []string {
+func BuildMessage(res *civicApi.Response, language string, newUser bool, messages *responses.Content) ([]string, bool) {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
-		return success(res, language, messages)
+		return success(res, language, messages), true
 	} else {
-		return failure(res, language, messages)
+		return failure(res, language, newUser, messages), false
 	}
 }
 
@@ -35,10 +35,14 @@ func success(res *civicApi.Response, language string, messages *responses.Conten
 	return []string{response}
 }
 
-func failure(res *civicApi.Response, language string, messages *responses.Content) []string {
+func failure(res *civicApi.Response, language string, newUser bool, messages *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
-			return []string{messages.Errors.Text[language]["addressParse"]}
+			if newUser == true {
+				return []string{messages.Errors.Text[language]["addressParseNewUser"]}
+			} else {
+				return []string{messages.Errors.Text[language]["addressParseExistingUser"]}
+			}
 		}
 	}
 

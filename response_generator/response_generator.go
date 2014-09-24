@@ -2,6 +2,7 @@ package responseGenerator
 
 import (
 	"log"
+	"strings"
 
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/data"
@@ -33,13 +34,32 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
 	}
 
+	message = strings.TrimSpace(message)
+	message = strings.ToLower(message)
+
 	language := userData["language"]
+	action := r.triggers[language][message]
 
-	res, err := r.civic.Query(message)
-	if err != nil {
-		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
-		return []string{r.content.Errors.Text["en"]["generalBackend"]}
+	switch action {
+	default:
+		var newUser bool
+		if len(userData["address"]) == 0 {
+			newUser = true
+		} else {
+			newUser = false
+		}
+
+		res, err := r.civic.Query(message)
+		if err != nil {
+			log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
+			return []string{r.content.Errors.Text["en"]["generalBackend"]}
+		}
+
+		messages, success := pollingLocation.BuildMessage(res, language, newUser, r.content)
+		if success == true {
+			user.SetAddress(userData["phone_number"], message)
+		}
+
+		return messages
 	}
-
-	return pollingLocation.BuildMessage(res, language, r.content)
 }

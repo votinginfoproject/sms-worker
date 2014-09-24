@@ -14,10 +14,12 @@ pollingLocation:
 errors:
   text:
     en:
-      addressParse: That isn’t a recognized command. Text HELP to see all options.
+      addressParseExistingUser: That isn’t a recognized command. Text HELP to see all options.
+      addressParseNewUser: We need your address to provide you with local voting information. We didn’t recognize that address, please try again.
       generalBackend: Sorry, we were unable to find your election day polling location.
     es:
-      addressParse: spanish-That isn’t a recognized command. Text HELP to see all options.
+      addressParseExistingUser: spanish-That isn’t a recognized command. Text HELP to see all options.
+      addressParseNewUser: spanish-We need your address to provide you with local voting information. We didn’t recognize that address, please try again.
       generalBackend: spanish-Sorry, we were unable to find your election day polling location.
   triggers:
     en:
