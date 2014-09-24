@@ -63,7 +63,24 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
-func TestPollingLocationSuccessExistingUser(t *testing.T) {
+func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": timeString})
+
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestSuccess)
+	g := responseGenerator.New(c)
+
+	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm", messages.Help.Text["es"]["menu"], messages.Help.Text["es"]["languages"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
+}
+
+func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 

@@ -51,6 +51,8 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	switch action {
 	case "ChangeLanguage":
 		return r.changeLanguage(user, number, language)
+	case "PollingLocation":
+		return r.pollingLocation(userData, user, number, message, routine)
 	default:
 		return r.pollingLocation(userData, user, number, message, routine)
 	}
