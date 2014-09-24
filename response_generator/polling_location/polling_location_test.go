@@ -38,7 +38,7 @@ func TestPollingLocationError(t *testing.T) {
 	c := civicApi.New("", "", makeRequestError)
 	g := responseGenerator.New(c)
 
-	expected := []string{"the civic api returned an error"}
+	expected := []string{"That isn’t a recognized command. Text HELP to see all options."}
 	assert.Equal(t, expected, g.Generate(""))
 }
 
@@ -46,6 +46,6 @@ func TestPollingLocationFailure(t *testing.T) {
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
-	expected := []string{"an error has occurred"}
+	expected := []string{"Sorry, we were unable to find your election day polling location."}
 	assert.Equal(t, expected, g.Generate(""))
 }

@@ -16,7 +16,7 @@ func New(civic civicApi.Querier) *Generator {
 func (r *Generator) Generate(message string) []string {
 	res, err := r.civic.Query(message)
 	if err != nil {
-		return []string{"an error has occurred"}
+		return []string{"Sorry, we were unable to find your election day polling location."}
 	}
 
 	return pollingLocation.BuildMessage(res)

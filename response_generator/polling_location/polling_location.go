@@ -33,5 +33,11 @@ func success(res *civicApi.Response) []string {
 }
 
 func failure(res *civicApi.Response) []string {
-	return []string{"the civic api returned an error"}
+	if len(res.Error.Errors) > 0 {
+		if res.Error.Errors[0].Reason == "parseError" {
+			return []string{"That isn’t a recognized command. Text HELP to see all options."}
+		}
+	}
+
+	return []string{"Sorry, we were unable to find your election day polling location."}
 }
