@@ -5,17 +5,17 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, messages *responses.Content) []string {
+func BuildMessage(res *civicApi.Response, language string, messages *responses.Content) []string {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
-		return success(res, messages)
+		return success(res, language, messages)
 	} else {
-		return failure(res, messages)
+		return failure(res, language, messages)
 	}
 }
 
-func success(res *civicApi.Response, messages *responses.Content) []string {
+func success(res *civicApi.Response, language string, messages *responses.Content) []string {
 	pl := res.PollingLocations[0]
-	response := messages.PollingLocation.Text["en"]["prefix"] + "\n"
+	response := messages.PollingLocation.Text[language]["prefix"] + "\n"
 
 	if len(pl.Address.LocationName) > 0 {
 		response = response + pl.Address.LocationName + "\n"
@@ -35,12 +35,12 @@ func success(res *civicApi.Response, messages *responses.Content) []string {
 	return []string{response}
 }
 
-func failure(res *civicApi.Response, messages *responses.Content) []string {
+func failure(res *civicApi.Response, language string, messages *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
-			return []string{messages.Errors.Text["en"]["addressParse"]}
+			return []string{messages.Errors.Text[language]["addressParse"]}
 		}
 	}
 
-	return []string{messages.Errors.Text["en"]["generalBackend"]}
+	return []string{messages.Errors.Text[language]["generalBackend"]}
 }

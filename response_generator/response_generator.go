@@ -27,11 +27,19 @@ func New(civic civicApi.Querier) *Generator {
 }
 
 func (r *Generator) Generate(user *users.Users, number string, message string, routine int) []string {
+	userData, err := user.GetOrCreate(number)
+	if err != nil {
+		log.Printf("[ERROR] [%d] User store error : %s", routine, err)
+		return []string{r.content.Errors.Text["en"]["generalBackend"]}
+	}
+
+	language := userData["language"]
+
 	res, err := r.civic.Query(message)
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
 	}
 
-	return pollingLocation.BuildMessage(res, r.content)
+	return pollingLocation.BuildMessage(res, language, r.content)
 }
