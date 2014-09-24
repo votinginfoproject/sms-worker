@@ -42,24 +42,28 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 
 	switch action {
 	default:
-		var newUser bool
-		if len(userData["address"]) == 0 {
-			newUser = true
-		} else {
-			newUser = false
-		}
-
-		res, err := r.civic.Query(message)
-		if err != nil {
-			log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
-			return []string{r.content.Errors.Text["en"]["generalBackend"]}
-		}
-
-		messages, success := pollingLocation.BuildMessage(res, language, newUser, r.content)
-		if success == true {
-			user.SetAddress(userData["phone_number"], message)
-		}
-
-		return messages
+		return r.pollingLocation(userData, user, number, message, routine)
 	}
+}
+
+func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, routine int) []string {
+	var newUser bool
+	if len(userData["address"]) == 0 {
+		newUser = true
+	} else {
+		newUser = false
+	}
+
+	res, err := r.civic.Query(message)
+	if err != nil {
+		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
+		return []string{r.content.Errors.Text["en"]["generalBackend"]}
+	}
+
+	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, r.content)
+	if success == true {
+		user.SetAddress(userData["phone_number"], message)
+	}
+
+	return messages
 }
