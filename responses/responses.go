@@ -15,6 +15,7 @@ type Response struct {
 type Responses struct {
 	PollingLocation  Response "pollingLocation"
 	ElectionOfficial Response "electionOfficial"
+	Errors           Response "errors"
 }
 
 func Load(raw []byte) (*Responses, map[string]map[string]string) {

@@ -1,18 +1,21 @@
 package pollingLocation
 
-import "github.com/votinginfoproject/sms-worker/civic_api"
+import (
+	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/responses"
+)
 
-func BuildMessage(res *civicApi.Response) []string {
+func BuildMessage(res *civicApi.Response, messages *responses.Responses) []string {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
-		return success(res)
+		return success(res, messages)
 	} else {
-		return failure(res)
+		return failure(res, messages)
 	}
 }
 
-func success(res *civicApi.Response) []string {
+func success(res *civicApi.Response, messages *responses.Responses) []string {
 	pl := res.PollingLocations[0]
-	response := "Your polling place is:\n"
+	response := messages.PollingLocation.Text["en"]["prefix"] + "\n"
 
 	if len(pl.Address.LocationName) > 0 {
 		response = response + pl.Address.LocationName + "\n"
@@ -26,18 +29,18 @@ func success(res *civicApi.Response) []string {
 	}
 
 	if len(pl.PollingHours) > 0 {
-		response = response + "\nHours: " + pl.PollingHours
+		response = response + "\n" + messages.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
 	return []string{response}
 }
 
-func failure(res *civicApi.Response) []string {
+func failure(res *civicApi.Response, messages *responses.Responses) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
-			return []string{"That isn’t a recognized command. Text HELP to see all options."}
+			return []string{messages.Errors.Text["en"]["addressParse"]}
 		}
 	}
 
-	return []string{"Sorry, we were unable to find your election day polling location."}
+	return []string{messages.Errors.Text["en"]["generalBackend"]}
 }

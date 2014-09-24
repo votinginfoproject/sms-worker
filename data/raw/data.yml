@@ -1,8 +1,24 @@
 pollingLocation:
   text:
     en:
+      prefix: "Your polling place is:"
+      hours: "Hours:"
     es:
-
+      prefix: "spanish-Your polling place is:"
+      hours: "spanish-Hours:"
+  triggers:
+    en:
+      - poll
+    es:
+      - spoll
+errors:
+  text:
+    en:
+      addressParse: That isn’t a recognized command. Text HELP to see all options.
+      generalBackend: Sorry, we were unable to find your election day polling location.
+    es:
+      addressParse: spanish-That isn’t a recognized command. Text HELP to see all options.
+      generalBackend: spanish-Sorry, we were unable to find your election day polling location.
   triggers:
     en:
     es:
