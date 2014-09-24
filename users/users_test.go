@@ -15,7 +15,7 @@ func TestNew(t *testing.T) {
 func TestGetNewUser(t *testing.T) {
 	s := fakeStorage.New()
 	u := New(s)
-	item, err := u.GetOrCreate("+12318384215")
+	item, err := u.GetOrCreate("+15551235555")
 	assert.Nil(t, err)
 	assert.Equal(t, "en", item["language"])
 	assert.Equal(t, true, len(item["last_contact"]) > 0)
@@ -24,8 +24,8 @@ func TestGetNewUser(t *testing.T) {
 func TestGetExistingUser(t *testing.T) {
 	s := fakeStorage.New()
 	u := New(s)
-	s.CreateItem("+12318384215", map[string]string{"language": "es", "last_contact": "0"})
-	item, err := u.GetOrCreate("+12318384215")
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": "0"})
+	item, err := u.GetOrCreate("+15551235555")
 	assert.Nil(t, err)
 	assert.Equal(t, "es", item["language"])
 	assert.NotEqual(t, 0, item["last_contact"])
@@ -33,20 +33,20 @@ func TestGetExistingUser(t *testing.T) {
 
 func TestChangeLanguage(t *testing.T) {
 	s := fakeStorage.New()
-	s.CreateItem("+12318384215", map[string]string{"language": "es", "last_contact": "0"})
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": "0"})
 	u := New(s)
-	u.ChangeLanguage("+12318384215", "xx")
-	item, err := u.GetOrCreate("+12318384215")
+	u.ChangeLanguage("+15551235555", "xx")
+	item, err := u.GetOrCreate("+15551235555")
 	assert.Nil(t, err)
 	assert.Equal(t, "xx", item["language"])
 }
 
 func TestSetAddress(t *testing.T) {
 	s := fakeStorage.New()
-	s.CreateItem("+12318384215", map[string]string{"language": "es", "last_contact": "0"})
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": "0"})
 	u := New(s)
-	u.SetAddress("+12318384215", "123 test street test city test 12345")
-	item, err := u.GetOrCreate("+12318384215")
+	u.SetAddress("+15551235555", "123 test street test city test 12345")
+	item, err := u.GetOrCreate("+15551235555")
 	assert.Nil(t, err)
 	assert.Equal(t, "123 test street test city test 12345", item["address"])
 }
