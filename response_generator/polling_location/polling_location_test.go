@@ -17,7 +17,7 @@ var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 }
 
 var makeRequestError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_error.json")
+	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_parse_error.json")
 
 	return data, nil
 }

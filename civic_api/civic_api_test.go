@@ -14,7 +14,7 @@ var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 }
 
 var makeRequestError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("test_data/google_civic_error.json")
+	data, _ := ioutil.ReadFile("test_data/google_civic_parse_error.json")
 
 	return data, nil
 }
@@ -32,5 +32,5 @@ func TestQueryError(t *testing.T) {
 	c := New("", "", makeRequestError)
 	res, _ := c.Query("")
 	assert.Equal(t, len(res.Error.Errors), 1)
-	assert.Equal(t, res.Error.Errors[0].Reason, "keyInvalid")
+	assert.Equal(t, res.Error.Errors[0].Reason, "parseError")
 }
