@@ -37,7 +37,7 @@ func TestPollingLocationSuccess(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
-	assert.Equal(t, expected, g.Generate("", 0))
+	assert.Equal(t, expected, g.Generate("", "", 0))
 }
 
 func TestPollingLocationError(t *testing.T) {
@@ -46,7 +46,7 @@ func TestPollingLocationError(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{"That isn’t a recognized command. Text HELP to see all options."}
-	assert.Equal(t, expected, g.Generate("", 0))
+	assert.Equal(t, expected, g.Generate("", "", 0))
 }
 
 func TestPollingLocationFailure(t *testing.T) {
@@ -55,5 +55,5 @@ func TestPollingLocationFailure(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{"Sorry, we were unable to find your election day polling location."}
-	assert.Equal(t, expected, g.Generate("", 0))
+	assert.Equal(t, expected, g.Generate("", "", 0))
 }

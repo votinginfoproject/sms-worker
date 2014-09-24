@@ -21,7 +21,7 @@ func Start(q queue.ExternalQueueService, rg *responseGenerator.Generator, sms sm
 			continue
 		}
 
-		reply := rg.Generate(message, routine)
+		reply := rg.Generate(number, message, routine)
 
 		log.Printf("[INFO] [%d] Sending '%s' To %s", routine, reply, number)
 
