@@ -18,6 +18,7 @@ type Content struct {
 	ChangeLanguage   Response "changeLanguage"
 	Help             Response "help"
 	About            Response "about"
+	Intro            Response "intro"
 	Errors           Response "errors"
 }
 

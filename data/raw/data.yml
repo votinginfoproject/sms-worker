@@ -21,6 +21,20 @@ changeLanguage:
     es:
       - español
       - espanol
+intro:
+  text:
+    en:
+      all: Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
+    es:
+      all: spanish-Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
+  triggers:
+    en:
+      - vote
+      - where
+    es:
+      - voto
+      - donde
+      - dónde
 about:
   text:
     en:
