@@ -1,0 +1,832 @@
+{
+ "kind": "civicinfo#voterInfoResponse",
+ "election": {
+  "id": "2000",
+  "name": "VIP Test Election",
+  "electionDay": "2015-06-06"
+ },
+ "normalizedInput": {
+  "line1": "1210 harmon pl",
+  "city": "minneapolis",
+  "state": "MN",
+  "zip": "55403"
+ },
+ "pollingLocations": [
+  {
+   "address": {
+    "locationName": "EMERSON SPANISH IMMERSION SCHOOL (7-8)",
+    "line1": "1421 SPRUCE PL",
+    "city": "MINNEAPOLIS",
+    "state": "MN",
+    "zip": "55403"
+   },
+   "notes": "",
+   "pollingHours": "",
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  }
+ ],
+ "contests": [
+  {
+   "type": "General",
+   "office": "State Senator District 61",
+   "district": {
+    "name": "61",
+    "scope": "stateUpper"
+   },
+   "ballotPlacement": "71",
+   "candidates": [
+    {
+     "name": "SCOTT DIBBLE",
+     "party": "DEMOCRATIC-FARMER-LABOR",
+     "candidateUrl": "HTTP://www.scottdibble.com",
+     "phone": "3273870",
+     "email": "senatordibble@gmail.com"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 2",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "332",
+   "candidates": [
+    {
+     "name": "FRANCIS MAGILL",
+     "party": "NONPARTISAN"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 6",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "333",
+   "candidates": [
+    {
+     "name": "DAVID PIPER",
+     "party": "NONPARTISAN",
+     "phone": "2509527"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 15",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "334",
+   "candidates": [
+    {
+     "name": "PHIL CARRUTHERS",
+     "party": "NONPARTISAN",
+     "phone": "5355551"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 17",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "335",
+   "candidates": [
+    {
+     "name": "DENISE D. REILLY",
+     "party": "NONPARTISAN",
+     "phone": "3480112"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 22",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "336",
+   "candidates": [
+    {
+     "name": "STEVEN E. ANTOLAK",
+     "party": "NONPARTISAN",
+     "candidateUrl": "HTTP://www.voteantolak.com",
+     "phone": "5935042",
+     "email": "voteantolak@comcast.net"
+    },
+    {
+     "name": "ELIZABETH V. CUTTER",
+     "party": "NONPARTISAN",
+     "candidateUrl": "HTTP://www.cutter4judge.com",
+     "email": "cutter4judge@gmail.com"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 29",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "337",
+   "candidates": [
+    {
+     "name": "NANCY E. BRASEL",
+     "party": "NONPARTISAN",
+     "phone": "3486458",
+     "email": "nancybrasel@comcast.net"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 33",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "338",
+   "candidates": [
+    {
+     "name": "M. JACQUELINE REGIS",
+     "party": "NONPARTISAN",
+     "phone": "3486700"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 35",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "339",
+   "candidates": [
+    {
+     "name": "DANIEL MABLEY",
+     "party": "NONPARTISAN",
+     "phone": "8054128"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 40",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "340",
+   "candidates": [
+    {
+     "name": "JAMIE L. ANDERSON",
+     "party": "NONPARTISAN",
+     "phone": "3480127"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 44",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "341",
+   "candidates": [
+    {
+     "name": "LOIS CONROY",
+     "party": "NONPARTISAN",
+     "candidateUrl": "HTTP://www.loisconroyforjudge.com",
+     "phone": "2366550",
+     "email": "loisconroyforjudge@gmail.com"
+    },
+    {
+     "name": "MARC BERRIS",
+     "party": "NONPARTISAN",
+     "candidateUrl": "HTTP://WWW.MARCBERRIS.ORG",
+     "phone": "3962998",
+     "email": "MARC@BERRISLAW.COM"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 45",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "342",
+   "candidates": [
+    {
+     "name": "MARILYN BROWN ROSENBAUM",
+     "party": "NONPARTISAN",
+     "phone": "3488777"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 46",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "343",
+   "candidates": [
+    {
+     "name": "MARY R. VASALY",
+     "party": "NONPARTISAN",
+     "phone": "3480087",
+     "email": "mary.vasaly@courts.state.mn.us"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 48",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "344",
+   "candidates": [
+    {
+     "name": "JOHN Q. MCSHANE",
+     "party": "NONPARTISAN",
+     "phone": "5966830"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 49",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "345",
+   "candidates": [
+    {
+     "name": "LYONEL NORRIS",
+     "party": "NONPARTISAN"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 50",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "346",
+   "candidates": [
+    {
+     "name": "BRUCE A. PETERSON",
+     "party": "NONPARTISAN",
+     "phone": "9299207",
+     "email": "Brucelissem@aol.com"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "Judge - 4th District Court 59",
+   "district": {
+    "name": "04",
+    "scope": "judicial"
+   },
+   "ballotPlacement": "347",
+   "candidates": [
+    {
+     "name": "PATRICK ROBBEN",
+     "party": "NONPARTISAN"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "President & Vice President",
+   "district": {
+    "name": "Minnesota",
+    "scope": "statewide",
+    "id": "27mn"
+   },
+   "candidates": [
+    {
+     "name": "Barack Obama & Joe Biden",
+     "party": "Democratic-Farmer-Labor",
+     "candidateUrl": "http://www.barackobama.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/barackobama"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/obama2012"
+      },
+      {
+       "type": "GooglePlus",
+       "id": "https://plus.google.com/u/0/110031535020051778989/posts"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/BarackObamadotcom"
+      }
+     ]
+    },
+    {
+     "name": "Mitt Romney & Paul Ryan",
+     "party": "Republican",
+     "candidateUrl": "http://www.mittromney.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "https://www.facebook.com/mittromney"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/MittRomney"
+      },
+      {
+       "type": "GooglePlus",
+       "id": "https://plus.google.com/+MittRomney/posts"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/mittromney"
+      }
+     ]
+    },
+    {
+     "name": "Gary Johnson & James P. Gray",
+     "party": "Libertarian",
+     "candidateUrl": "http://www.garyjohnson2012.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/govgaryjohnson"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/govgaryjohnson"
+      },
+      {
+       "type": "GooglePlus",
+       "id": "https://plus.google.com/+GovGaryJohnson/posts"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/govgaryjohnson"
+      }
+     ]
+    },
+    {
+     "name": "Jill Stein & Cheri Honkala",
+     "party": "Green",
+     "candidateUrl": "http://www.jillstein.org/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/drjillstein"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/jillstein2012"
+      },
+      {
+       "type": "GooglePlus",
+       "id": "https://plus.google.com/109196677270230251313/posts"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/drjillstein"
+      }
+     ]
+    },
+    {
+     "name": "Virgil H. Goode Jr. & James N. Clymer",
+     "party": "Constitution",
+     "candidateUrl": "http://www.goodeforpresident2012.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "https://www.facebook.com/pages/Virgil-Goode-for-President/118321594875524"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/VirgilGoode"
+      },
+      {
+       "type": "GooglePlus",
+       "id": "https://plus.google.com/u/0/115105427009854565886/posts"
+      },
+      {
+       "type": "YouTube",
+       "id": "https://www.youtube.com/virgilgoode2012"
+      }
+     ]
+    },
+    {
+     "name": "Ross C. \"Rocky\" Anderson & Luis J. Rodriguez",
+     "party": "Justice",
+     "candidateUrl": "http://www.voterocky.org/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/YourFriendRocky"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/rockyanderson"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/VoteRockyOrg"
+      }
+     ]
+    },
+    {
+     "name": "Peta Lindsay & Yari Osorio",
+     "party": "Socialism and Liberation",
+     "candidateUrl": "http://www.pslweb.org/votepsl/2012/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/pages/Peta-LindsayYari-Osorio-PSL-2012-Presidential-Campaign/244242058990949"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/VotePSL"
+      },
+      {
+       "type": "YouTube",
+       "id": "http://www.youtube.com/user/VotePSL"
+      }
+     ]
+    },
+    {
+     "name": "James Harris & Maura Deluca",
+     "party": "Socialist Workers"
+    },
+    {
+     "name": "Dean Morstad & Josh Franke-Hyland",
+     "party": "Constitutional Government",
+     "candidateUrl": "http://www.morstadforpresident.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "https://www.facebook.com/pages/Dean-Morstad-for-President/123401074437578"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/Morstad2012"
+      }
+     ]
+    },
+    {
+     "name": "Jim Carlson & George McMahon",
+     "party": "Grassroots"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Ballot Information Project",
+     "official": false
+    }
+   ]
+  },
+  {
+   "type": "General",
+   "office": "US Senate",
+   "district": {
+    "name": "Minnesota",
+    "scope": "statewide",
+    "id": "27mn"
+   },
+   "candidates": [
+    {
+     "name": "Amy Klobuchar",
+     "party": "Democratic-Farmer-Labor",
+     "candidateUrl": "http://www.amyklobuchar.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "https://www.facebook.com/amyklobuchar"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/amyklobuchar"
+      }
+     ]
+    },
+    {
+     "name": "Kurt Bills",
+     "party": "Republican",
+     "candidateUrl": "http://kurtbills.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/kurtbills"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/https://twitter.com/KurtBills"
+      }
+     ]
+    },
+    {
+     "name": "Stephen Williams",
+     "party": "Independence Party of America",
+     "candidateUrl": "http://prairiefireusa.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/pages/Stephen-Williams-for-U-S-Senate-2012/10549627959"
+      }
+     ]
+    },
+    {
+     "name": "Michael Cavlan",
+     "party": "Minnesota Open Progressives",
+     "candidateUrl": "http://michaelcavlan.com/",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/pages/Michael-Cavlan-for-US-Senate-2012/122110937819816"
+      },
+      {
+       "type": "Twitter",
+       "id": "https://twitter.com/MichaelCavlan"
+      }
+     ]
+    },
+    {
+     "name": "Tim Davis",
+     "party": "Grassroots Party",
+     "channels": [
+      {
+       "type": "Facebook",
+       "id": "http://www.facebook.com/TimDavisforSenator"
+      }
+     ]
+    }
+   ],
+   "sources": [
+    {
+     "name": "Ballot Information Project",
+     "official": false
+    }
+   ]
+  },
+  {
+   "type": "Primary",
+   "office": "County Park Commissioner District 2",
+   "district": {
+    "name": "Hennepin",
+    "scope": "countywide"
+   },
+   "candidates": [
+    {
+     "name": "MARILYNN CORCORAN",
+     "party": "NONPARTISAN",
+     "phone": "4274217",
+     "email": "CORCDAYTON@YAHOO.COM"
+    },
+    {
+     "name": "MARILYNN CORCORAN",
+     "party": "NONPARTISAN",
+     "phone": "4274217",
+     "email": "CORCDAYTON@YAHOO.COM"
+    },
+    {
+     "name": "MARILYNN CORCORAN",
+     "party": "NONPARTISAN",
+     "phone": "4274217",
+     "email": "CORCDAYTON@YAHOO.COM"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "Primary",
+   "office": "County Park Commissioner District 1",
+   "district": {
+    "name": "Hennepin",
+    "scope": "countywide"
+   },
+   "candidates": [
+    {
+     "name": "JAMES (JIM) HOLMBECK",
+     "party": "NONPARTISAN",
+     "phone": "4724268",
+     "email": ""
+    },
+    {
+     "name": "JAMES (JIM) HOLMBECK",
+     "party": "NONPARTISAN",
+     "phone": "4724268",
+     "email": ""
+    },
+    {
+     "name": "JAMES (JIM) HOLMBECK",
+     "party": "NONPARTISAN",
+     "phone": "4724268",
+     "email": ""
+    },
+    {
+     "name": "JAMES (JIM) HOLMBECK",
+     "party": "NONPARTISAN",
+     "phone": "4724268",
+     "email": ""
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "Referendum",
+   "district": {
+    "name": "Minnesota",
+    "scope": "statewide",
+    "id": "27mn"
+   },
+   "referendumTitle": "Amendment 1",
+   "referendumSubtitle": "Recognition of Marriage Solely Between One Man and One Woman.",
+   "referendumUrl": "http://www.co.carver.mn.us/departments/prts/docs/2012_General/SBG_2012_waconia_twp_108.pdf",
+   "sources": [
+    {
+     "name": "Ballot Information Project",
+     "official": false
+    }
+   ]
+  },
+  {
+   "type": "Referendum",
+   "district": {
+    "name": "Minnesota",
+    "scope": "statewide",
+    "id": "27mn"
+   },
+   "referendumTitle": "Amendment 2",
+   "referendumSubtitle": "Photo Identification Required for Voting",
+   "referendumUrl": "http://www.co.carver.mn.us/departments/prts/docs/2012_General/SBG_2012_waconia_twp_108.pdf",
+   "sources": [
+    {
+     "name": "Ballot Information Project",
+     "official": false
+    }
+   ]
+  }
+ ],
+ "state": [
+  {
+   "name": "Minnesota",
+   "local_jurisdiction": {
+    "name": "Hennepin",
+    "sources": [
+     {
+      "name": "Voting Information Project",
+      "official": true
+     }
+    ]
+   },
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  }
+ ]
+}
