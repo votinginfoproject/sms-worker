@@ -51,7 +51,7 @@ func (u *User) GetOrCreate(key string) (map[string]string, error) {
 func (u *User) ChangeLanguage(key, language string) error {
 	err := u.s.UpdateItem(key, map[string]string{"language": language})
 	if err != nil {
-		log.Printf("[ERROR] unable to update user with number: '%s' : %s", key, err)
+		log.Printf("[ERROR] unable to update language for user with number: '%s' : %s", key, err)
 		return err
 	}
 
