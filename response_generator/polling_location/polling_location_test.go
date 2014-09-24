@@ -60,7 +60,7 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm", messages.Help.Text["en"]["menu"], messages.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationSuccessExistingUser(t *testing.T) {
@@ -77,7 +77,9 @@ func TestPollingLocationSuccessExistingUser(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm", messages.Help.Text["es"]["menu"], messages.Help.Text["es"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	updatedUser, _ := u.GetOrCreate("+15551235555")
+	assert.Equal(t, "111 address street", updatedUser["address"])
 }
 
 func TestPollingLocationParseErrorNewUser(t *testing.T) {
@@ -89,7 +91,7 @@ func TestPollingLocationParseErrorNewUser(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{messages.Errors.Text["en"]["addressParseNewUser"], messages.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationParseErrorExistingUser(t *testing.T) {
@@ -106,7 +108,7 @@ func TestPollingLocationParseErrorExistingUser(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{messages.Errors.Text["en"]["addressParseExistingUser"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationNotFoundError(t *testing.T) {
@@ -118,7 +120,7 @@ func TestPollingLocationNotFoundError(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{messages.Errors.Text["en"]["noElectionInfo"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationFailure(t *testing.T) {
@@ -130,5 +132,5 @@ func TestPollingLocationFailure(t *testing.T) {
 	g := responseGenerator.New(c)
 
 	expected := []string{messages.Errors.Text["en"]["generalBackend"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
