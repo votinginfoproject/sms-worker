@@ -13,6 +13,12 @@ var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	return data, nil
 }
 
+var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
+	data, _ := ioutil.ReadFile("test_data/google_civic_success_empty.json")
+
+	return data, nil
+}
+
 var makeRequestError = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("test_data/google_civic_parse_error.json")
 
@@ -26,6 +32,14 @@ func TestQuerySuccess(t *testing.T) {
 	assert.Equal(t, res.PollingLocations[0].Address.Line1, "115 W 6th St")
 	assert.Equal(t, res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl, "http://nvsos.gov/index.aspx?page=703")
 	assert.Equal(t, res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionOfficials[0].Name, "Dan Burk")
+}
+
+func TestQuerySuccessEmpty(t *testing.T) {
+	c := New("", "", makeRequestSuccessEmpty)
+	res, _ := c.Query("")
+	assert.Equal(t, len(res.Error.Errors), 0)
+	assert.Equal(t, len(res.PollingLocations), 0)
+	assert.Equal(t, len(res.State), 0)
 }
 
 func TestQueryError(t *testing.T) {

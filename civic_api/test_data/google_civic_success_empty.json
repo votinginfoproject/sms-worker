@@ -1,0 +1,14 @@
+{
+ "kind": "civicinfo#voterInfoResponse",
+ "election": {
+  "id": "4100",
+  "name": "US General Election 2014",
+  "electionDay": "2014-11-04"
+ },
+ "normalizedInput": {
+  "line1": "5630 lupin dr",
+  "city": "sun valley",
+  "state": "NV",
+  "zip": "89433"
+ }
+}
