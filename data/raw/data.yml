@@ -30,7 +30,10 @@ help:
       languages: Text ENGLISH to change the language.
   triggers:
     en:
+      - help
+      - menu
     es:
+      - ayuda
 errors:
   text:
     en:

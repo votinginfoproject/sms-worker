@@ -49,6 +49,8 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	}
 
 	switch action {
+	case "Help":
+		return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
 	case "ChangeLanguage":
 		return r.changeLanguage(user, number, language)
 	case "PollingLocation":
