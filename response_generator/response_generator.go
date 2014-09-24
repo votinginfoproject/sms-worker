@@ -40,10 +40,39 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	language := userData["language"]
 	action := r.triggers[language][message]
 
+	if len(action) == 0 {
+		success, newLanguage := r.checkIfOtherLanguage(message)
+		language = newLanguage
+		if success == true {
+			action = "ChangeLanguage"
+		}
+	}
+
 	switch action {
+	case "ChangeLanguage":
+		return r.changeLanguage(user, number, language)
 	default:
 		return r.pollingLocation(userData, user, number, message, routine)
 	}
+}
+
+func (r *Generator) checkIfOtherLanguage(message string) (bool, string) {
+	for language, _ := range r.triggers {
+		if len(r.triggers[language][message]) > 0 {
+			return true, language
+		}
+	}
+
+	return false, ""
+}
+
+func (r *Generator) changeLanguage(user *users.Users, number string, language string) []string {
+	err := user.ChangeLanguage(number, language)
+	if err != nil {
+		return []string{r.content.Errors.Text[language]["generalBackend"]}
+	}
+
+	return []string{r.content.Help.Text[language]["menu"]}
 }
 
 func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, routine int) []string {
@@ -62,7 +91,7 @@ func (r *Generator) pollingLocation(userData map[string]string, user *users.User
 
 	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, r.content)
 	if success == true {
-		user.SetAddress(userData["phone_number"], message)
+		user.SetAddress(number, message)
 	}
 
 	return messages

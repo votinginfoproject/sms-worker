@@ -11,6 +11,15 @@ pollingLocation:
       - poll
     es:
       - spoll
+changeLanguage:
+  text:
+    en:
+    es:
+  triggers:
+    en:
+      - english
+    es:
+      - español
 help:
   text:
     en:
