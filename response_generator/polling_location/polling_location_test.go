@@ -3,12 +3,17 @@ package pollingLocation_test
 import (
 	"errors"
 	"io/ioutil"
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/response_generator"
 )
+
+func setup() {
+	log.SetOutput(ioutil.Discard)
+}
 
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
@@ -27,25 +32,28 @@ var makeRequestFailure = func(endpoint string) ([]byte, error) {
 }
 
 func TestPollingLocationSuccess(t *testing.T) {
+	setup()
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
 	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
-	assert.Equal(t, expected, g.Generate(""))
+	assert.Equal(t, expected, g.Generate("", 0))
 }
 
 func TestPollingLocationError(t *testing.T) {
+	setup()
 	c := civicApi.New("", "", makeRequestError)
 	g := responseGenerator.New(c)
 
 	expected := []string{"That isn’t a recognized command. Text HELP to see all options."}
-	assert.Equal(t, expected, g.Generate(""))
+	assert.Equal(t, expected, g.Generate("", 0))
 }
 
 func TestPollingLocationFailure(t *testing.T) {
+	setup()
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
 	expected := []string{"Sorry, we were unable to find your election day polling location."}
-	assert.Equal(t, expected, g.Generate(""))
+	assert.Equal(t, expected, g.Generate("", 0))
 }

@@ -25,9 +25,10 @@ func New(civic civicApi.Querier) *Generator {
 	return &Generator{civic, content, triggers}
 }
 
-func (r *Generator) Generate(message string) []string {
+func (r *Generator) Generate(message string, routine int) []string {
 	res, err := r.civic.Query(message)
 	if err != nil {
+		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
 	}
 
