@@ -17,6 +17,7 @@ type Content struct {
 	ElectionOfficial Response "electionOfficial"
 	ChangeLanguage   Response "changeLanguage"
 	Help             Response "help"
+	About            Response "about"
 	Errors           Response "errors"
 }
 

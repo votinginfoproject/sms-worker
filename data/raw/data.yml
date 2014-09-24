@@ -20,6 +20,21 @@ changeLanguage:
       - english
     es:
       - español
+      - espanol
+about:
+  text:
+    en:
+      all: You’re using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
+    es:
+      all: spanish-You’re using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
+  triggers:
+    en:
+      - what
+      - about
+    es:
+      - acerca
+      - que
+      - qué
 help:
   text:
     en:
