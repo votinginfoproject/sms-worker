@@ -15,6 +15,7 @@ type Response struct {
 type Content struct {
 	PollingLocation  Response "pollingLocation"
 	ElectionOfficial Response "electionOfficial"
+	Help             Response "help"
 	Errors           Response "errors"
 }
 

@@ -32,17 +32,19 @@ func success(res *civicApi.Response, language string, messages *responses.Conten
 		response = response + "\n" + messages.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
-	return []string{response}
+	return []string{response, messages.Help.Text[language]["menu"]}
 }
 
 func failure(res *civicApi.Response, language string, newUser bool, messages *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
 			if newUser == true {
-				return []string{messages.Errors.Text[language]["addressParseNewUser"]}
+				return []string{messages.Errors.Text[language]["addressParseNewUser"], messages.Help.Text[language]["languages"]}
 			} else {
 				return []string{messages.Errors.Text[language]["addressParseExistingUser"]}
 			}
+		} else if res.Error.Errors[0].Reason == "notFound" {
+			return []string{messages.Errors.Text[language]["noElectionInfo"]}
 		}
 	}
 

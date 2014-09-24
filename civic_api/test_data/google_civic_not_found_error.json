@@ -1,0 +1,13 @@
+{
+ "error": {
+  "errors": [
+   {
+    "domain": "global",
+    "reason": "notFound",
+    "message": "No information for this address"
+   }
+  ],
+  "code": 404,
+  "message": "No information for this address"
+ }
+}

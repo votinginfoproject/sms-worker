@@ -11,15 +11,28 @@ pollingLocation:
       - poll
     es:
       - spoll
+help:
+  text:
+    en:
+      menu: Text POLL to find your polling place. Text OFFICIAL for election official info. Text REGISTER for registration info.
+      languages: Manda ESPAÑOL para cambiar el idioma.
+    es:
+      menu: spanish-Text POLL to find your polling place. Text OFFICIAL for election official info. Text REGISTER for registration info.
+      languages: Text ENGLISH to change the language.
+  triggers:
+    en:
+    es:
 errors:
   text:
     en:
       addressParseExistingUser: That isn’t a recognized command. Text HELP to see all options.
       addressParseNewUser: We need your address to provide you with local voting information. We didn’t recognize that address, please try again.
+      noElectionInfo: No elections are scheduled for your area. To check elsewhere, reply with a new address.
       generalBackend: Sorry, we were unable to find your election day polling location.
     es:
       addressParseExistingUser: spanish-That isn’t a recognized command. Text HELP to see all options.
       addressParseNewUser: spanish-We need your address to provide you with local voting information. We didn’t recognize that address, please try again.
+      noElectionInfo: spanish-No elections are scheduled for your area. To check elsewhere, reply with a new address.
       generalBackend: spanish-Sorry, we were unable to find your election day polling location.
   triggers:
     en:

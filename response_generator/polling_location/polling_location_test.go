@@ -10,8 +10,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/data"
 	"github.com/votinginfoproject/sms-worker/fake_storage"
 	"github.com/votinginfoproject/sms-worker/response_generator"
+	"github.com/votinginfoproject/sms-worker/responses"
 	"github.com/votinginfoproject/sms-worker/users"
 )
 
@@ -19,14 +21,28 @@ func setup() {
 	log.SetOutput(ioutil.Discard)
 }
 
+func getContent() *responses.Content {
+	rawContent, _ := data.Asset("raw/data.yml")
+	content, _ := responses.Load(rawContent)
+	return content
+}
+
+var messages = getContent()
+
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
 
 	return data, nil
 }
 
-var makeRequestError = func(endpoint string) ([]byte, error) {
+var makeRequestParseError = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_parse_error.json")
+
+	return data, nil
+}
+
+var makeRequestNotFoundError = func(endpoint string) ([]byte, error) {
+	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_not_found_error.json")
 
 	return data, nil
 }
@@ -43,7 +59,7 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
+	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm", messages.Help.Text["en"]["menu"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
 
@@ -60,7 +76,7 @@ func TestPollingLocationSuccessExistingUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm"}
+	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm", messages.Help.Text["es"]["menu"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
 
@@ -69,10 +85,10 @@ func TestPollingLocationParseErrorNewUser(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestError)
+	c := civicApi.New("", "", makeRequestParseError)
 	g := responseGenerator.New(c)
 
-	expected := []string{"We need your address to provide you with local voting information. We didn’t recognize that address, please try again."}
+	expected := []string{messages.Errors.Text["en"]["addressParseNewUser"], messages.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
 
@@ -86,10 +102,22 @@ func TestPollingLocationParseErrorExistingUser(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestError)
+	c := civicApi.New("", "", makeRequestParseError)
 	g := responseGenerator.New(c)
 
-	expected := []string{"That isn’t a recognized command. Text HELP to see all options."}
+	expected := []string{messages.Errors.Text["en"]["addressParseExistingUser"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
+}
+
+func TestPollingLocationNotFoundError(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestNotFoundError)
+	g := responseGenerator.New(c)
+
+	expected := []string{messages.Errors.Text["en"]["noElectionInfo"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
 
@@ -101,6 +129,6 @@ func TestPollingLocationFailure(t *testing.T) {
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
-	expected := []string{"Sorry, we were unable to find your election day polling location."}
+	expected := []string{messages.Errors.Text["en"]["generalBackend"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "", 0))
 }
