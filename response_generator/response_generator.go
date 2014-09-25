@@ -50,6 +50,8 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 		}
 	}
 
+	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
+
 	switch action {
 	case "Elo":
 		return r.elo(userData["address"], language, firstContact, routine)
