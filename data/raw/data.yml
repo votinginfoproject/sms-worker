@@ -98,6 +98,15 @@ help:
       - menu
     es:
       - ayuda
+lastContact:
+  text:
+    en:
+      prefix: "Your address on file is:"
+    es:
+      prefix: "spanish-Your address on file is:"
+  triggers:
+    en:
+    es:
 errors:
   text:
     en:

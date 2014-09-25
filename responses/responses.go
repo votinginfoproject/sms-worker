@@ -21,6 +21,7 @@ type Content struct {
 	Help             Response "help"
 	About            Response "about"
 	Intro            Response "intro"
+	LastContact      Response "lastContact"
 	Errors           Response "errors"
 }
 

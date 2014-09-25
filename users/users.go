@@ -16,7 +16,7 @@ func New(s storage.ExternalStorageService) *Users {
 	return &Users{s}
 }
 
-func (u *Users) GetOrCreate(key string) (map[string]string, bool, error) {
+func (u *Users) GetOrCreate(key string) (map[string]string, bool, string, error) {
 	isFirstContact := false
 	item, getErr := u.s.GetItem(key)
 	time := time.Now().Unix()
@@ -28,6 +28,8 @@ func (u *Users) GetOrCreate(key string) (map[string]string, bool, error) {
 		item["last_contact"] = timeString
 	}
 
+	lastContactTime := item["last_contact"]
+
 	if getErr != nil {
 		isFirstContact = true
 		attrs := map[string]string{"phone_number": key, "language": "en", "last_contact": timeString}
@@ -35,19 +37,19 @@ func (u *Users) GetOrCreate(key string) (map[string]string, bool, error) {
 
 		if createErr != nil {
 			log.Printf("[ERROR] unable to create user with number: '%s' : %s", key, createErr)
-			return make(map[string]string), isFirstContact, createErr
+			return make(map[string]string), isFirstContact, lastContactTime, createErr
 		} else {
-			return attrs, isFirstContact, nil
+			return attrs, isFirstContact, lastContactTime, nil
 		}
 	}
 
 	timeErr := u.s.UpdateItem(key, map[string]string{"last_contact": timeString})
 	if timeErr != nil {
 		log.Printf("[ERROR] unable to update last_contact for user with number: '%s' : %s", key, timeErr)
-		return make(map[string]string), isFirstContact, timeErr
+		return make(map[string]string), isFirstContact, lastContactTime, timeErr
 	}
 
-	return item, isFirstContact, nil
+	return item, isFirstContact, lastContactTime, nil
 }
 
 func (u *Users) ChangeLanguage(key, language string) error {

@@ -2,7 +2,9 @@ package responseGenerator
 
 import (
 	"log"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/data"
@@ -31,7 +33,7 @@ func New(civic civicApi.Querier, user *users.Users) *Generator {
 }
 
 func (r *Generator) Generate(number string, message string, routine int) []string {
-	userData, firstContact, err := r.user.GetOrCreate(number)
+	userData, firstContact, lastContactTime, err := r.user.GetOrCreate(number)
 	if err != nil {
 		log.Printf("[ERROR] [%d] User store error : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
@@ -52,7 +54,19 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
-	return r.performAction(action, userData, language, message, firstContact, routine)
+	return r.checkLastContactTime(r.performAction(action, userData, language, message, firstContact, routine), userData, language, lastContactTime)
+}
+
+func (r *Generator) checkLastContactTime(messages []string, userData map[string]string, language string, lastContactTime string) []string {
+	lcInt, _ := strconv.ParseInt(lastContactTime, 10, 64)
+	lcTime := time.Unix(lcInt, 0)
+	duration := time.Since(lcTime)
+
+	if duration > (7*24*time.Hour) && len(userData["address"]) > 0 {
+		messages = append(messages, r.content.LastContact.Text[language]["prefix"]+"\n"+userData["address"])
+	}
+
+	return messages
 }
 
 func (r *Generator) performAction(action string, userData map[string]string, language string, message string, firstContact bool, routine int) []string {
