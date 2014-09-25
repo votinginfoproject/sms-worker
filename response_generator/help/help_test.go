@@ -1,4 +1,4 @@
-package help
+package help_test
 
 import (
 	"io/ioutil"

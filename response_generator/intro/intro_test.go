@@ -1,4 +1,4 @@
-package intro
+package intro_test
 
 import (
 	"io/ioutil"
