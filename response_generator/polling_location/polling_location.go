@@ -32,14 +32,14 @@ func success(res *civicApi.Response, language string, content *responses.Content
 		response = response + "\n" + content.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
-	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+	return []string{response + "\n\n" + content.Help.Text[language]["menu"] + "\n" + content.Help.Text[language]["languages"]}
 }
 
 func failure(res *civicApi.Response, language string, newUser bool, content *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
 			if newUser == true {
-				return []string{content.Errors.Text[language]["addressParseNewUser"], content.Help.Text[language]["languages"]}
+				return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
 			} else {
 				return []string{content.Errors.Text[language]["addressParseExistingUser"]}
 			}

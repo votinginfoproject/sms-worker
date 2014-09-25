@@ -53,7 +53,7 @@ func TestRegistrationFailureNewUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["needAddress"], messages.Help.Text["en"]["languages"]}
+	expected := []string{messages.Errors.Text["en"]["needAddress"] + "\n\n" + messages.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "registration", 0))
 }
 

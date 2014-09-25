@@ -38,6 +38,6 @@ func TestHelpWithCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Help.Text["en"]["menu"], messages.Help.Text["en"]["languages"]}
+	expected := []string{messages.Help.Text["en"]["menu"] + "\n" + messages.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "menu", 0))
 }
