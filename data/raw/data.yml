@@ -87,10 +87,10 @@ about:
 help:
   text:
     en:
-      menu: Text POLL to find your polling place. Text OFFICIAL for election official info. Text REGISTER for registration info.
+      menu: "Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
       languages: Manda ESPAÑOL para cambiar el idioma.
     es:
-      menu: spanish-Text POLL to find your polling place. Text OFFICIAL for election official info. Text REGISTER for registration info.
+      menu: "spanish-Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
       languages: Text ENGLISH to change the language.
   triggers:
     en:

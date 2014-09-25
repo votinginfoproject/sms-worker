@@ -34,7 +34,7 @@ func success(res *civicApi.Response, language string, content *responses.Content
 		response = response + "\n" + content.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
-	return []string{response, content.Help.Text[language]["menu"] + " " + content.Help.Text[language]["languages"]}
+	return []string{response, content.Help.Text[language]["menu"] + "\n" + content.Help.Text[language]["languages"]}
 }
 
 func failure(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) []string {

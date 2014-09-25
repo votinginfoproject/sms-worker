@@ -56,7 +56,7 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	case "Registration":
 		return r.registration(userData["address"], language, firstContact, routine)
 	case "Help":
-		return []string{r.content.Help.Text[language]["menu"] + " " + r.content.Help.Text[language]["languages"]}
+		return []string{r.content.Help.Text[language]["menu"] + "\n" + r.content.Help.Text[language]["languages"]}
 	case "About":
 		return []string{r.content.About.Text[language]["all"]}
 	case "Intro":
