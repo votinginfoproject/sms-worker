@@ -30,7 +30,7 @@ func (u *Users) GetOrCreate(key string) (map[string]string, bool, error) {
 
 	if getErr != nil {
 		isFirstContact = true
-		attrs := map[string]string{"language": "en", "last_contact": timeString}
+		attrs := map[string]string{"phone_number": key, "language": "en", "last_contact": timeString}
 		createErr := u.s.CreateItem(key, attrs)
 
 		if createErr != nil {

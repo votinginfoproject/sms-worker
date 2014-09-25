@@ -22,6 +22,7 @@ func (s *Local) GetItem(key string) (map[string]string, error) {
 
 func (s *Local) CreateItem(key string, attrs map[string]string) error {
 	s.db[key] = attrs
+	attrs["phone_number"] = key
 	return nil
 }
 
