@@ -8,6 +8,8 @@ import (
 func BuildMessage(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) ([]string, bool) {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
 		return success(res, language, content), true
+	} else if len(res.Error.Errors) == 0 && len(res.PollingLocations) == 0 {
+		return []string{content.Errors.Text[language]["noElectionInfo"]}, true
 	} else {
 		return failure(res, language, newUser, firstContact, content), false
 	}

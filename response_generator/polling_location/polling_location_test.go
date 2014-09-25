@@ -35,6 +35,12 @@ var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	return data, nil
 }
 
+var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
+	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success_empty.json")
+
+	return data, nil
+}
+
 var makeRequestParseError = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_parse_error.json")
 
@@ -150,6 +156,18 @@ func TestPollingLocationNotFoundError(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestNotFoundError)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+}
+
+func TestPollingLocationEmpty(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c)
 
 	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
