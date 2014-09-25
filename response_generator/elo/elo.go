@@ -12,11 +12,11 @@ func BuildMessage(res *civicApi.Response, language string, content *responses.Co
 	}
 
 	message := content.Elo.Text[language]["prefix"] + "\n" + name
-	if len(email) > 0 {
+	if len(phone) > 0 {
 		message = message + "\n" + content.Elo.Text[language]["phone"] + " " + phone
 	}
 
-	if len(phone) > 0 {
+	if len(email) > 0 {
 		message = message + "\n" + content.Elo.Text[language]["email"] + " " + email
 	}
 
