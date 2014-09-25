@@ -6,7 +6,7 @@ import (
 )
 
 func BuildMessage(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) ([]string, bool) {
-	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
+	if len(res.PollingLocations) > 0 {
 		return success(res, language, content), true
 	} else if len(res.Error.Errors) == 0 && len(res.PollingLocations) == 0 {
 		return []string{content.Errors.Text[language]["noElectionInfo"]}, true
@@ -38,21 +38,23 @@ func success(res *civicApi.Response, language string, content *responses.Content
 }
 
 func failure(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) []string {
+	var reason string
 	if len(res.Error.Errors) > 0 {
-		if res.Error.Errors[0].Reason == "parseError" {
-			if newUser == true {
-				if firstContact == true {
-					return []string{content.Intro.Text[language]["all"]}
-				} else {
-					return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
-				}
-			} else {
-				return []string{content.Errors.Text[language]["addressParseExistingUser"]}
-			}
-		} else if res.Error.Errors[0].Reason == "notFound" {
-			return []string{content.Errors.Text[language]["noElectionInfo"]}
-		}
+		reason = res.Error.Errors[0].Reason
 	}
 
-	return []string{content.Errors.Text[language]["generalBackend"]}
+	switch reason {
+	case "parseError":
+		if newUser == true && firstContact == true {
+			return []string{content.Intro.Text[language]["all"]}
+		} else if newUser == true && firstContact == false {
+			return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
+		} else {
+			return []string{content.Errors.Text[language]["addressParseExistingUser"]}
+		}
+	case "notFound":
+		return []string{content.Errors.Text[language]["noElectionInfo"]}
+	default:
+		return []string{content.Errors.Text[language]["generalBackend"]}
+	}
 }
