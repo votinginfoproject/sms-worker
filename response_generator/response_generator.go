@@ -134,11 +134,9 @@ func (r *Generator) registration(address string, language string, firstContact b
 }
 
 func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, firstContact bool, routine int) []string {
-	var newUser bool
+	newUser := false
 	if len(userData["address"]) == 0 {
 		newUser = true
-	} else {
-		newUser = false
 	}
 
 	res, err := r.civic.Query(message)
