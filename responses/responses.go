@@ -16,6 +16,7 @@ type Content struct {
 	PollingLocation  Response "pollingLocation"
 	ElectionOfficial Response "electionOfficial"
 	ChangeLanguage   Response "changeLanguage"
+	Registration     Response "registration"
 	Help             Response "help"
 	About            Response "about"
 	Intro            Response "intro"

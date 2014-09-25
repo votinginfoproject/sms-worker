@@ -7,6 +7,7 @@ import (
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/data"
 	"github.com/votinginfoproject/sms-worker/response_generator/polling_location"
+	"github.com/votinginfoproject/sms-worker/response_generator/registration"
 	"github.com/votinginfoproject/sms-worker/responses"
 	"github.com/votinginfoproject/sms-worker/users"
 )
@@ -47,8 +48,9 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 			action = "ChangeLanguage"
 		}
 	}
-
 	switch action {
+	case "Registration":
+		return r.registration(userData["address"], language, routine)
 	case "Help":
 		return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
 	case "About":
@@ -83,6 +85,20 @@ func (r *Generator) changeLanguage(user *users.Users, number string, language st
 	return []string{r.content.Help.Text[language]["menu"]}
 }
 
+func (r *Generator) registration(address string, language string, routine int) []string {
+	if address == "" {
+		return []string{r.content.Errors.Text[language]["needAddress"], r.content.Help.Text[language]["languages"]}
+	}
+
+	res, err := r.civic.Query(address)
+	if err != nil {
+		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
+		return []string{r.content.Errors.Text[language]["generalBackend"]}
+	}
+
+	return registration.BuildMessage(res, language, r.content)
+}
+
 func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, routine int) []string {
 	var newUser bool
 	if len(userData["address"]) == 0 {
@@ -94,7 +110,7 @@ func (r *Generator) pollingLocation(userData map[string]string, user *users.User
 	res, err := r.civic.Query(message)
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
-		return []string{r.content.Errors.Text["en"]["generalBackend"]}
+		return []string{r.content.Errors.Text[userData["language"]]["generalBackend"]}
 	}
 
 	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, r.content)

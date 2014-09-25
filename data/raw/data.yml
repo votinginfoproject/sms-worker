@@ -35,6 +35,21 @@ intro:
       - voto
       - donde
       - dónde
+registration:
+  text:
+    en:
+      prefix: "For registration information:"
+    es:
+      prefix: "spanish-For registration information:"
+  triggers:
+    en:
+      - register
+      - reg
+      - registration
+      - registration info
+      - reg
+    es:
+      - registrarme
 about:
   text:
     en:
@@ -72,13 +87,15 @@ errors:
       generalBackend: Sorry, we were unable to find your election day polling location.
       noElectionOfficial: We don’t have election official information on file for your area.
       noRegistrationInfo: We don’t have registration information on file for your area.
+      needAddress: We need your address to provide you with local voting information.
     es:
       addressParseExistingUser: spanish-That isn’t a recognized command. Text HELP to see all options.
       addressParseNewUser: spanish-We need your address to provide you with local voting information. We didn’t recognize that address, please try again.
       noElectionInfo: spanish-No elections are scheduled for your area. To check elsewhere, reply with a new address.
       generalBackend: spanish-Sorry, we were unable to find your election day polling location.
       noElectionOfficial: spanish-We don’t have election official information on file for your area.
-      noRegistrationInfo: We don’t have registration information on file for your area.
+      noRegistrationInfo: spanish-We don’t have registration information on file for your area.
+      needAddress: spanish-We need your address to provide you with local voting information.
   triggers:
     en:
     es:
