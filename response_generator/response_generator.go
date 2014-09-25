@@ -54,19 +54,30 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
-	return r.checkLastContactTime(r.performAction(action, userData, language, message, firstContact, routine), userData, language, lastContactTime)
+
+	lctm := r.lastContactTimeMessage(userData, language, lastContactTime)
+
+	messages := r.performAction(action, userData, language, message, firstContact, routine)
+
+	if len(lctm) > 0 {
+		messages = append(messages, lctm)
+	}
+
+	return messages
 }
 
-func (r *Generator) checkLastContactTime(messages []string, userData map[string]string, language string, lastContactTime string) []string {
+func (r *Generator) lastContactTimeMessage(userData map[string]string, language string, lastContactTime string) string {
+	message := ""
+
 	lcInt, _ := strconv.ParseInt(lastContactTime, 10, 64)
 	lcTime := time.Unix(lcInt, 0)
 	duration := time.Since(lcTime)
 
 	if duration > (7*24*time.Hour) && len(userData["address"]) > 0 {
-		messages = append(messages, r.content.LastContact.Text[language]["prefix"]+"\n"+userData["address"])
+		message = r.content.LastContact.Text[language]["prefix"] + "\n" + userData["address"]
 	}
 
-	return messages
+	return message
 }
 
 func (r *Generator) performAction(action string, userData map[string]string, language string, message string, firstContact bool, routine int) []string {
