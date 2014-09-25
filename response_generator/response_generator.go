@@ -52,10 +52,10 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
-	return r.performAction(action, userData, language, number, message, firstContact, routine)
+	return r.performAction(action, userData, language, message, firstContact, routine)
 }
 
-func (r *Generator) performAction(action string, userData map[string]string, language string, number string, message string, firstContact bool, routine int) []string {
+func (r *Generator) performAction(action string, userData map[string]string, language string, message string, firstContact bool, routine int) []string {
 	switch action {
 	case "Elo":
 		return r.elo(userData["address"], language, firstContact, routine)
@@ -76,17 +76,17 @@ func (r *Generator) performAction(action string, userData map[string]string, lan
 	case "Intro":
 		return []string{r.content.Intro.Text[language]["all"]}
 	case "ChangeLanguage":
-		return r.changeLanguage(number, language)
+		return r.changeLanguage(userData["phone_number"], language)
 	case "PollingLocation":
 		if len(userData["address"]) == 0 && firstContact == true {
 			return []string{r.content.Intro.Text[language]["all"]}
 		} else if len(userData["address"]) == 0 && firstContact == false {
 			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
 		} else {
-			return r.pollingLocation(userData, number, userData["address"], firstContact, routine)
+			return r.pollingLocation(userData, userData["address"], firstContact, routine)
 		}
 	default:
-		return r.pollingLocation(userData, number, message, firstContact, routine)
+		return r.pollingLocation(userData, message, firstContact, routine)
 	}
 }
 
@@ -145,7 +145,7 @@ func (r *Generator) registration(address string, language string, firstContact b
 	return registration.BuildMessage(res, language, r.content)
 }
 
-func (r *Generator) pollingLocation(userData map[string]string, number string, message string, firstContact bool, routine int) []string {
+func (r *Generator) pollingLocation(userData map[string]string, message string, firstContact bool, routine int) []string {
 	newUser := false
 	if len(userData["address"]) == 0 {
 		newUser = true
@@ -159,7 +159,7 @@ func (r *Generator) pollingLocation(userData map[string]string, number string, m
 
 	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, firstContact, r.content)
 	if success == true {
-		r.user.SetAddress(number, message)
+		r.user.SetAddress(userData["phone_number"], message)
 	}
 
 	return messages
