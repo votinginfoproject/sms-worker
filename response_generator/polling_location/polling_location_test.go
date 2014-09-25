@@ -72,13 +72,43 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
+func TestPollingLocationSuccessNewUserFirstcontactCommand(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Intro.Text["en"]["all"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "poll", 0))
+}
+
+func TestPollingLocationSuccessNewUserCommand(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
+
+	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "poll", 0))
+}
+
 func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 
 	time := time.Now().Unix()
 	timeString := strconv.FormatInt(time, 10)
-	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": timeString})
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": timeString, "address": "exists"})
 
 	u := users.New(s)
 

@@ -72,7 +72,13 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	case "ChangeLanguage":
 		return r.changeLanguage(user, number, language)
 	case "PollingLocation":
-		return r.pollingLocation(userData, user, number, userData["address"], firstContact, routine)
+		if len(userData["address"]) == 0 && firstContact == true {
+			return []string{r.content.Intro.Text[language]["all"]}
+		} else if len(userData["address"]) == 0 && firstContact == false {
+			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+		} else {
+			return r.pollingLocation(userData, user, number, userData["address"], firstContact, routine)
+		}
 	default:
 		return r.pollingLocation(userData, user, number, message, firstContact, routine)
 	}
