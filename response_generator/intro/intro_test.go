@@ -36,8 +36,8 @@ func TestIntroWithCommand(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequest)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "vote", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "vote", 0))
 }

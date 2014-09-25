@@ -7,10 +7,9 @@ import (
 	"github.com/votinginfoproject/sms-worker/queue"
 	"github.com/votinginfoproject/sms-worker/response_generator"
 	"github.com/votinginfoproject/sms-worker/sms"
-	"github.com/votinginfoproject/sms-worker/users"
 )
 
-func Start(user *users.Users, q queue.ExternalQueueService, rg *responseGenerator.Generator, sms sms.ExternalSmsServce, wg *sync.WaitGroup, routine int) {
+func Start(q queue.ExternalQueueService, rg *responseGenerator.Generator, sms sms.ExternalSmsServce, wg *sync.WaitGroup, routine int) {
 	defer wg.Done()
 
 	log.Print("[INFO] Started routine ", routine)
@@ -22,7 +21,7 @@ func Start(user *users.Users, q queue.ExternalQueueService, rg *responseGenerato
 			continue
 		}
 
-		reply := rg.Generate(user, number, message, routine)
+		reply := rg.Generate(number, message, routine)
 
 		log.Printf("[INFO] [%d] Sending '%s' To %s", routine, reply, number)
 

@@ -42,10 +42,10 @@ func TestHelpWithCommandNotFirstContact(t *testing.T) {
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
 	c := civicApi.New("", "", makeRequest)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Help.Text["en"]["menu"], content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "menu", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "menu", 0))
 }
 
 func TestHelpWithCommandFirstContact(t *testing.T) {
@@ -54,8 +54,8 @@ func TestHelpWithCommandFirstContact(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequest)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "menu", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "menu", 0))
 }

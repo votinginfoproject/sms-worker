@@ -45,13 +45,12 @@ func main() {
 
 	log.SetOutput(logger.New())
 
-	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
-	rg := responseGenerator.New(api)
-
-	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))
-
 	st := storage.New()
 	user := users.New(st)
+	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
+	rg := responseGenerator.New(api, user)
+
+	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))
 
 	q := queue.New()
 	q.Connect()
@@ -60,7 +59,7 @@ func main() {
 
 	for i := 0; i < routines; i++ {
 		wg.Add(1)
-		go poll.Start(user, q, rg, sms, &wg, i)
+		go poll.Start(q, rg, sms, &wg, i)
 	}
 
 	wg.Wait()

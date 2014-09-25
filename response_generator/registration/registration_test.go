@@ -51,10 +51,10 @@ func TestRegistrationFailureNewUserFirstContact(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "registration", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "registration", 0))
 }
 
 func TestRegistrationFailureNewUserNotFirstContact(t *testing.T) {
@@ -67,10 +67,10 @@ func TestRegistrationFailureNewUserNotFirstContact(t *testing.T) {
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "registration", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "registration", 0))
 }
 
 func TestRegistrationFailureEmptyExistingUser(t *testing.T) {
@@ -83,10 +83,10 @@ func TestRegistrationFailureEmptyExistingUser(t *testing.T) {
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
 	c := civicApi.New("", "", makeRequestSuccessEmpty)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noRegistrationInfo"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "registration", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "registration", 0))
 }
 
 func TestRegistrationSuccessExistingUser(t *testing.T) {
@@ -99,8 +99,8 @@ func TestRegistrationSuccessExistingUser(t *testing.T) {
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{"For registration information: http://nvsos.gov/index.aspx?page=703"}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "registration", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "registration", 0))
 }

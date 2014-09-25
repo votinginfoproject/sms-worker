@@ -17,20 +17,21 @@ type Generator struct {
 	civic    civicApi.Querier
 	content  *responses.Content
 	triggers map[string]map[string]string
+	user     *users.Users
 }
 
-func New(civic civicApi.Querier) *Generator {
+func New(civic civicApi.Querier, user *users.Users) *Generator {
 	rawContent, err := data.Asset("raw/data.yml")
 	if err != nil {
 		log.Panic("[ERROR] Failed to load responses : ", err)
 	}
 
 	content, triggers := responses.Load(rawContent)
-	return &Generator{civic, content, triggers}
+	return &Generator{civic, content, triggers, user}
 }
 
-func (r *Generator) Generate(user *users.Users, number string, message string, routine int) []string {
-	userData, firstContact, err := user.GetOrCreate(number)
+func (r *Generator) Generate(number string, message string, routine int) []string {
+	userData, firstContact, err := r.user.GetOrCreate(number)
 	if err != nil {
 		log.Printf("[ERROR] [%d] User store error : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
@@ -51,10 +52,10 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
-	return r.performAction(action, user, userData, language, number, message, firstContact, routine)
+	return r.performAction(action, userData, language, number, message, firstContact, routine)
 }
 
-func (r *Generator) performAction(action string, user *users.Users, userData map[string]string, language string, number string, message string, firstContact bool, routine int) []string {
+func (r *Generator) performAction(action string, userData map[string]string, language string, number string, message string, firstContact bool, routine int) []string {
 	switch action {
 	case "Elo":
 		return r.elo(userData["address"], language, firstContact, routine)
@@ -75,17 +76,17 @@ func (r *Generator) performAction(action string, user *users.Users, userData map
 	case "Intro":
 		return []string{r.content.Intro.Text[language]["all"]}
 	case "ChangeLanguage":
-		return r.changeLanguage(user, number, language)
+		return r.changeLanguage(number, language)
 	case "PollingLocation":
 		if len(userData["address"]) == 0 && firstContact == true {
 			return []string{r.content.Intro.Text[language]["all"]}
 		} else if len(userData["address"]) == 0 && firstContact == false {
 			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
 		} else {
-			return r.pollingLocation(userData, user, number, userData["address"], firstContact, routine)
+			return r.pollingLocation(userData, number, userData["address"], firstContact, routine)
 		}
 	default:
-		return r.pollingLocation(userData, user, number, message, firstContact, routine)
+		return r.pollingLocation(userData, number, message, firstContact, routine)
 	}
 }
 
@@ -99,8 +100,8 @@ func (r *Generator) checkIfOtherLanguage(message string) (bool, string) {
 	return false, ""
 }
 
-func (r *Generator) changeLanguage(user *users.Users, number string, language string) []string {
-	err := user.ChangeLanguage(number, language)
+func (r *Generator) changeLanguage(number string, language string) []string {
+	err := r.user.ChangeLanguage(number, language)
 	if err != nil {
 		return []string{r.content.Errors.Text[language]["generalBackend"]}
 	}
@@ -144,7 +145,7 @@ func (r *Generator) registration(address string, language string, firstContact b
 	return registration.BuildMessage(res, language, r.content)
 }
 
-func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, firstContact bool, routine int) []string {
+func (r *Generator) pollingLocation(userData map[string]string, number string, message string, firstContact bool, routine int) []string {
 	newUser := false
 	if len(userData["address"]) == 0 {
 		newUser = true
@@ -158,7 +159,7 @@ func (r *Generator) pollingLocation(userData map[string]string, user *users.User
 
 	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, firstContact, r.content)
 	if success == true {
-		user.SetAddress(number, message)
+		r.user.SetAddress(number, message)
 	}
 
 	return messages

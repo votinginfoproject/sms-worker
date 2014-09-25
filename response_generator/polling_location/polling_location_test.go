@@ -63,13 +63,13 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{
 		"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
 		content.Help.Text["en"]["menu"],
 		content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationSuccessNewUserFirstcontactCommand(t *testing.T) {
@@ -79,10 +79,10 @@ func TestPollingLocationSuccessNewUserFirstcontactCommand(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccessEmpty)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "poll", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "poll", 0))
 }
 
 func TestPollingLocationSuccessNewUserCommand(t *testing.T) {
@@ -96,10 +96,10 @@ func TestPollingLocationSuccessNewUserCommand(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccessEmpty)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "poll", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "poll", 0))
 }
 
 func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
@@ -113,13 +113,13 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{
 		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))
 }
 
 func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
@@ -133,13 +133,13 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccess)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{
 		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 	updatedUser, _, _ := u.GetOrCreate("+15551235555")
 	assert.Equal(t, "111 address street", updatedUser["address"])
 }
@@ -150,10 +150,10 @@ func TestPollingLocationParseErrorNewUserFirstContact(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestParseError)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationParseErrorNewUserNotFirstContact(t *testing.T) {
@@ -166,10 +166,10 @@ func TestPollingLocationParseErrorNewUserNotFirstContact(t *testing.T) {
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
 	c := civicApi.New("", "", makeRequestParseError)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["addressParseNewUser"] + "\n\n" + content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationParseErrorExistingUser(t *testing.T) {
@@ -183,10 +183,10 @@ func TestPollingLocationParseErrorExistingUser(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestParseError)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["addressParseExistingUser"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationNotFoundError(t *testing.T) {
@@ -195,10 +195,10 @@ func TestPollingLocationNotFoundError(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestNotFoundError)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationEmpty(t *testing.T) {
@@ -207,10 +207,10 @@ func TestPollingLocationEmpty(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestSuccessEmpty)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
 func TestPollingLocationFailure(t *testing.T) {
@@ -219,8 +219,8 @@ func TestPollingLocationFailure(t *testing.T) {
 	u := users.New(s)
 
 	c := civicApi.New("", "", makeRequestFailure)
-	g := responseGenerator.New(c)
+	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["generalBackend"]}
-	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
