@@ -5,19 +5,19 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, language string, messages *responses.Content) []string {
+func BuildMessage(res *civicApi.Response, language string, content *responses.Content) []string {
 	name, email, phone := getElo(res)
 	if len(name) == 0 {
-		return []string{messages.Errors.Text[language]["noElectionOfficial"]}
+		return []string{content.Errors.Text[language]["noElectionOfficial"]}
 	}
 
-	message := messages.Elo.Text[language]["prefix"] + "\n" + name
+	message := content.Elo.Text[language]["prefix"] + "\n" + name
 	if len(email) > 0 {
-		message = message + "\n" + messages.Elo.Text[language]["phone"] + " " + phone
+		message = message + "\n" + content.Elo.Text[language]["phone"] + " " + phone
 	}
 
 	if len(phone) > 0 {
-		message = message + "\n" + messages.Elo.Text[language]["email"] + " " + email
+		message = message + "\n" + content.Elo.Text[language]["email"] + " " + email
 	}
 
 	return []string{message}

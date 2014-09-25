@@ -5,13 +5,13 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, language string, messages *responses.Content) []string {
+func BuildMessage(res *civicApi.Response, language string, content *responses.Content) []string {
 	url := getRegistrationUrl(res)
 	if len(url) == 0 {
-		return []string{messages.Errors.Text[language]["noRegistrationInfo"]}
+		return []string{content.Errors.Text[language]["noRegistrationInfo"]}
 	}
 
-	return []string{messages.Registration.Text[language]["prefix"] + " " + url}
+	return []string{content.Registration.Text[language]["prefix"] + " " + url}
 }
 
 func getRegistrationUrl(res *civicApi.Response) string {

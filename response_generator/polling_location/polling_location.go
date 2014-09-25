@@ -5,17 +5,17 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, language string, newUser bool, messages *responses.Content) ([]string, bool) {
+func BuildMessage(res *civicApi.Response, language string, newUser bool, content *responses.Content) ([]string, bool) {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
-		return success(res, language, messages), true
+		return success(res, language, content), true
 	} else {
-		return failure(res, language, newUser, messages), false
+		return failure(res, language, newUser, content), false
 	}
 }
 
-func success(res *civicApi.Response, language string, messages *responses.Content) []string {
+func success(res *civicApi.Response, language string, content *responses.Content) []string {
 	pl := res.PollingLocations[0]
-	response := messages.PollingLocation.Text[language]["prefix"] + "\n"
+	response := content.PollingLocation.Text[language]["prefix"] + "\n"
 
 	if len(pl.Address.LocationName) > 0 {
 		response = response + pl.Address.LocationName + "\n"
@@ -29,24 +29,24 @@ func success(res *civicApi.Response, language string, messages *responses.Conten
 	}
 
 	if len(pl.PollingHours) > 0 {
-		response = response + "\n" + messages.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
+		response = response + "\n" + content.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
-	return []string{response, messages.Help.Text[language]["menu"], messages.Help.Text[language]["languages"]}
+	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
 }
 
-func failure(res *civicApi.Response, language string, newUser bool, messages *responses.Content) []string {
+func failure(res *civicApi.Response, language string, newUser bool, content *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
 			if newUser == true {
-				return []string{messages.Errors.Text[language]["addressParseNewUser"], messages.Help.Text[language]["languages"]}
+				return []string{content.Errors.Text[language]["addressParseNewUser"], content.Help.Text[language]["languages"]}
 			} else {
-				return []string{messages.Errors.Text[language]["addressParseExistingUser"]}
+				return []string{content.Errors.Text[language]["addressParseExistingUser"]}
 			}
 		} else if res.Error.Errors[0].Reason == "notFound" {
-			return []string{messages.Errors.Text[language]["noElectionInfo"]}
+			return []string{content.Errors.Text[language]["noElectionInfo"]}
 		}
 	}
 
-	return []string{messages.Errors.Text[language]["generalBackend"]}
+	return []string{content.Errors.Text[language]["generalBackend"]}
 }
