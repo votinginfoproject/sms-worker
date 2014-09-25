@@ -31,7 +31,7 @@ func (u *Users) GetOrCreate(key string) (map[string]string, bool, error) {
 	if getErr != nil {
 		isFirstContact = true
 		attrs := map[string]string{"language": "en", "last_contact": timeString}
-		createErr := u.s.CreateItem(key, map[string]string{"language": "en"})
+		createErr := u.s.CreateItem(key, attrs)
 
 		if createErr != nil {
 			log.Printf("[ERROR] unable to create user with number: '%s' : %s", key, createErr)
