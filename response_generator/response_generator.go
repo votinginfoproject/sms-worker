@@ -56,38 +56,42 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 }
 
 func (r *Generator) performAction(action string, userData map[string]string, language string, message string, firstContact bool, routine int) []string {
+	var messages []string
+
 	switch action {
 	case "Elo":
-		return r.elo(userData["address"], language, firstContact, routine)
+		messages = r.elo(userData["address"], language, firstContact, routine)
 	case "Registration":
-		return r.registration(userData["address"], language, firstContact, routine)
+		messages = r.registration(userData["address"], language, firstContact, routine)
 	case "Help":
 		if firstContact == true {
-			return []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[language]["all"]}
 		} else {
-			return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
+			messages = []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
 		}
 	case "About":
 		if firstContact == true {
-			return []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[language]["all"]}
 		} else {
-			return []string{r.content.About.Text[language]["all"]}
+			messages = []string{r.content.About.Text[language]["all"]}
 		}
 	case "Intro":
-		return []string{r.content.Intro.Text[language]["all"]}
+		messages = []string{r.content.Intro.Text[language]["all"]}
 	case "ChangeLanguage":
-		return r.changeLanguage(userData["phone_number"], language)
+		messages = r.changeLanguage(userData["phone_number"], language)
 	case "PollingLocation":
 		if len(userData["address"]) == 0 && firstContact == true {
-			return []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[language]["all"]}
 		} else if len(userData["address"]) == 0 && firstContact == false {
-			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+			messages = []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
 		} else {
-			return r.pollingLocation(userData, userData["address"], firstContact, routine)
+			messages = r.pollingLocation(userData, userData["address"], firstContact, routine)
 		}
 	default:
-		return r.pollingLocation(userData, message, firstContact, routine)
+		messages = r.pollingLocation(userData, message, firstContact, routine)
 	}
+
+	return messages
 }
 
 func (r *Generator) checkIfOtherLanguage(message string) (bool, string) {
