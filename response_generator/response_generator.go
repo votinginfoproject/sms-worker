@@ -110,7 +110,7 @@ func (r *Generator) changeLanguage(number string, language string) []string {
 }
 
 func (r *Generator) elo(address string, language string, firstContact bool, routine int) []string {
-	if address == "" {
+	if len(address) == 0 {
 		if firstContact == true {
 			return []string{r.content.Intro.Text[language]["all"]}
 		} else {
@@ -128,7 +128,7 @@ func (r *Generator) elo(address string, language string, firstContact bool, rout
 }
 
 func (r *Generator) registration(address string, language string, firstContact bool, routine int) []string {
-	if address == "" {
+	if len(address) == 0 {
 		if firstContact == true {
 			return []string{r.content.Intro.Text[language]["all"]}
 		} else {
