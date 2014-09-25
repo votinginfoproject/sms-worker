@@ -51,7 +51,10 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
+	return r.performAction(action, user, userData, language, number, message, firstContact, routine)
+}
 
+func (r *Generator) performAction(action string, user *users.Users, userData map[string]string, language string, number string, message string, firstContact bool, routine int) []string {
 	switch action {
 	case "Elo":
 		return r.elo(userData["address"], language, firstContact, routine)
