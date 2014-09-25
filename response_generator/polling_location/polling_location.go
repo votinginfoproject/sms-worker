@@ -32,7 +32,7 @@ func success(res *civicApi.Response, language string, content *responses.Content
 		response = response + "\n" + content.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
 	}
 
-	return []string{response + "\n\n" + content.Help.Text[language]["menu"] + "\n" + content.Help.Text[language]["languages"]}
+	return []string{response + "\n\n" + content.Help.Text[language]["menu"] + " " + content.Help.Text[language]["languages"]}
 }
 
 func failure(res *civicApi.Response, language string, newUser bool, content *responses.Content) []string {

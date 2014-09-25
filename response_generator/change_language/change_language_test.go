@@ -38,7 +38,7 @@ func TestChangeLanguageWithLanguageCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Help.Text["es"]["menu"]}
+	expected := []string{messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "español", 0))
 }
 
@@ -50,6 +50,6 @@ func TestChangeLanguageWithOtherCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Help.Text["es"]["menu"]}
+	expected := []string{messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
 }
