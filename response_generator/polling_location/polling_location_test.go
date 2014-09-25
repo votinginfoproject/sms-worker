@@ -95,14 +95,30 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 
 	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + content.Help.Text["es"]["menu"] + " " + content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
-	updatedUser, _ := u.GetOrCreate("+15551235555")
+	updatedUser, _, _ := u.GetOrCreate("+15551235555")
 	assert.Equal(t, "111 address street", updatedUser["address"])
 }
 
-func TestPollingLocationParseErrorNewUser(t *testing.T) {
+func TestPollingLocationParseErrorNewUserFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestParseError)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Intro.Text["en"]["all"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
+}
+
+func TestPollingLocationParseErrorNewUserNotFirstContact(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
 	c := civicApi.New("", "", makeRequestParseError)
 	g := responseGenerator.New(c)

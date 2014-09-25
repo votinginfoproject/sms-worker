@@ -30,7 +30,7 @@ func New(civic civicApi.Querier) *Generator {
 }
 
 func (r *Generator) Generate(user *users.Users, number string, message string, routine int) []string {
-	userData, err := user.GetOrCreate(number)
+	userData, firstContact, err := user.GetOrCreate(number)
 	if err != nil {
 		log.Printf("[ERROR] [%d] User store error : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
@@ -52,9 +52,9 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 
 	switch action {
 	case "Elo":
-		return r.elo(userData["address"], language, routine)
+		return r.elo(userData["address"], language, firstContact, routine)
 	case "Registration":
-		return r.registration(userData["address"], language, routine)
+		return r.registration(userData["address"], language, firstContact, routine)
 	case "Help":
 		return []string{r.content.Help.Text[language]["menu"] + " " + r.content.Help.Text[language]["languages"]}
 	case "About":
@@ -64,9 +64,9 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 	case "ChangeLanguage":
 		return r.changeLanguage(user, number, language)
 	case "PollingLocation":
-		return r.pollingLocation(userData, user, number, userData["address"], routine)
+		return r.pollingLocation(userData, user, number, userData["address"], firstContact, routine)
 	default:
-		return r.pollingLocation(userData, user, number, message, routine)
+		return r.pollingLocation(userData, user, number, message, firstContact, routine)
 	}
 }
 
@@ -89,9 +89,13 @@ func (r *Generator) changeLanguage(user *users.Users, number string, language st
 	return []string{r.content.Help.Text[language]["menu"] + " " + r.content.Help.Text[language]["languages"]}
 }
 
-func (r *Generator) elo(address string, language string, routine int) []string {
+func (r *Generator) elo(address string, language string, firstContact bool, routine int) []string {
 	if address == "" {
-		return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+		if firstContact == true {
+			return []string{r.content.Intro.Text[language]["all"]}
+		} else {
+			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+		}
 	}
 
 	res, err := r.civic.Query(address)
@@ -103,9 +107,13 @@ func (r *Generator) elo(address string, language string, routine int) []string {
 	return elo.BuildMessage(res, language, r.content)
 }
 
-func (r *Generator) registration(address string, language string, routine int) []string {
+func (r *Generator) registration(address string, language string, firstContact bool, routine int) []string {
 	if address == "" {
-		return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+		if firstContact == true {
+			return []string{r.content.Intro.Text[language]["all"]}
+		} else {
+			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+		}
 	}
 
 	res, err := r.civic.Query(address)
@@ -117,7 +125,7 @@ func (r *Generator) registration(address string, language string, routine int) [
 	return registration.BuildMessage(res, language, r.content)
 }
 
-func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, routine int) []string {
+func (r *Generator) pollingLocation(userData map[string]string, user *users.Users, number string, message string, firstContact bool, routine int) []string {
 	var newUser bool
 	if len(userData["address"]) == 0 {
 		newUser = true
@@ -131,7 +139,7 @@ func (r *Generator) pollingLocation(userData map[string]string, user *users.User
 		return []string{r.content.Errors.Text[userData["language"]]["generalBackend"]}
 	}
 
-	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, r.content)
+	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, firstContact, r.content)
 	if success == true {
 		user.SetAddress(number, message)
 	}

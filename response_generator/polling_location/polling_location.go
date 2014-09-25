@@ -5,11 +5,11 @@ import (
 	"github.com/votinginfoproject/sms-worker/responses"
 )
 
-func BuildMessage(res *civicApi.Response, language string, newUser bool, content *responses.Content) ([]string, bool) {
+func BuildMessage(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) ([]string, bool) {
 	if len(res.Error.Errors) == 0 && len(res.PollingLocations) > 0 {
 		return success(res, language, content), true
 	} else {
-		return failure(res, language, newUser, content), false
+		return failure(res, language, newUser, firstContact, content), false
 	}
 }
 
@@ -35,11 +35,15 @@ func success(res *civicApi.Response, language string, content *responses.Content
 	return []string{response + "\n\n" + content.Help.Text[language]["menu"] + " " + content.Help.Text[language]["languages"]}
 }
 
-func failure(res *civicApi.Response, language string, newUser bool, content *responses.Content) []string {
+func failure(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) []string {
 	if len(res.Error.Errors) > 0 {
 		if res.Error.Errors[0].Reason == "parseError" {
 			if newUser == true {
-				return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
+				if firstContact == true {
+					return []string{content.Intro.Text[language]["all"]}
+				} else {
+					return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
+				}
 			} else {
 				return []string{content.Errors.Text[language]["addressParseExistingUser"]}
 			}

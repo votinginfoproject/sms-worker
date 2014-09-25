@@ -45,10 +45,26 @@ var makeRequestFailure = func(endpoint string) ([]byte, error) {
 	return nil, errors.New("something bad has happened")
 }
 
-func TestEloFailureNewUser(t *testing.T) {
+func TestEloFailureNewUserFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 	u := users.New(s)
+
+	c := civicApi.New("", "", makeRequestSuccess)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Intro.Text["en"]["all"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "elo", 0))
+}
+
+func TestEloFailureNewUserNotFirstContact(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
