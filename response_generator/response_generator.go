@@ -100,7 +100,7 @@ func (r *Generator) changeLanguage(user *users.Users, number string, language st
 		return []string{r.content.Errors.Text[language]["generalBackend"]}
 	}
 
-	return []string{r.content.Help.Text[language]["menu"] + " " + r.content.Help.Text[language]["languages"]}
+	return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
 }
 
 func (r *Generator) elo(address string, language string, firstContact bool, routine int) []string {
