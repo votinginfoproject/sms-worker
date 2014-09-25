@@ -67,7 +67,8 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 
 	expected := []string{
 		"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
-		content.Help.Text["en"]["menu"] + "\n" + content.Help.Text["en"]["languages"]}
+		content.Help.Text["en"]["menu"],
+		content.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
@@ -86,7 +87,8 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 
 	expected := []string{
 		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
-		content.Help.Text["es"]["menu"] + "\n" + content.Help.Text["es"]["languages"]}
+		content.Help.Text["es"]["menu"],
+		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
 }
 
@@ -105,7 +107,8 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 
 	expected := []string{
 		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
-		content.Help.Text["es"]["menu"] + "\n" + content.Help.Text["es"]["languages"]}
+		content.Help.Text["es"]["menu"],
+		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 	updatedUser, _, _ := u.GetOrCreate("+15551235555")
 	assert.Equal(t, "111 address street", updatedUser["address"])

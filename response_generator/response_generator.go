@@ -59,7 +59,7 @@ func (r *Generator) Generate(user *users.Users, number string, message string, r
 		if firstContact == true {
 			return []string{r.content.Intro.Text[language]["all"]}
 		} else {
-			return []string{r.content.Help.Text[language]["menu"] + "\n" + r.content.Help.Text[language]["languages"]}
+			return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
 		}
 	case "About":
 		if firstContact == true {
