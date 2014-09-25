@@ -17,6 +17,7 @@ type Content struct {
 	ElectionOfficial Response "electionOfficial"
 	ChangeLanguage   Response "changeLanguage"
 	Registration     Response "registration"
+	Elo              Response "elo"
 	Help             Response "help"
 	About            Response "about"
 	Intro            Response "intro"

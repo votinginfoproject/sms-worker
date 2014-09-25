@@ -50,6 +50,26 @@ registration:
       - reg
     es:
       - registrarme
+elo:
+  text:
+    en:
+      prefix: "Your local election official is:"
+      phone: "Phone:"
+      email: "Email:"
+    es:
+      prefix: "spanish-Your local election official is:"
+      phone: "spanish-Phone:"
+      email: "spanish-Email:"
+  triggers:
+    en:
+      - official
+      - election official info
+      - election info
+      - election official
+      - election
+      - elo
+    es:
+      - funcionario
 about:
   text:
     en:
