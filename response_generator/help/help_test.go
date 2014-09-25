@@ -3,7 +3,9 @@ package help
 import (
 	"io/ioutil"
 	"log"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
@@ -30,7 +32,23 @@ var makeRequest = func(endpoint string) ([]byte, error) {
 	return []byte{}, nil
 }
 
-func TestHelpWithCommand(t *testing.T) {
+func TestHelpWithCommandNotFirstContact(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
+
+	c := civicApi.New("", "", makeRequest)
+	g := responseGenerator.New(c)
+
+	expected := []string{content.Help.Text["en"]["menu"] + "\n" + content.Help.Text["en"]["languages"]}
+	assert.Equal(t, expected, g.Generate(u, "+15551235555", "menu", 0))
+}
+
+func TestHelpWithCommandFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 	u := users.New(s)
@@ -38,6 +56,6 @@ func TestHelpWithCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{content.Help.Text["en"]["menu"] + "\n" + content.Help.Text["en"]["languages"]}
+	expected := []string{content.Intro.Text["en"]["all"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "menu", 0))
 }
