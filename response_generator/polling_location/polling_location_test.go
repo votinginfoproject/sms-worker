@@ -27,7 +27,7 @@ func getContent() *responses.Content {
 	return content
 }
 
-var messages = getContent()
+var content = getContent()
 
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
@@ -59,7 +59,7 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + messages.Help.Text["en"]["menu"] + " " + messages.Help.Text["en"]["languages"]}
+	expected := []string{"Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + content.Help.Text["en"]["menu"] + " " + content.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
@@ -76,7 +76,7 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
+	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + content.Help.Text["es"]["menu"] + " " + content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
 }
 
@@ -93,7 +93,7 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
+	expected := []string{"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm" + "\n\n" + content.Help.Text["es"]["menu"] + " " + content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 	updatedUser, _ := u.GetOrCreate("+15551235555")
 	assert.Equal(t, "111 address street", updatedUser["address"])
@@ -107,7 +107,7 @@ func TestPollingLocationParseErrorNewUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestParseError)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["addressParseNewUser"] + "\n\n" + messages.Help.Text["en"]["languages"]}
+	expected := []string{content.Errors.Text["en"]["addressParseNewUser"] + "\n\n" + content.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
@@ -124,7 +124,7 @@ func TestPollingLocationParseErrorExistingUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestParseError)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["addressParseExistingUser"]}
+	expected := []string{content.Errors.Text["en"]["addressParseExistingUser"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
@@ -136,7 +136,7 @@ func TestPollingLocationNotFoundError(t *testing.T) {
 	c := civicApi.New("", "", makeRequestNotFoundError)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["noElectionInfo"]}
+	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }
 
@@ -148,6 +148,6 @@ func TestPollingLocationFailure(t *testing.T) {
 	c := civicApi.New("", "", makeRequestFailure)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["generalBackend"]}
+	expected := []string{content.Errors.Text["en"]["generalBackend"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "111 address street", 0))
 }

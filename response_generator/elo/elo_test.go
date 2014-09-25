@@ -27,7 +27,7 @@ func getContent() *responses.Content {
 	return content
 }
 
-var messages = getContent()
+var content = getContent()
 
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
@@ -53,7 +53,7 @@ func TestEloFailureNewUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccess)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["needAddress"] + "\n\n" + messages.Help.Text["en"]["languages"]}
+	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "elo", 0))
 }
 
@@ -69,7 +69,7 @@ func TestEloFailureExistingUser(t *testing.T) {
 	c := civicApi.New("", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Errors.Text["en"]["noElectionOfficial"]}
+	expected := []string{content.Errors.Text["en"]["noElectionOfficial"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "elo", 0))
 }
 

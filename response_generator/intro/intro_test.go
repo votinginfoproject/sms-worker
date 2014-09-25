@@ -24,7 +24,7 @@ func getContent() *responses.Content {
 	return content
 }
 
-var messages = getContent()
+var content = getContent()
 
 var makeRequest = func(endpoint string) ([]byte, error) {
 	return []byte{}, nil
@@ -38,6 +38,6 @@ func TestIntroWithCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Intro.Text["en"]["all"]}
+	expected := []string{content.Intro.Text["en"]["all"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "vote", 0))
 }

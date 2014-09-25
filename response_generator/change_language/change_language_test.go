@@ -24,7 +24,7 @@ func getContent() *responses.Content {
 	return content
 }
 
-var messages = getContent()
+var content = getContent()
 
 var makeRequest = func(endpoint string) ([]byte, error) {
 	return []byte{}, nil
@@ -38,7 +38,7 @@ func TestChangeLanguageWithLanguageCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
+	expected := []string{content.Help.Text["es"]["menu"] + " " + content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "español", 0))
 }
 
@@ -50,6 +50,6 @@ func TestChangeLanguageWithOtherCommand(t *testing.T) {
 	c := civicApi.New("", "", makeRequest)
 	g := responseGenerator.New(c)
 
-	expected := []string{messages.Help.Text["es"]["menu"] + " " + messages.Help.Text["es"]["languages"]}
+	expected := []string{content.Help.Text["es"]["menu"] + " " + content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate(u, "+15551235555", "spoll", 0))
 }
