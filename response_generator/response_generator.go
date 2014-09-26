@@ -182,10 +182,10 @@ func (r *Generator) pollingLocation(user *users.User, message string, routine in
 	res, err := r.civic.Query(message)
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
-		return []string{r.content.Errors.Text[user.Data["language"]]["generalBackend"]}
+		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	messages, success := pollingLocation.BuildMessage(res, user.Data["language"], newUser, user.FirstContact, r.content)
+	messages, success := pollingLocation.BuildMessage(res, user.Language, newUser, user.FirstContact, r.content)
 	if success == true {
 		r.userDb.SetAddress(user.Data["phone_number"], message)
 	}
