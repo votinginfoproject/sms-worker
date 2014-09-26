@@ -42,22 +42,21 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 	message = strings.TrimSpace(message)
 	message = strings.ToLower(message)
 
-	language := user.Data["language"]
-	action := r.triggers[language][message]
+	action := r.triggers[user.Language][message]
 
 	if len(action) == 0 {
 		success, newLanguage := r.checkIfOtherLanguage(message)
-		language = newLanguage
 		if success == true {
+			user.Language = newLanguage
 			action = "ChangeLanguage"
 		}
 	}
 
 	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
 
-	lctm := r.lastContactTimeMessage(user, language)
+	lctm := r.lastContactTimeMessage(user)
 
-	messages := r.performAction(action, user, language, message, routine)
+	messages := r.performAction(action, user, message, routine)
 
 	if len(lctm) > 0 {
 		messages = append(messages, lctm)
@@ -66,7 +65,7 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 	return messages
 }
 
-func (r *Generator) lastContactTimeMessage(user *users.User, language string) string {
+func (r *Generator) lastContactTimeMessage(user *users.User) string {
 	message := ""
 
 	lcInt, _ := strconv.ParseInt(user.LastContactTime, 10, 64)
@@ -74,41 +73,41 @@ func (r *Generator) lastContactTimeMessage(user *users.User, language string) st
 	duration := time.Since(lcTime)
 
 	if duration > (7*24*time.Hour) && len(user.Data["address"]) > 0 {
-		message = r.content.LastContact.Text[language]["prefix"] + "\n" + user.Data["address"]
+		message = r.content.LastContact.Text[user.Language]["prefix"] + "\n" + user.Data["address"]
 	}
 
 	return message
 }
 
-func (r *Generator) performAction(action string, user *users.User, language string, message string, routine int) []string {
+func (r *Generator) performAction(action string, user *users.User, message string, routine int) []string {
 	var messages []string
 
 	switch action {
 	case "Elo":
-		messages = r.elo(user.Data["address"], language, user.FirstContact, routine)
+		messages = r.elo(user.Data["address"], user.Language, user.FirstContact, routine)
 	case "Registration":
-		messages = r.registration(user.Data["address"], language, user.FirstContact, routine)
+		messages = r.registration(user.Data["address"], user.Language, user.FirstContact, routine)
 	case "Help":
 		if user.FirstContact == true {
-			messages = []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			messages = []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
+			messages = []string{r.content.Help.Text[user.Language]["menu"], r.content.Help.Text[user.Language]["languages"]}
 		}
 	case "About":
 		if user.FirstContact == true {
-			messages = []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			messages = []string{r.content.About.Text[language]["all"]}
+			messages = []string{r.content.About.Text[user.Language]["all"]}
 		}
 	case "Intro":
-		messages = []string{r.content.Intro.Text[language]["all"]}
+		messages = []string{r.content.Intro.Text[user.Language]["all"]}
 	case "ChangeLanguage":
-		messages = r.changeLanguage(user.Data["phone_number"], language)
+		messages = r.changeLanguage(user.Data["phone_number"], user.Language)
 	case "PollingLocation":
 		if len(user.Data["address"]) == 0 && user.FirstContact == true {
-			messages = []string{r.content.Intro.Text[language]["all"]}
+			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else if len(user.Data["address"]) == 0 && user.FirstContact == false {
-			messages = []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+			messages = []string{r.content.Errors.Text[user.Language]["needAddress"] + "\n\n" + r.content.Help.Text[user.Language]["languages"]}
 		} else {
 			messages = r.pollingLocation(user, user.Data["address"], routine)
 		}

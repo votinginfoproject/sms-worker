@@ -15,6 +15,7 @@ type Db struct {
 type User struct {
 	Data            map[string]string
 	FirstContact    bool
+	Language        string
 	LastContactTime string
 }
 
@@ -43,19 +44,19 @@ func (u *Db) GetOrCreate(key string) (*User, error) {
 
 		if createErr != nil {
 			log.Printf("[ERROR] unable to create user with number: '%s' : %s", key, createErr)
-			return &User{make(map[string]string), isFirstContact, lastContactTime}, createErr
+			return &User{make(map[string]string), isFirstContact, "en", lastContactTime}, createErr
 		} else {
-			return &User{attrs, isFirstContact, lastContactTime}, nil
+			return &User{attrs, isFirstContact, attrs["language"], lastContactTime}, nil
 		}
 	}
 
 	timeErr := u.s.UpdateItem(key, map[string]string{"last_contact": timeString})
 	if timeErr != nil {
 		log.Printf("[ERROR] unable to update last_contact for user with number: '%s' : %s", key, timeErr)
-		return &User{make(map[string]string), isFirstContact, lastContactTime}, timeErr
+		return &User{make(map[string]string), isFirstContact, "en", lastContactTime}, timeErr
 	}
 
-	return &User{item, isFirstContact, lastContactTime}, nil
+	return &User{item, isFirstContact, item["language"], lastContactTime}, nil
 }
 
 func (u *Db) ChangeLanguage(key, language string) error {
