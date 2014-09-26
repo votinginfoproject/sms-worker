@@ -19,21 +19,21 @@ type Generator struct {
 	civic    civicApi.Querier
 	content  *responses.Content
 	triggers map[string]map[string]string
-	user     *users.Db
+	userDb   *users.Db
 }
 
-func New(civic civicApi.Querier, user *users.Db) *Generator {
+func New(civic civicApi.Querier, userDb *users.Db) *Generator {
 	rawContent, err := data.Asset("raw/data.yml")
 	if err != nil {
 		log.Panic("[ERROR] Failed to load responses : ", err)
 	}
 
 	content, triggers := responses.Load(rawContent)
-	return &Generator{civic, content, triggers, user}
+	return &Generator{civic, content, triggers, userDb}
 }
 
 func (r *Generator) Generate(number string, message string, routine int) []string {
-	userData, firstContact, lastContactTime, err := r.user.GetOrCreate(number)
+	userData, firstContact, lastContactTime, err := r.userDb.GetOrCreate(number)
 	if err != nil {
 		log.Printf("[ERROR] [%d] User store error : %s", routine, err)
 		return []string{r.content.Errors.Text["en"]["generalBackend"]}
@@ -130,7 +130,7 @@ func (r *Generator) checkIfOtherLanguage(message string) (bool, string) {
 }
 
 func (r *Generator) changeLanguage(number string, language string) []string {
-	err := r.user.ChangeLanguage(number, language)
+	err := r.userDb.ChangeLanguage(number, language)
 	if err != nil {
 		return []string{r.content.Errors.Text[language]["generalBackend"]}
 	}
@@ -188,7 +188,7 @@ func (r *Generator) pollingLocation(userData map[string]string, message string, 
 
 	messages, success := pollingLocation.BuildMessage(res, userData["language"], newUser, firstContact, r.content)
 	if success == true {
-		r.user.SetAddress(userData["phone_number"], message)
+		r.userDb.SetAddress(userData["phone_number"], message)
 	}
 
 	return messages
