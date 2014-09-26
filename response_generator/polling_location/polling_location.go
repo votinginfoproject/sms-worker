@@ -48,7 +48,9 @@ func failure(res *civicApi.Response, language string, newUser bool, firstContact
 		if newUser == true && firstContact == true {
 			return []string{content.Intro.Text[language]["all"]}
 		} else if newUser == true && firstContact == false {
-			return []string{content.Errors.Text[language]["addressParseNewUser"] + "\n\n" + content.Help.Text[language]["languages"]}
+			return []string{
+				content.Errors.Text[language]["addressParseNewUser"] +
+					"\n\n" + content.Help.Text[language]["languages"]}
 		} else {
 			return []string{content.Errors.Text[language]["addressParseExistingUser"]}
 		}

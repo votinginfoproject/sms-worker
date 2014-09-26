@@ -73,7 +73,8 @@ func (r *Generator) lastContactTimeMessage(user *users.User) string {
 	duration := time.Since(lcTime)
 
 	if duration > (7*24*time.Hour) && len(user.Data["address"]) > 0 {
-		message = r.content.LastContact.Text[user.Language]["prefix"] + "\n" + user.Data["address"]
+		message = r.content.LastContact.Text[user.Language]["prefix"] +
+			"\n" + user.Data["address"]
 	}
 
 	return message
@@ -91,7 +92,9 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 		if user.FirstContact == true {
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			messages = []string{r.content.Help.Text[user.Language]["menu"], r.content.Help.Text[user.Language]["languages"]}
+			messages = []string{
+				r.content.Help.Text[user.Language]["menu"],
+				r.content.Help.Text[user.Language]["languages"]}
 		}
 	case "About":
 		if user.FirstContact == true {
@@ -107,7 +110,9 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 		if len(user.Data["address"]) == 0 && user.FirstContact == true {
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else if len(user.Data["address"]) == 0 && user.FirstContact == false {
-			messages = []string{r.content.Errors.Text[user.Language]["needAddress"] + "\n\n" + r.content.Help.Text[user.Language]["languages"]}
+			messages = []string{
+				r.content.Errors.Text[user.Language]["needAddress"] +
+					"\n\n" + r.content.Help.Text[user.Language]["languages"]}
 		} else {
 			messages = r.pollingLocation(user, user.Data["address"], routine)
 		}
@@ -134,7 +139,9 @@ func (r *Generator) changeLanguage(user *users.User) []string {
 		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	return []string{r.content.Help.Text[user.Language]["menu"], r.content.Help.Text[user.Language]["languages"]}
+	return []string{
+		r.content.Help.Text[user.Language]["menu"],
+		r.content.Help.Text[user.Language]["languages"]}
 }
 
 func (r *Generator) elo(user *users.User, routine int) []string {
@@ -142,7 +149,9 @@ func (r *Generator) elo(user *users.User, routine int) []string {
 		if user.FirstContact == true {
 			return []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			return []string{r.content.Errors.Text[user.Language]["needAddress"] + "\n\n" + r.content.Help.Text[user.Language]["languages"]}
+			return []string{
+				r.content.Errors.Text[user.Language]["needAddress"] +
+					"\n\n" + r.content.Help.Text[user.Language]["languages"]}
 		}
 	}
 
@@ -160,7 +169,9 @@ func (r *Generator) registration(user *users.User, routine int) []string {
 		if user.FirstContact == true {
 			return []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			return []string{r.content.Errors.Text[user.Language]["needAddress"] + "\n\n" + r.content.Help.Text[user.Language]["languages"]}
+			return []string{
+				r.content.Errors.Text[user.Language]["needAddress"] +
+					"\n\n" + r.content.Help.Text[user.Language]["languages"]}
 		}
 	}
 
