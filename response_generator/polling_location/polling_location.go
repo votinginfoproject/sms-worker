@@ -3,15 +3,16 @@ package pollingLocation
 import (
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/responses"
+	"github.com/votinginfoproject/sms-worker/users"
 )
 
-func BuildMessage(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) ([]string, bool) {
+func BuildMessage(res *civicApi.Response, user *users.User, content *responses.Content) ([]string, bool) {
 	if len(res.PollingLocations) > 0 {
-		return success(res, language, content), true
+		return success(res, user.Language, content), true
 	} else if len(res.Error.Errors) == 0 && len(res.PollingLocations) == 0 {
-		return []string{content.Errors.Text[language]["noElectionInfo"]}, true
+		return []string{content.Errors.Text[user.Language]["noElectionInfo"]}, true
 	} else {
-		return failure(res, language, newUser, firstContact, content), false
+		return failure(res, user, content), false
 	}
 }
 
@@ -37,7 +38,7 @@ func success(res *civicApi.Response, language string, content *responses.Content
 	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
 }
 
-func failure(res *civicApi.Response, language string, newUser bool, firstContact bool, content *responses.Content) []string {
+func failure(res *civicApi.Response, user *users.User, content *responses.Content) []string {
 	var reason string
 	if len(res.Error.Errors) > 0 {
 		reason = res.Error.Errors[0].Reason
@@ -45,18 +46,18 @@ func failure(res *civicApi.Response, language string, newUser bool, firstContact
 
 	switch reason {
 	case "parseError":
-		if newUser == true && firstContact == true {
-			return []string{content.Intro.Text[language]["all"]}
-		} else if newUser == true && firstContact == false {
+		if user.IsNewUser() == true && user.FirstContact == true {
+			return []string{content.Intro.Text[user.Language]["all"]}
+		} else if user.IsNewUser() == true && user.FirstContact == false {
 			return []string{
-				content.Errors.Text[language]["addressParseNewUser"] +
-					"\n\n" + content.Help.Text[language]["languages"]}
+				content.Errors.Text[user.Language]["addressParseNewUser"] +
+					"\n\n" + content.Help.Text[user.Language]["languages"]}
 		} else {
-			return []string{content.Errors.Text[language]["addressParseExistingUser"]}
+			return []string{content.Errors.Text[user.Language]["addressParseExistingUser"]}
 		}
 	case "notFound":
-		return []string{content.Errors.Text[language]["noElectionInfo"]}
+		return []string{content.Errors.Text[user.Language]["noElectionInfo"]}
 	default:
-		return []string{content.Errors.Text[language]["generalBackend"]}
+		return []string{content.Errors.Text[user.Language]["generalBackend"]}
 	}
 }

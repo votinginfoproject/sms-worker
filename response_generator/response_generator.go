@@ -191,7 +191,7 @@ func (r *Generator) pollingLocation(user *users.User, message string, routine in
 		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	messages, success := pollingLocation.BuildMessage(res, user.Language, user.IsNewUser(), user.FirstContact, r.content)
+	messages, success := pollingLocation.BuildMessage(res, user, r.content)
 	if success == true {
 		r.userDb.SetAddress(user.Data["phone_number"], message)
 	}
