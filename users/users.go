@@ -12,11 +12,17 @@ type Db struct {
 	s storage.ExternalStorageService
 }
 
+type User struct {
+	Data            map[string]string
+	FirstContact    bool
+	LastContactTime string
+}
+
 func New(s storage.ExternalStorageService) *Db {
 	return &Db{s}
 }
 
-func (u *Db) GetOrCreate(key string) (map[string]string, bool, string, error) {
+func (u *Db) GetOrCreate(key string) (*User, error) {
 	isFirstContact := false
 	item, getErr := u.s.GetItem(key)
 	time := time.Now().Unix()
@@ -37,19 +43,19 @@ func (u *Db) GetOrCreate(key string) (map[string]string, bool, string, error) {
 
 		if createErr != nil {
 			log.Printf("[ERROR] unable to create user with number: '%s' : %s", key, createErr)
-			return make(map[string]string), isFirstContact, lastContactTime, createErr
+			return &User{make(map[string]string), isFirstContact, lastContactTime}, createErr
 		} else {
-			return attrs, isFirstContact, lastContactTime, nil
+			return &User{attrs, isFirstContact, lastContactTime}, nil
 		}
 	}
 
 	timeErr := u.s.UpdateItem(key, map[string]string{"last_contact": timeString})
 	if timeErr != nil {
 		log.Printf("[ERROR] unable to update last_contact for user with number: '%s' : %s", key, timeErr)
-		return make(map[string]string), isFirstContact, lastContactTime, timeErr
+		return &User{make(map[string]string), isFirstContact, lastContactTime}, timeErr
 	}
 
-	return item, isFirstContact, lastContactTime, nil
+	return &User{item, isFirstContact, lastContactTime}, nil
 }
 
 func (u *Db) ChangeLanguage(key, language string) error {

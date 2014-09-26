@@ -140,8 +140,8 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
-	updatedUser, _, _, _ := u.GetOrCreate("+15551235555")
-	assert.Equal(t, "111 address street", updatedUser["address"])
+	updatedUser, _ := u.GetOrCreate("+15551235555")
+	assert.Equal(t, "111 address street", updatedUser.Data["address"])
 }
 
 func TestPollingLocationParseErrorNewUserFirstContact(t *testing.T) {
