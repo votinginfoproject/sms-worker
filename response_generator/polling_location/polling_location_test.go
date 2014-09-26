@@ -2,6 +2,7 @@ package pollingLocation_test
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -116,7 +117,7 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 	g := responseGenerator.New(c, u)
 
 	expected := []string{
-		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
+		fmt.Sprintf("%s\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\n%s 7am-7pm", content.PollingLocation.Text["es"]["prefix"], content.PollingLocation.Text["es"]["hours"]),
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))
@@ -136,7 +137,7 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 	g := responseGenerator.New(c, u)
 
 	expected := []string{
-		"spanish-Your polling place is:\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\nHours: 7am-7pm",
+		fmt.Sprintf("%s\nSun Valley Neighborhood Center\n115 W 6th St\nSun Valley, NV 00000\n%s 7am-7pm", content.PollingLocation.Text["es"]["prefix"], content.PollingLocation.Text["es"]["hours"]),
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))

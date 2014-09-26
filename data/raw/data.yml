@@ -4,13 +4,13 @@ pollingLocation:
       prefix: "Your polling place is:"
       hours: "Hours:"
     es:
-      prefix: "spanish-Your polling place is:"
-      hours: "spanish-Hours:"
+      prefix: "Su lugar de votación es la siguiente:"
+      hours: "Horario:"
   triggers:
     en:
       - poll
     es:
-      - spoll
+      - encuesta
 changeLanguage:
   text:
     en:
@@ -26,7 +26,7 @@ intro:
     en:
       all: Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
     es:
-      all: spanish-Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
+      all: Bienvenido a la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Responda con su dirección para encontrar su lugar de votación y otra información local.
   triggers:
     en:
       - vote
@@ -40,7 +40,7 @@ registration:
     en:
       prefix: "For registration information:"
     es:
-      prefix: "spanish-For registration information:"
+      prefix: "Para información de registro:"
   triggers:
     en:
       - register
@@ -49,7 +49,11 @@ registration:
       - registration info
       - reg
     es:
-      - registrarme
+      - regístrese
+      - registrese
+      - registro
+      - información de registro
+      - informacion de registro
 elo:
   text:
     en:
@@ -57,9 +61,9 @@ elo:
       phone: "Phone:"
       email: "Email:"
     es:
-      prefix: "spanish-Your local election official is:"
-      phone: "spanish-Phone:"
-      email: "spanish-Email:"
+      prefix: "Su funcionario electoral local es:"
+      phone: Teléfono
+      email: "Correo electrónico:"
   triggers:
     en:
       - official
@@ -70,17 +74,25 @@ elo:
       - elo
     es:
       - funcionario
+      - oficial
+      - información oficial de la elección
+      - informacion oficial de la eleccion
+      - elección oficial
+      - eleccion oficial
+      - elección
+      - eleccion
 about:
   text:
     en:
       all: You're using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
     es:
-      all: spanish-You're using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
+      all: Está utilizando la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Para obtener más información, visite http://www.votinginfoproject.org
   triggers:
     en:
       - what
       - about
     es:
+      - acerca de
       - acerca
       - que
       - qué
@@ -90,7 +102,7 @@ help:
       menu: "Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
       languages: Manda ESPAÑOL para cambiar el idioma.
     es:
-      menu: "spanish-Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
+      menu: "Envíe por texto ENCUESTA para encontrar su lugar de votación.\nEnvíe por texto OFICIAL para obtener la información electoral oficial.\nEnvíe por texto REGISTRO para obtener la información de registro."
       languages: Text ENGLISH to change the language.
   triggers:
     en:
@@ -103,7 +115,7 @@ lastContact:
     en:
       prefix: "Your address on file is:"
     es:
-      prefix: "spanish-Your address on file is:"
+      prefix: "Su dirección registrada es:"
   triggers:
     en:
     es:
@@ -118,13 +130,13 @@ errors:
       noRegistrationInfo: We don’t have registration information on file for your area.
       needAddress: We need your address to provide you with local voting information.
     es:
-      addressParseExistingUser: spanish-That isn't a recognized command. Text HELP to see all options.
-      addressParseNewUser: spanish-We need your address to provide you with local voting information. We didn't recognize that address, please try again.
-      noElectionInfo: spanish-No elections are scheduled for your area. To check elsewhere, reply with a new address.
-      generalBackend: spanish-Sorry, we were unable to find your election day polling location.
-      noElectionOfficial: spanish-We don’t have election official information on file for your area.
-      noRegistrationInfo: spanish-We don’t have registration information on file for your area.
-      needAddress: spanish-We need your address to provide you with local voting information.
+      addressParseExistingUser: Este no es un comando reconocido. Envíe por texto AYUDA para ver todas las opciones.
+      addressParseNewUser: Necesitamos su dirección para ofrecerle información sobre la votación local. Nosotros no reconocemos esa dirección, inténtelo nuevamente.
+      noElectionInfo: No hay elecciones programadas para su área. Para verificar en otro lugar, responda con una nueva dirección.
+      generalBackend: Lo sentimos, no hemos podido encontrar la ubicación de la votación del día de la elección.
+      noElectionOfficial: No tenemos elección información oficial en el archivo para su área.
+      noRegistrationInfo: No tenemos información de registro en el archivo para su área.
+      needAddress: Necesitamos su dirección para ofrecerle información sobre la votación local.
   triggers:
     en:
     es:

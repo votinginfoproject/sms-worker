@@ -31,7 +31,7 @@ func success(res *civicApi.Response, language string, content *responses.Content
 	}
 
 	if len(pl.PollingHours) > 0 {
-		response = response + "\n" + content.PollingLocation.Text["en"]["hours"] + " " + pl.PollingHours
+		response = response + "\n" + content.PollingLocation.Text[language]["hours"] + " " + pl.PollingHours
 	}
 
 	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
