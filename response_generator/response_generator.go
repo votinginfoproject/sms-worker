@@ -86,7 +86,7 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 	case "Elo":
 		messages = r.elo(user, routine)
 	case "Registration":
-		messages = r.registration(user.Data["address"], user.Language, user.FirstContact, routine)
+		messages = r.registration(user, routine)
 	case "Help":
 		if user.FirstContact == true {
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
@@ -155,22 +155,22 @@ func (r *Generator) elo(user *users.User, routine int) []string {
 	return elo.BuildMessage(res, user.Language, r.content)
 }
 
-func (r *Generator) registration(address string, language string, firstContact bool, routine int) []string {
-	if len(address) == 0 {
-		if firstContact == true {
-			return []string{r.content.Intro.Text[language]["all"]}
+func (r *Generator) registration(user *users.User, routine int) []string {
+	if len(user.Data["address"]) == 0 {
+		if user.FirstContact == true {
+			return []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
-			return []string{r.content.Errors.Text[language]["needAddress"] + "\n\n" + r.content.Help.Text[language]["languages"]}
+			return []string{r.content.Errors.Text[user.Language]["needAddress"] + "\n\n" + r.content.Help.Text[user.Language]["languages"]}
 		}
 	}
 
-	res, err := r.civic.Query(address)
+	res, err := r.civic.Query(user.Data["address"])
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
-		return []string{r.content.Errors.Text[language]["generalBackend"]}
+		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	return registration.BuildMessage(res, language, r.content)
+	return registration.BuildMessage(res, user.Language, r.content)
 }
 
 func (r *Generator) pollingLocation(user *users.User, message string, routine int) []string {
