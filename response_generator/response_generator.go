@@ -72,7 +72,7 @@ func (r *Generator) lastContactTimeMessage(user *users.User) string {
 	lcTime := time.Unix(lcInt, 0)
 	duration := time.Since(lcTime)
 
-	if duration > (7*24*time.Hour) && len(user.Data["address"]) > 0 {
+	if duration > (7*24*time.Hour) && user.IsNewUser() == false {
 		message = r.content.LastContact.Text[user.Language]["prefix"] +
 			"\n" + user.Data["address"]
 	}
@@ -145,7 +145,7 @@ func (r *Generator) changeLanguage(user *users.User) []string {
 }
 
 func (r *Generator) elo(user *users.User, routine int) []string {
-	if len(user.Data["address"]) == 0 {
+	if user.IsNewUser() == true {
 		if user.FirstContact == true {
 			return []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
@@ -165,7 +165,7 @@ func (r *Generator) elo(user *users.User, routine int) []string {
 }
 
 func (r *Generator) registration(user *users.User, routine int) []string {
-	if len(user.Data["address"]) == 0 {
+	if user.IsNewUser() == true {
 		if user.FirstContact == true {
 			return []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
@@ -185,18 +185,13 @@ func (r *Generator) registration(user *users.User, routine int) []string {
 }
 
 func (r *Generator) pollingLocation(user *users.User, message string, routine int) []string {
-	newUser := false
-	if len(user.Data["address"]) == 0 {
-		newUser = true
-	}
-
 	res, err := r.civic.Query(message)
 	if err != nil {
 		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
 		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	messages, success := pollingLocation.BuildMessage(res, user.Language, newUser, user.FirstContact, r.content)
+	messages, success := pollingLocation.BuildMessage(res, user.Language, user.IsNewUser(), user.FirstContact, r.content)
 	if success == true {
 		r.userDb.SetAddress(user.Data["phone_number"], message)
 	}

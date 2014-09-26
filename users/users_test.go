@@ -43,6 +43,7 @@ func TestChangeLanguage(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "xx", user.Data["language"])
 	assert.Equal(t, false, user.FirstContact)
+	assert.Equal(t, true, user.IsNewUser())
 }
 
 func TestSetAddress(t *testing.T) {
@@ -54,4 +55,5 @@ func TestSetAddress(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "123 test street test city test 12345", user.Data["address"])
 	assert.Equal(t, false, user.FirstContact)
+	assert.Equal(t, false, user.IsNewUser())
 }

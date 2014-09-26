@@ -78,3 +78,12 @@ func (u *Db) SetAddress(key, address string) error {
 
 	return nil
 }
+
+func (u *User) IsNewUser() bool {
+	newUser := false
+	if len(u.Data["address"]) == 0 {
+		newUser = true
+	}
+
+	return newUser
+}
