@@ -8,15 +8,15 @@ import (
 	"github.com/votinginfoproject/sms-worker/storage"
 )
 
-type Users struct {
+type Db struct {
 	s storage.ExternalStorageService
 }
 
-func New(s storage.ExternalStorageService) *Users {
-	return &Users{s}
+func New(s storage.ExternalStorageService) *Db {
+	return &Db{s}
 }
 
-func (u *Users) GetOrCreate(key string) (map[string]string, bool, string, error) {
+func (u *Db) GetOrCreate(key string) (map[string]string, bool, string, error) {
 	isFirstContact := false
 	item, getErr := u.s.GetItem(key)
 	time := time.Now().Unix()
@@ -52,7 +52,7 @@ func (u *Users) GetOrCreate(key string) (map[string]string, bool, string, error)
 	return item, isFirstContact, lastContactTime, nil
 }
 
-func (u *Users) ChangeLanguage(key, language string) error {
+func (u *Db) ChangeLanguage(key, language string) error {
 	err := u.s.UpdateItem(key, map[string]string{"language": language})
 	if err != nil {
 		log.Printf("[ERROR] unable to update language for user with number: '%s' : %s", key, err)
@@ -62,7 +62,7 @@ func (u *Users) ChangeLanguage(key, language string) error {
 	return nil
 }
 
-func (u *Users) SetAddress(key, address string) error {
+func (u *Db) SetAddress(key, address string) error {
 	err := u.s.UpdateItem(key, map[string]string{"address": address})
 	if err != nil {
 		log.Printf("[ERROR] unable to set address for user with number: '%s' : %s", key, err)

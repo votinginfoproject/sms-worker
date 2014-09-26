@@ -19,10 +19,10 @@ type Generator struct {
 	civic    civicApi.Querier
 	content  *responses.Content
 	triggers map[string]map[string]string
-	user     *users.Users
+	user     *users.Db
 }
 
-func New(civic civicApi.Querier, user *users.Users) *Generator {
+func New(civic civicApi.Querier, user *users.Db) *Generator {
 	rawContent, err := data.Asset("raw/data.yml")
 	if err != nil {
 		log.Panic("[ERROR] Failed to load responses : ", err)
