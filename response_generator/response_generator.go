@@ -102,7 +102,7 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 	case "Intro":
 		messages = []string{r.content.Intro.Text[user.Language]["all"]}
 	case "ChangeLanguage":
-		messages = r.changeLanguage(user.Data["phone_number"], user.Language)
+		messages = r.changeLanguage(user)
 	case "PollingLocation":
 		if len(user.Data["address"]) == 0 && user.FirstContact == true {
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
@@ -128,13 +128,13 @@ func (r *Generator) checkIfOtherLanguage(message string) (bool, string) {
 	return false, ""
 }
 
-func (r *Generator) changeLanguage(number string, language string) []string {
-	err := r.userDb.ChangeLanguage(number, language)
+func (r *Generator) changeLanguage(user *users.User) []string {
+	err := r.userDb.ChangeLanguage(user.Data["phone_number"], user.Language)
 	if err != nil {
-		return []string{r.content.Errors.Text[language]["generalBackend"]}
+		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	return []string{r.content.Help.Text[language]["menu"], r.content.Help.Text[language]["languages"]}
+	return []string{r.content.Help.Text[user.Language]["menu"], r.content.Help.Text[user.Language]["languages"]}
 }
 
 func (r *Generator) elo(address string, language string, firstContact bool, routine int) []string {
