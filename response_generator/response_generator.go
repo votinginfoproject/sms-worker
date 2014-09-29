@@ -104,9 +104,9 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 	case "ChangeLanguage":
 		messages = r.changeLanguage(user)
 	case "PollingLocation":
-		if len(user.Data["address"]) == 0 && user.FirstContact == true {
+		if user.IsNewUser() && user.FirstContact == true {
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
-		} else if len(user.Data["address"]) == 0 && user.FirstContact == false {
+		} else if user.IsNewUser() && user.FirstContact == false {
 			messages = []string{
 				r.content.Errors.Text[user.Language]["needAddress"] +
 					"\n\n" + r.content.Help.Text[user.Language]["languages"]}
