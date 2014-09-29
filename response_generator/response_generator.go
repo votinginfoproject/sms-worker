@@ -136,9 +136,13 @@ func (r *Generator) changeLanguage(user *users.User) []string {
 		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
 	}
 
-	return []string{
-		r.content.Help.Text[user.Language]["menu"],
-		r.content.Help.Text[user.Language]["languages"]}
+	if user.FirstContact == true {
+		return []string{r.content.Intro.Text[user.Language]["all"]}
+	} else {
+		return []string{
+			r.content.Help.Text[user.Language]["menu"],
+			r.content.Help.Text[user.Language]["languages"]}
+	}
 }
 
 func (r *Generator) elo(user *users.User, routine int) []string {
