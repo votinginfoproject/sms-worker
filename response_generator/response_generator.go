@@ -52,7 +52,7 @@ func (r *Generator) Generate(number string, message string, routine int) []strin
 		}
 	}
 
-	log.Printf("[INFO] [%d] Taking action '%s'", routine, action)
+	log.Printf("[INFO] [%d] Taking action '%s' for %s", routine, action, number)
 
 	messages := r.performAction(action, user, message, routine)
 
