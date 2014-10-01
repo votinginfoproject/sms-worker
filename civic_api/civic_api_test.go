@@ -34,6 +34,7 @@ var makeRequestError = func(endpoint string) ([]byte, error) {
 func TestQuerySuccess(t *testing.T) {
 	c := New("", "", makeRequestSuccess)
 	res, _ := c.Query("")
+
 	assert.Equal(t, 0, len(res.Error.Errors), 0)
 	assert.Equal(t, "115 W 6th St", res.PollingLocations[0].Address.Line1)
 	assert.Equal(t, "http://nvsos.gov/index.aspx?page=703", res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl)
@@ -43,6 +44,7 @@ func TestQuerySuccess(t *testing.T) {
 func TestQuerySuccessEmpty(t *testing.T) {
 	c := New("", "", makeRequestSuccessEmpty)
 	res, _ := c.Query("")
+
 	assert.Equal(t, 0, len(res.Error.Errors))
 	assert.Equal(t, 0, len(res.PollingLocations))
 	assert.Equal(t, 0, len(res.State))
@@ -51,6 +53,7 @@ func TestQuerySuccessEmpty(t *testing.T) {
 func TestQuerySuccessEmptyState(t *testing.T) {
 	c := New("", "", makeRequestSuccessEmptyState)
 	res, _ := c.Query("")
+
 	assert.Equal(t, 0, len(res.Error.Errors))
 	assert.Equal(t, 1, len(res.PollingLocations))
 	assert.Equal(t, 1, len(res.State))
@@ -60,6 +63,7 @@ func TestQuerySuccessEmptyState(t *testing.T) {
 func TestQueryError(t *testing.T) {
 	c := New("", "", makeRequestError)
 	res, _ := c.Query("")
+
 	assert.Equal(t, 1, len(res.Error.Errors))
 	assert.Equal(t, "parseError", res.Error.Errors[0].Reason)
 }
