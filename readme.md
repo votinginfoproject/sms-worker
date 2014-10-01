@@ -57,7 +57,7 @@ rake deploy\[environment\]
 - Build the binary
 - Upload the binary to S3
 - Upload all but the first THREE lines of the .env file to S3
-- Restart the sms-web process on all instances
+- Restart the sms-worker process on all instances
 
 ### Send Test Message
 ~~~~
