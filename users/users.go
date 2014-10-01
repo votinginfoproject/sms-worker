@@ -2,6 +2,7 @@ package users
 
 import (
 	"log"
+	"reflect"
 	"strconv"
 	"time"
 
@@ -24,39 +25,56 @@ func New(s storage.ExternalStorageService) *Db {
 }
 
 func (u *Db) GetOrCreate(key string) (*User, error) {
-	isFirstContact := false
-	item, getErr := u.s.GetItem(key)
-	time := time.Now().Unix()
-	timeString := strconv.FormatInt(time, 10)
-
-	// since updating creates an item if one doesn't exist, verify that last_contact
-	// is set
-	if len(item["last_contact"]) == 0 {
-		item["last_contact"] = timeString
-	}
-
-	lastContactTime := item["last_contact"]
-
-	if getErr != nil {
-		isFirstContact = true
-		attrs := map[string]string{"phone_number": key, "language": "en", "last_contact": timeString}
-		createErr := u.s.CreateItem(key, attrs)
-
-		if createErr != nil {
-			log.Printf("[ERROR] unable to create user with number: '%s' : %s", key, createErr)
-			return &User{make(map[string]string), isFirstContact, "en", lastContactTime}, createErr
-		} else {
-			return &User{attrs, isFirstContact, attrs["language"], lastContactTime}, nil
+	user, err := u.get(key)
+	if err != nil {
+		switch reflect.TypeOf(err).String() {
+		case "*users.updateUserError":
+			// got user, but failed to update last_contact time
+			return &User{}, err
+		default:
+			// user not found, create new user
+			user, err = u.create(key)
+			if err != nil {
+				return &User{}, err
+			}
 		}
 	}
 
-	timeErr := u.s.UpdateItem(key, map[string]string{"last_contact": timeString})
-	if timeErr != nil {
-		log.Printf("[ERROR] unable to update last_contact for user with number: '%s' : %s", key, timeErr)
-		return &User{make(map[string]string), isFirstContact, "en", lastContactTime}, timeErr
+	return user, nil
+}
+
+func (u *Db) get(key string) (*User, error) {
+	item, err := u.s.GetItem(key)
+	if err != nil {
+		return &User{}, &getUserError{err.Error()}
 	}
 
-	return &User{item, isFirstContact, item["language"], lastContactTime}, nil
+	time := time.Now().Unix()
+	newLastContactTime := strconv.FormatInt(time, 10)
+	oldLastContactTime := item["last_contact"]
+
+	err = u.s.UpdateItem(key, map[string]string{"last_contact": newLastContactTime})
+	if err != nil {
+		log.Printf("[ERROR] unable to update last_contact for user with number: '%s' : %s", key, err)
+		return &User{}, &updateUserError{err.Error()}
+	}
+
+	return &User{item, false, item["language"], oldLastContactTime}, nil
+}
+
+func (u *Db) create(key string) (*User, error) {
+	time := time.Now().Unix()
+	lastContactTime := strconv.FormatInt(time, 10)
+
+	attrs := map[string]string{"phone_number": key, "language": "en", "last_contact": lastContactTime}
+
+	err := u.s.CreateItem(key, attrs)
+	if err != nil {
+		log.Printf("[ERROR] unable to create uler with number: '%s' : %s", key, err)
+		return &User{}, &createUserError{err.Error()}
+	}
+
+	return &User{attrs, true, attrs["language"], lastContactTime}, nil
 }
 
 func (u *Db) ChangeLanguage(key, language string) error {
