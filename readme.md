@@ -42,7 +42,7 @@ To set your system up to develop this application...
 godep go test ./...
 ~~~~
 
-### Generate Go data file from YAML
+### Generate Go Data File From YAML
 ~~~~
 rake gen_asset
 ~~~~
