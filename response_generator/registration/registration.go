@@ -21,7 +21,7 @@ func getRegistrationUrl(res *civicApi.Response) string {
 	}()
 
 	var url string
-	url = res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl
+	url = res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionRegistrationUrl
 
 	return url
 }

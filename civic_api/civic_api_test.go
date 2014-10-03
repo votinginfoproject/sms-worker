@@ -1,6 +1,7 @@
 package civicApi
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -33,11 +34,13 @@ var makeRequestError = func(endpoint string) ([]byte, error) {
 
 func TestQuerySuccess(t *testing.T) {
 	c := New("", "", "", makeRequestSuccess)
-	res, _ := c.Query("")
+	res, e := c.Query("")
 
+	fmt.Println(res)
+	fmt.Println(e)
 	assert.Equal(t, 0, len(res.Error.Errors), 0)
-	assert.Equal(t, "115 W 6th St", res.PollingLocations[0].Address.Line1)
-	assert.Equal(t, "http://nvsos.gov/index.aspx?page=703", res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl)
+	assert.Equal(t, "1 BENEVOLENT ST", res.PollingLocations[0].Address.Line1)
+	assert.Equal(t, "http://www.sos.ri.gov/elections/voters/register/", res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionRegistrationUrl)
 	assert.Equal(t, "Dan Burk", res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionOfficials[0].Name)
 }
 
@@ -57,7 +60,7 @@ func TestQuerySuccessEmptyState(t *testing.T) {
 	assert.Equal(t, 0, len(res.Error.Errors))
 	assert.Equal(t, 1, len(res.PollingLocations))
 	assert.Equal(t, 1, len(res.State))
-	assert.Equal(t, "", res.State[0].ElectionAdministrationBody.ElectionRegistrationUrl)
+	assert.Equal(t, "", res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionRegistrationUrl)
 }
 
 func TestQueryError(t *testing.T) {

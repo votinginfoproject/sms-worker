@@ -101,6 +101,6 @@ func TestRegistrationSuccessExistingUser(t *testing.T) {
 	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
-	expected := []string{"For registration information: http://nvsos.gov/index.aspx?page=703"}
+	expected := []string{"For registration information: http://www.sos.ri.gov/elections/voters/register/"}
 	assert.Equal(t, expected, g.Generate("+15551235555", "registration", 0))
 }

@@ -32,9 +32,6 @@ type Response struct {
 		Message string `json:"message"`
 	} `json:"error"`
 	State []struct {
-		ElectionAdministrationBody struct {
-			ElectionRegistrationUrl string `json:"electionRegistrationUrl"`
-		} `json:"electionAdministrationBody"`
 		LocalJurisdiction struct {
 			ElectionAdministrationBody struct {
 				ElectionOfficials []struct {
@@ -42,6 +39,7 @@ type Response struct {
 					OfficePhoneNumber string `json:"officePhoneNumber"`
 					EmailAddress      string `json:"emailAddress"`
 				} `json:"electionOfficials"`
+				ElectionRegistrationUrl string `json:"electionRegistrationUrl"`
 			} `json:"electionAdministrationBody"`
 		} `json:"local_jurisdiction"`
 	} `json:"state"`

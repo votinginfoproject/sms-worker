@@ -1,27 +1,27 @@
 {
  "kind": "civicinfo#voterInfoResponse",
  "election": {
-  "id": "2000",
-  "name": "VIP Test Election",
-  "electionDay": "2015-06-06"
+  "id": "4100",
+  "name": "US General Election 2014",
+  "electionDay": "2014-11-04"
  },
  "normalizedInput": {
-  "line1": "5630 lupin dr",
-  "city": "sun valley",
-  "state": "NV",
-  "zip": "89433"
+  "line1": "100 n main st",
+  "city": "providence",
+  "state": "RI",
+  "zip": "02903"
  },
  "pollingLocations": [
   {
    "address": {
-    "locationName": "Sun Valley Neighborhood Center",
-    "line1": "115 W 6th St",
-    "city": "Sun Valley",
-    "state": "NV",
-    "zip": "00000"
+    "locationName": "FIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B",
+    "line1": "1 BENEVOLENT ST",
+    "city": "PROVIDENCE",
+    "state": "RI",
+    "zip": "02906"
    },
    "notes": "",
-   "pollingHours": "7am-7pm",
+   "pollingHours": "7am - 7pm",
    "sources": [
     {
      "name": "Voting Information Project",
@@ -32,357 +32,99 @@
  ],
  "contests": [
   {
-   "type": "General",
-   "office": "Justice of Supreme Court - Seat G",
-   "level": "other",
+   "type": "General Election",
+   "special": "no",
+   "office": "SENATOR IN GENERAL ASSEMBLY DIST 06",
    "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
+    "name": "STATE SENATE",
+    "scope": "stateUpper",
+    "id": "6"
    },
+   "ballotPlacement": "14",
    "candidates": [
     {
-     "name": "Nancy M. Saitta",
-     "party": "Non-Partisan"
-    },
-    {
-     "name": "None of these Candidates",
-     "party": "Non-Partisan"
-    }
-   ],
-   "sources": [
-    {
-     "name": "Ballot Information Project",
-     "official": false
-    }
-   ]
-  },
-  {
-   "type": "General",
-   "office": "Justice of Supreme Court - Seat C",
-   "level": "other",
-   "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
-   },
-   "candidates": [
-    {
-     "name": "Michael A. Cherry",
-     "party": "Non-Partisan"
-    },
-    {
-     "name": "None of these Candidates",
-     "party": "Non-Partisan"
-    }
-   ],
-   "sources": [
-    {
-     "name": "Ballot Information Project",
-     "official": false
-    }
-   ]
-  },
-  {
-   "type": "General",
-   "office": "President & Vice President",
-   "level": "federal",
-   "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
-   },
-   "candidates": [
-    {
-     "name": "Barack Obama & Joe Biden",
-     "party": "Democratic",
-     "candidateUrl": "http://www.barackobama.com/",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "http://www.facebook.com/barackobama"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/obama2012"
-      },
-      {
-       "type": "GooglePlus",
-       "id": "https://plus.google.com/u/0/110031535020051778989/posts"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/user/BarackObamadotcom"
-      }
-     ]
-    },
-    {
-     "name": "Mitt Romney & Paul Ryan",
-     "party": "Republican",
-     "candidateUrl": "http://www.mittromney.com/",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "https://www.facebook.com/mittromney"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/MittRomney"
-      },
-      {
-       "type": "GooglePlus",
-       "id": "https://plus.google.com/+MittRomney/posts"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/user/mittromney"
-      }
-     ]
-    },
-    {
-     "name": "Gary Johnson & James P. Gray",
-     "party": "Libertarian",
-     "candidateUrl": "http://www.garyjohnson2012.com/",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "http://www.facebook.com/govgaryjohnson"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/govgaryjohnson"
-      },
-      {
-       "type": "GooglePlus",
-       "id": "https://plus.google.com/+GovGaryJohnson/posts"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/user/govgaryjohnson"
-      }
-     ]
-    },
-    {
-     "name": "Virgil H. Goode Jr. & James N. Clymer",
-     "party": "Independent American",
-     "candidateUrl": "http://www.goodeforpresident2012.com/",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "https://www.facebook.com/pages/Virgil-Goode-for-President/118321594875524"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/VirgilGoode"
-      },
-      {
-       "type": "GooglePlus",
-       "id": "https://plus.google.com/u/0/115105427009854565886/posts"
-      },
-      {
-       "type": "YouTube",
-       "id": "https://www.youtube.com/virgilgoode2012"
-      }
-     ]
-    },
-    {
-     "name": "None of these Candidates",
-     "party": "None"
-    }
-   ],
-   "sources": [
-    {
-     "name": "Ballot Information Project",
-     "official": false
-    }
-   ]
-  },
-  {
-   "type": "General",
-   "office": "U.S. Senate",
-   "level": "federal",
-   "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
-   },
-   "candidates": [
-    {
-     "name": "Shelley Berkley",
+     "name": "HAROLD METTS",
      "party": "Democrat",
-     "candidateUrl": "http://www.shelleyberkley.com/",
-     "phone": "7024839014",
-     "email": "info@shelleyberkley.com",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "https://www.facebook.com/berkleyforsenate"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/berkley4senate"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/user/BerkleyforSenate"
-      }
-     ]
+     "phone": "4012720112"
     },
     {
-     "name": "Dean Heller",
-     "party": "Republican",
-     "candidateUrl": "http://deanheller.com/",
-     "phone": "7022282012",
-     "email": "info@deanheller.org",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "https://www.facebook.com/DeanHeller?ref=ts"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/DeanHeller"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/DeanHeller"
-      }
-     ]
-    },
-    {
-     "name": "David Lory VanderBeek",
-     "party": "Independent American Party of Nevada",
-     "candidateUrl": "http://www.ccnviap.org/vanderbeek/",
-     "phone": "7757511646",
-     "email": "vanderbeek@ccnviap.org",
-     "channels": [
-      {
-       "type": "Facebook",
-       "id": "https://www.facebook.com/dave.vanderbeek"
-      },
-      {
-       "type": "Twitter",
-       "id": "https://twitter.com/USFamilyMan"
-      },
-      {
-       "type": "YouTube",
-       "id": "http://www.youtube.com/user/davidlory"
-      }
-     ]
-    },
-    {
-     "name": "None of these Candidates",
-     "party": "None"
+     "name": "RUSSELL HRYZAN",
+     "party": "Independent"
     }
    ],
    "sources": [
     {
-     "name": "Ballot Information Project",
-     "official": false
+     "name": "Voting Information Project",
+     "official": true
     }
    ]
   },
   {
-   "type": "General",
-   "office": "Justice of Supreme Court - Seat F",
-   "level": "other",
+   "type": "General Election",
+   "special": "no",
+   "office": "REPRESENTATIVE IN GENERAL ASSEMBLY DIST 01",
    "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
+    "name": "STATE REP",
+    "scope": "stateLower",
+    "id": "1"
    },
+   "ballotPlacement": "47",
    "candidates": [
     {
-     "name": "Michael L. Douglas",
-     "party": "Non-Partisan"
-    },
-    {
-     "name": "None of these Candidates",
-     "party": "Non-Partisan"
+     "name": "EDITH AJELLO",
+     "party": "Democrat",
+     "phone": "4012747078"
     }
    ],
    "sources": [
     {
-     "name": "Ballot Information Project",
-     "official": false
-    }
-   ]
-  },
-  {
-   "type": "Referendum",
-   "district": {
-    "name": "Nevada",
-    "scope": "statewide",
-    "id": "32nv"
-   },
-   "referendumTitle": "Question No. 1",
-   "referendumSubtitle": "Amendment to the Nevada Constitution: Assembly Joing Resolution No. 5 of the 75th Session",
-   "referendumUrl": "http://www.carson.org/Index.aspx?page=90",
-   "sources": [
-    {
-     "name": "Ballot Information Project",
-     "official": false
+     "name": "Voting Information Project",
+     "official": true
     }
    ]
   }
  ],
  "state": [
   {
-   "name": "Nevada",
-   "electionAdministrationBody": {
-    "name": "\"Nevada Secretary of State, Elections Division\"",
-    "electionInfoUrl": "http://nvsos.gov/index.aspx?page=3",
-    "electionRegistrationUrl": "http://nvsos.gov/index.aspx?page=703",
-    "electionRegistrationConfirmationUrl": "https://nvsos.gov/votersearch/",
-    "absenteeVotingInfoUrl": "http://nvsos.gov/index.aspx?page=77",
-    "votingLocationFinderUrl": "https://nvsos.gov/votersearch/",
-    "ballotInfoUrl": "http://nvsos.gov/index.aspx?page=1220",
-    "correspondenceAddress": {
-     "line1": "101 N Carson St Ste 3",
-     "city": "Carson City",
-     "state": "Nevada",
-     "zip": "89701-3714"
-    }
-   },
+   "name": "Rhode Island",
    "local_jurisdiction": {
-    "name": "Washoe",
+    "name": "PROVIDENCE",
     "electionAdministrationBody": {
-     "name": "Registrar of Voters",
-     "electionInfoUrl": "http://www.co.washoe.nv.us/voters",
-     "hoursOfOperation": "",
-     "correspondenceAddress": {
-      "line1": "P.O. Box 11130",
-      "city": "Reno",
-      "state": "NV",
-      "zip": "89520"
-     },
+     "name": "MRS CLAUDIA J HAUGEN",
+     "electionInfoUrl": "http://www.sos.ri.gov",
+     "electionRegistrationUrl": "http://www.sos.ri.gov/elections/voters/register/",
+     "electionRegistrationConfirmationUrl": "https://sos.ri.gov/vic/",
+     "absenteeVotingInfoUrl": "https://sos.ri.gov/elections/voters/mail/",
+     "votingLocationFinderUrl": "https://sos.ri.gov/vic/",
+     "electionRulesUrl": "https://sos.ri.gov/elections/electionlaws/",
+     "hoursOfOperation": "8:30a-4:30p (daily) 7a-9p (election day)",
      "physicalAddress": {
-      "line1": "1001 E. Ninth Street, RM A135",
-      "city": "Reno",
-      "state": "NV",
-      "zip": "89512"
+      "line1": "25 DORRANCE STREET",
+      "city": "PROVIDENCE",
+      "state": "RI",
+      "zip": "02903"
      },
      "electionOfficials": [
-      {
-       "name": "Dan Burk",
-       "title": "Registrar of Voters",
-       "officePhoneNumber": "(775) 328-3670",
-       "faxNumber": "(775) 328-3747",
-       "emailAddress": "dburk@washoecounty.us"
-      }
-     ]
+       {
+        "name": "Dan Burk",
+        "title": "Registrar of Voters",
+        "officePhoneNumber": "(775) 328-3670",
+        "faxNumber": "(775) 328-3747",
+        "emailAddress": "dburk@washoecounty.us"
+       }
+      ]
     },
     "sources": [
      {
-      "name": "TurboVote",
-      "official": false
+      "name": "Voting Information Project",
+      "official": true
      }
     ]
    },
    "sources": [
     {
-     "name": "TurboVote",
-     "official": false
+     "name": "Voting Information Project",
+     "official": true
     }
    ]
   }
