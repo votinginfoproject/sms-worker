@@ -47,7 +47,7 @@ func main() {
 
 	st := storage.New()
 	user := users.New(st)
-	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), util.MakeRequest)
+	api := civicApi.New(os.Getenv("CIVIC_API_KEY"), os.Getenv("CIVIC_API_ELECTION_ID"), os.Getenv("CIVIC_API_OFFICIAL_ONLY"), util.MakeRequest)
 	rg := responseGenerator.New(api, user)
 
 	sms := sms.New(os.Getenv("TWILIO_SID"), os.Getenv("TWILIO_TOKEN"), os.Getenv("TWILIO_NUMBER"))

@@ -43,7 +43,7 @@ func TestSendAddress(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "test"})
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"], content.LastContact.Text["en"]["prefix"] + "\ntest"}
@@ -59,7 +59,7 @@ func TestDontSendAddress(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "test"})
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}

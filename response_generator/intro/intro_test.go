@@ -35,7 +35,7 @@ func TestIntroWithCommand(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequest)
+	c := civicApi.New("", "", "", makeRequest)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}

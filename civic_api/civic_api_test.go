@@ -32,7 +32,7 @@ var makeRequestError = func(endpoint string) ([]byte, error) {
 }
 
 func TestQuerySuccess(t *testing.T) {
-	c := New("", "", makeRequestSuccess)
+	c := New("", "", "", makeRequestSuccess)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 0, len(res.Error.Errors), 0)
@@ -42,7 +42,7 @@ func TestQuerySuccess(t *testing.T) {
 }
 
 func TestQuerySuccessEmpty(t *testing.T) {
-	c := New("", "", makeRequestSuccessEmpty)
+	c := New("", "", "", makeRequestSuccessEmpty)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 0, len(res.Error.Errors))
@@ -51,7 +51,7 @@ func TestQuerySuccessEmpty(t *testing.T) {
 }
 
 func TestQuerySuccessEmptyState(t *testing.T) {
-	c := New("", "", makeRequestSuccessEmptyState)
+	c := New("", "", "", makeRequestSuccessEmptyState)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 0, len(res.Error.Errors))
@@ -61,7 +61,7 @@ func TestQuerySuccessEmptyState(t *testing.T) {
 }
 
 func TestQueryError(t *testing.T) {
-	c := New("", "", makeRequestError)
+	c := New("", "", "", makeRequestError)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 1, len(res.Error.Errors))

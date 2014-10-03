@@ -63,7 +63,7 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{
@@ -79,7 +79,7 @@ func TestPollingLocationSuccessNewUserFirstcontactCommand(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	c := civicApi.New("", "", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
@@ -96,7 +96,7 @@ func TestPollingLocationSuccessNewUserCommand(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	c := civicApi.New("", "", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
@@ -113,7 +113,7 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{
@@ -133,7 +133,7 @@ func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{
@@ -150,7 +150,7 @@ func TestPollingLocationParseErrorNewUserFirstContact(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestParseError)
+	c := civicApi.New("", "", "", makeRequestParseError)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
@@ -166,7 +166,7 @@ func TestPollingLocationParseErrorNewUserNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", makeRequestParseError)
+	c := civicApi.New("", "", "", makeRequestParseError)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["addressParseNewUser"] + "\n\n" + content.Help.Text["en"]["languages"]}
@@ -183,7 +183,7 @@ func TestPollingLocationParseErrorExistingUser(t *testing.T) {
 
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestParseError)
+	c := civicApi.New("", "", "", makeRequestParseError)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["addressParseExistingUser"]}
@@ -195,7 +195,7 @@ func TestPollingLocationNotFoundError(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestNotFoundError)
+	c := civicApi.New("", "", "", makeRequestNotFoundError)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
@@ -207,7 +207,7 @@ func TestPollingLocationEmpty(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	c := civicApi.New("", "", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noElectionInfo"]}
@@ -219,7 +219,7 @@ func TestPollingLocationFailure(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestFailure)
+	c := civicApi.New("", "", "", makeRequestFailure)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["generalBackend"]}

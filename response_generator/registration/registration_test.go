@@ -50,7 +50,7 @@ func TestRegistrationFailureNewUserFirstContact(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
@@ -66,7 +66,7 @@ func TestRegistrationFailureNewUserNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
@@ -82,7 +82,7 @@ func TestRegistrationFailureEmptyExistingUser(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
-	c := civicApi.New("", "", makeRequestSuccessEmpty)
+	c := civicApi.New("", "", "", makeRequestSuccessEmpty)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noRegistrationInfo"]}
@@ -98,7 +98,7 @@ func TestRegistrationSuccessExistingUser(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
-	c := civicApi.New("", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", makeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{"For registration information: http://nvsos.gov/index.aspx?page=703"}

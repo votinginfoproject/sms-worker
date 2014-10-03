@@ -41,7 +41,7 @@ func TestAboutWithCommandNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", makeRequest)
+	c := civicApi.New("", "", "", makeRequest)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.About.Text["en"]["all"]}
@@ -53,7 +53,7 @@ func TestAboutWithCommandFirstContact(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", makeRequest)
+	c := civicApi.New("", "", "", makeRequest)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
