@@ -1,7 +1,6 @@
 package civicApi
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,10 +9,8 @@ import (
 
 func TestQuerySuccess(t *testing.T) {
 	c := New("", "", "", civicApiFixtures.MakeRequestSuccess)
-	res, e := c.Query("")
+	res, _ := c.Query("")
 
-	fmt.Println(res)
-	fmt.Println(e)
 	assert.Equal(t, 0, len(res.Error.Errors), 0)
 	assert.Equal(t, "1 BENEVOLENT ST", res.PollingLocations[0].Address.Line1)
 	assert.Equal(t, "http://www.sos.ri.gov/elections/voters/register/", res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionRegistrationUrl)
