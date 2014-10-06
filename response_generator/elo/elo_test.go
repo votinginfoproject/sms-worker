@@ -1,7 +1,6 @@
 package elo_test
 
 import (
-	"errors"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -10,6 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/civic_api/fixtures"
 	"github.com/votinginfoproject/sms-worker/data"
 	"github.com/votinginfoproject/sms-worker/fake_storage"
 	"github.com/votinginfoproject/sms-worker/response_generator"
@@ -29,28 +29,12 @@ func getContent() *responses.Content {
 
 var content = getContent()
 
-var makeRequestSuccess = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_success.json")
-
-	return data, nil
-}
-
-var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_success_empty.json")
-
-	return data, nil
-}
-
-var makeRequestFailure = func(endpoint string) ([]byte, error) {
-	return nil, errors.New("something bad has happened")
-}
-
 func TestEloFailureNewUserFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
@@ -66,7 +50,7 @@ func TestEloFailureNewUserNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["needAddress"] + "\n\n" + content.Help.Text["en"]["languages"]}
@@ -82,7 +66,7 @@ func TestEloFailureExistingUser(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
-	c := civicApi.New("", "", "", makeRequestSuccessEmpty)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessEmpty)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Errors.Text["en"]["noElectionOfficial"]}
@@ -98,7 +82,7 @@ func TestEloSuccessExistingUser(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "real"})
 
-	c := civicApi.New("", "", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{"Your local election official is:\nDan Burk\nPhone: (775) 328-3670\nEmail: dburk@washoecounty.us"}

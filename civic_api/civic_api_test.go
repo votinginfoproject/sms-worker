@@ -2,38 +2,14 @@ package civicApi
 
 import (
 	"fmt"
-	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/votinginfoproject/sms-worker/civic_api/fixtures"
 )
 
-var makeRequestSuccess = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("fixtures/google_civic_success.json")
-
-	return data, nil
-}
-
-var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("fixtures/google_civic_success_empty.json")
-
-	return data, nil
-}
-
-var makeRequestSuccessEmptyState = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("fixtures/google_civic_success_empty_state.json")
-
-	return data, nil
-}
-
-var makeRequestError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("fixtures/google_civic_parse_error.json")
-
-	return data, nil
-}
-
 func TestQuerySuccess(t *testing.T) {
-	c := New("", "", "", makeRequestSuccess)
+	c := New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	res, e := c.Query("")
 
 	fmt.Println(res)
@@ -45,7 +21,7 @@ func TestQuerySuccess(t *testing.T) {
 }
 
 func TestQuerySuccessEmpty(t *testing.T) {
-	c := New("", "", "", makeRequestSuccessEmpty)
+	c := New("", "", "", civicApiFixtures.MakeRequestSuccessEmpty)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 0, len(res.Error.Errors))
@@ -54,7 +30,7 @@ func TestQuerySuccessEmpty(t *testing.T) {
 }
 
 func TestQuerySuccessEmptyState(t *testing.T) {
-	c := New("", "", "", makeRequestSuccessEmptyState)
+	c := New("", "", "", civicApiFixtures.MakeRequestSuccessEmptyState)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 0, len(res.Error.Errors))
@@ -64,7 +40,7 @@ func TestQuerySuccessEmptyState(t *testing.T) {
 }
 
 func TestQueryError(t *testing.T) {
-	c := New("", "", "", makeRequestError)
+	c := New("", "", "", civicApiFixtures.MakeRequestParseError)
 	res, _ := c.Query("")
 
 	assert.Equal(t, 1, len(res.Error.Errors))
