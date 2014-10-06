@@ -47,3 +47,7 @@ func MakeRequestNotFoundError(endpoint string) ([]byte, error) {
 func MakeRequestFailure(endpoint string) ([]byte, error) {
 	return nil, errors.New("something bad has happened")
 }
+
+func MakeRequestSuccessFake(endpoint string) ([]byte, error) {
+	return []byte{}, nil
+}

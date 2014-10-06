@@ -9,6 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/civic_api/fixtures"
 	"github.com/votinginfoproject/sms-worker/fake_storage"
 	"github.com/votinginfoproject/sms-worker/response_generator"
 	"github.com/votinginfoproject/sms-worker/test_helpers"
@@ -21,10 +22,6 @@ func setup() {
 
 var content = testHelpers.GetContent()
 
-var makeRequest = func(endpoint string) ([]byte, error) {
-	return []byte{}, nil
-}
-
 func TestChangeLanguageWithLanguageCommandNotFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
@@ -34,7 +31,7 @@ func TestChangeLanguageWithLanguageCommandNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", "", makeRequest)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Help.Text["es"]["menu"], content.Help.Text["es"]["languages"]}
@@ -50,7 +47,7 @@ func TestChangeLanguageWithOtherCommandNotFirstContact(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
 
-	c := civicApi.New("", "", "", makeRequest)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Help.Text["es"]["menu"], content.Help.Text["es"]["languages"]}
@@ -62,7 +59,7 @@ func TestChangeLanguageWithLanguageCommandFirstContact(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", "", makeRequest)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["es"]["all"]}
@@ -74,7 +71,7 @@ func TestChangeLanguageWithOtherCommandFirstContact(t *testing.T) {
 	s := fakeStorage.New()
 	u := users.New(s)
 
-	c := civicApi.New("", "", "", makeRequest)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["es"]["all"]}
