@@ -9,25 +9,25 @@ import (
 )
 
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("test_data/google_civic_success.json")
+	data, _ := ioutil.ReadFile("fixtures/google_civic_success.json")
 
 	return data, nil
 }
 
 var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("test_data/google_civic_success_empty.json")
+	data, _ := ioutil.ReadFile("fixtures/google_civic_success_empty.json")
 
 	return data, nil
 }
 
 var makeRequestSuccessEmptyState = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("test_data/google_civic_success_empty_state.json")
+	data, _ := ioutil.ReadFile("fixtures/google_civic_success_empty_state.json")
 
 	return data, nil
 }
 
 var makeRequestError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("test_data/google_civic_parse_error.json")
+	data, _ := ioutil.ReadFile("fixtures/google_civic_parse_error.json")
 
 	return data, nil
 }

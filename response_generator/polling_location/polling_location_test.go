@@ -31,25 +31,25 @@ func getContent() *responses.Content {
 var content = getContent()
 
 var makeRequestSuccess = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
+	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_success.json")
 
 	return data, nil
 }
 
 var makeRequestSuccessEmpty = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success_empty.json")
+	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_success_empty.json")
 
 	return data, nil
 }
 
 var makeRequestParseError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_parse_error.json")
+	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_parse_error.json")
 
 	return data, nil
 }
 
 var makeRequestNotFoundError = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_not_found_error.json")
+	data, _ := ioutil.ReadFile("../../civic_api/fixtures/google_civic_not_found_error.json")
 
 	return data, nil
 }
