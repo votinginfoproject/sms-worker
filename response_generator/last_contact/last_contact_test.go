@@ -9,6 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/civic_api/fixtures"
 	"github.com/votinginfoproject/sms-worker/fake_storage"
 	"github.com/votinginfoproject/sms-worker/response_generator"
 	"github.com/votinginfoproject/sms-worker/test_helpers"
@@ -21,12 +22,6 @@ func setup() {
 
 var content = testHelpers.GetContent()
 
-var makeRequestSuccess = func(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile("../../civic_api/test_data/google_civic_success.json")
-
-	return data, nil
-}
-
 func TestSendAddress(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
@@ -36,7 +31,7 @@ func TestSendAddress(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "test"})
 
-	c := civicApi.New("", "", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"], content.LastContact.Text["en"]["prefix"] + "\ntest"}
@@ -52,7 +47,7 @@ func TestDontSendAddress(t *testing.T) {
 	timeString := strconv.FormatInt(time, 10)
 	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString, "address": "test"})
 
-	c := civicApi.New("", "", "", makeRequestSuccess)
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
