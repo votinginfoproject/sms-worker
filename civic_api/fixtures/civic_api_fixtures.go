@@ -20,6 +20,12 @@ func MakeRequestSuccess(endpoint string) ([]byte, error) {
 	return data, nil
 }
 
+func MakeRequestSuccessMulti(endpoint string) ([]byte, error) {
+	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_multi.json"))
+
+	return data, nil
+}
+
 func MakeRequestSuccessEmpty(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_empty.json"))
 

@@ -36,7 +36,11 @@ func success(res *civicApi.Response, language string, content *responses.Content
 			" " + pl.PollingHours
 	}
 
-	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+	if len(res.PollingLocations) > 1 {
+		return []string{response, content.PollingLocation.Text[language]["multi"], content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+	} else {
+		return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+	}
 }
 
 func failure(res *civicApi.Response, user *users.User, content *responses.Content) []string {

@@ -3,9 +3,11 @@ pollingLocation:
     en:
       prefix: "Your polling place is:"
       hours: "Hours:"
+      multi: "There are multiple polling locations in your area. Please text OFFICIAL for info on how to contact your local election official for more information."
     es:
       prefix: "Su lugar de votación es la siguiente:"
       hours: "Horario:"
+      multi: "There are multiple polling locations in your area. Please text OFFICIAL for info on how to contact your local election official for more information."
   triggers:
     en:
       - poll

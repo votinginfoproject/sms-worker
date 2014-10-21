@@ -1,0 +1,149 @@
+{
+ "kind": "civicinfo#voterInfoResponse",
+ "election": {
+  "id": "4100",
+  "name": "US General Election 2014",
+  "electionDay": "2014-11-04"
+ },
+ "normalizedInput": {
+  "line1": "100 n main st",
+  "city": "providence",
+  "state": "RI",
+  "zip": "02903"
+ },
+ "pollingLocations": [
+  {
+   "address": {
+    "locationName": "FIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B",
+    "line1": "1 BENEVOLENT ST",
+    "city": "PROVIDENCE",
+    "state": "RI",
+    "zip": "02906"
+   },
+   "notes": "",
+   "pollingHours": "7am - 7pm",
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "address": {
+    "locationName": "NOSHOW FIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B",
+    "line1": "1 BENEVOLENT ST",
+    "city": "PROVIDENCE",
+    "state": "RI",
+    "zip": "02906"
+   },
+   "notes": "",
+   "pollingHours": "7am - 7pm",
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  }
+ ],
+ "contests": [
+  {
+   "type": "General Election",
+   "special": "no",
+   "office": "SENATOR IN GENERAL ASSEMBLY DIST 06",
+   "district": {
+    "name": "STATE SENATE",
+    "scope": "stateUpper",
+    "id": "6"
+   },
+   "ballotPlacement": "14",
+   "candidates": [
+    {
+     "name": "HAROLD METTS",
+     "party": "Democrat",
+     "phone": "4012720112"
+    },
+    {
+     "name": "RUSSELL HRYZAN",
+     "party": "Independent"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  },
+  {
+   "type": "General Election",
+   "special": "no",
+   "office": "REPRESENTATIVE IN GENERAL ASSEMBLY DIST 01",
+   "district": {
+    "name": "STATE REP",
+    "scope": "stateLower",
+    "id": "1"
+   },
+   "ballotPlacement": "47",
+   "candidates": [
+    {
+     "name": "EDITH AJELLO",
+     "party": "Democrat",
+     "phone": "4012747078"
+    }
+   ],
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  }
+ ],
+ "state": [
+  {
+   "name": "Rhode Island",
+   "local_jurisdiction": {
+    "name": "PROVIDENCE",
+    "electionAdministrationBody": {
+     "name": "MRS CLAUDIA J HAUGEN",
+     "electionInfoUrl": "http://www.sos.ri.gov",
+     "electionRegistrationUrl": "http://www.sos.ri.gov/elections/voters/register/",
+     "electionRegistrationConfirmationUrl": "https://sos.ri.gov/vic/",
+     "absenteeVotingInfoUrl": "https://sos.ri.gov/elections/voters/mail/",
+     "votingLocationFinderUrl": "https://sos.ri.gov/vic/",
+     "electionRulesUrl": "https://sos.ri.gov/elections/electionlaws/",
+     "hoursOfOperation": "8:30a-4:30p (daily) 7a-9p (election day)",
+     "physicalAddress": {
+      "line1": "25 DORRANCE STREET",
+      "city": "PROVIDENCE",
+      "state": "RI",
+      "zip": "02903"
+     },
+     "electionOfficials": [
+       {
+        "name": "Dan Burk",
+        "title": "Registrar of Voters",
+        "officePhoneNumber": "(775) 328-3670",
+        "faxNumber": "(775) 328-3747",
+        "emailAddress": "dburk@washoecounty.us"
+       }
+      ]
+    },
+    "sources": [
+     {
+      "name": "Voting Information Project",
+      "official": true
+     }
+    ]
+   },
+   "sources": [
+    {
+     "name": "Voting Information Project",
+     "official": true
+    }
+   ]
+  }
+ ]
+}

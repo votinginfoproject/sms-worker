@@ -88,6 +88,27 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))
 }
 
+func TestPollingLocationSuccessMultiExistingUserCommand(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": timeString, "address": "exists"})
+
+	u := users.New(s)
+
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessMulti)
+	g := responseGenerator.New(c, u)
+
+	expected := []string{
+		fmt.Sprintf("%s\nFIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B\n1 BENEVOLENT ST\nPROVIDENCE, RI 02906\n%s 7am - 7pm", content.PollingLocation.Text["es"]["prefix"], content.PollingLocation.Text["es"]["hours"]),
+		content.PollingLocation.Text["es"]["multi"],
+		content.Help.Text["es"]["menu"],
+		content.Help.Text["es"]["languages"]}
+	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))
+}
+
 func TestPollingLocationSuccessExistingUserNewAddress(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
