@@ -7,28 +7,123 @@ pollingLocation:
     es:
       prefix: "Su lugar de votación es la siguiente:"
       hours: "Horario:"
-      multi: "There are multiple polling locations in your area. Please text OFFICIAL for info on how to contact your local election official for more information."
+      multi: ""
+    jp:
+      prefix: "あなたの投票所は:"
+      hours: "時間:"
+      multi: ""
+    cn:
+      prefix: "您的投票站在:"
+      hours: "時間:"
+      multi: ""
+    hi:
+      prefix: "आपका मतदान स्थल है :"
+      hours: "घंटे :"
+      multi: ""
+    ko:
+      prefix: "당신의 투표소는"
+      hours: "시간"
+      multi: ""
+    tl:
+      prefix: "Ang iyong lugar ng botohan ay:"
+      hours: "Mga Oras:"
+      multi: ""
+    vi:
+      prefix: "Phòng phiếu của quí vị là:"
+      hours: "Giờ:"
+      multi: ""
+    km:
+      prefix: "កន្លែងបោះឆ្នោតរបស់អ្នកគឺ:"
+      hours: "ម៉ោងធ្វើការ:"
+      multi: ""
+    th:
+      prefix: "สถานที่เลือกตั้งของท่านคือ:"
+      hours: "เวลาทำการ:"
+      multi: ""
   triggers:
     en:
       - poll
     es:
+      - urna
       - encuesta
+      - lugar de votación
+      - lugar de votacion
+    jp:
+      - 投票所
+    cn:
+      - 投票站
+    hi:
+      - मतदान स्थान
+      - मतदान
+    ko:
+      - 투표소
+      - 투표
+    tl:
+      - lugar ng botohan
+      - botohan
+    vi:
+      - phòng phiếu
+    km:
+      - កន្លែងបោះឆ្នោត
+    th:
+      - สถานที่เลือกตั้ง
+      - คูหาเลือกตั้ง
 changeLanguage:
   text:
     en:
     es:
+    jp:
+    hi:
+    cn:
+    ko:
+    tl:
+    vi:
+    km:
+    th: 
   triggers:
     en:
       - english
     es:
       - español
       - espanol
+    jp:
+      - 日本語
+    cn:
+      - 中文
+    hi:
+      - हिन्दी
+    ko:
+      - 한국어
+    tl:
+      - tagalog
+    vi:
+      - tiếng việt
+    km:
+      - ខ្មែរ
+    th:
+      - ไทย
 intro:
   text:
     en:
       all: Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
     es:
       all: Bienvenido a la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Responda con su dirección para encontrar su lugar de votación y otra información local.
+    jp:
+      all: The Pew Charitable Trustsの投票情報プロジェクト検索ツールへようこそ。あなたの住所を返信して投票所とその他の地元情報を見つけましょう。
+    cn:
+      all: 歡迎使用投票資訊項目The Pew Charitable Trusts。輸入您的地址查找投票站的位置和其他資訊。
+    hi:
+      all: दि पिउ चैरिटेबल ट्रस्ट से वोटिंग सूचना परियोजना खोज उपकरण में आपका स्वागत है. अपने मतदान स्थान और अन्य स्थानीय जानकारी खोजने के लिए अपने पते के साथ जवाब दें |
+    ko:
+      all: 을 통한 투표정보 프로젝트 조회 도구에 오신걸 환영합니다.당신의 투표 장소와 다른 지역 정보를 찾기 위해서 당신의 주소를 보내주셔요.
+    tl:
+      all: Malugod kayong  tinatanggap sa gamit-pantingin ng  Proyektong Impormasyon sa Pagboto mula sa The Pew Charitable Trust. Ibigay ang inyong tirahan upang hanapin ang inyong lugar ng botohan at iba pang lokal na impormasyon.
+    vi:
+      all: Chào quí vị đến với công cụ tìm kiếm Dư Án Thông Tin Bỏ Phiếu do hội từ thiện The Pew Charitable Trusts bảo trợ. Để biết địa điểm phòng phiếu và những tin tức địa phương, trả lời kèm theo địa chỉ của quí vị.
+    km:
+      all: សូមស្វាគមន៍មកកាន់ឧបករណ៍រកមើលគម្រោងពត៌មានការបោះឆ្នោត ពីអង្គការសប្បុរសធម៌ Pew Charitable Trusts ។ សូមឆ្លើយតបដោយមានអាសយដ្ឋានរបស់អ្នកដើម្បីស្វែងរកទីតាំងបោះឆ្នោតរបស់អ្នកនិងព័ត៌មានក្នុងមូលដ្ឋានផ្សេងទៀត។
+    th:
+      all: ขอต้อนรับเข้าสู่เครื่องมือค้นหาของโครงการข้อมูลการออกเสียงลงคะแนนจาก The Pew Charitable Trusts โปรดตอบกลับโดยใส่ที่อยู่ของท่านเพื่อหาสถานที่เลือกตั้งของท่านและข้อมูลท้องถิ่นด้านอื่น
   triggers:
     en:
       - vote
@@ -37,12 +132,52 @@ intro:
       - voto
       - donde
       - dónde
+    jp:
+      - 投票
+      - どこ
+    cn:
+      - 投票
+      - 何處
+    hi:
+      - मतदान
+      - कहां
+    ko:
+      - 투표
+      - 어디
+    tl:
+      - bumoto
+      - saan
+    vi:
+      - bỏ phiếu
+      - Ở đâu
+    km:
+      - បោះឆ្នោត
+      - ទីកន្លែងណា
+    th:
+      - ออกเสียงลงคะแนน
+      - ที่
 registration:
   text:
     en:
       prefix: "For registration information:"
     es:
       prefix: "Para información de registro:"
+    jp:
+      prefix: "登録情報:"
+    cn:
+      prefix: "有關註冊處資訊:"
+    hi:
+      prefix: "पंजीकरण जानकारी के लिए:"
+    ko:
+      prefix: "등록 정보를 위해:"
+    tl:
+      prefix: "Para sa impormasyon sa pagrerehistro:"
+    vi:
+      prefix: "Thông tin ghi danh:"
+    km:
+      prefix: "សម្រាប់ព័ត៌មានការចុះឈ្មោះ៖"
+    th:
+      prefix: "สำหรับข้อมูลการลงทะเบียน:"
   triggers:
     en:
       - register
@@ -56,6 +191,38 @@ registration:
       - registro
       - información de registro
       - informacion de registro
+    jp:
+      - 登録する
+      - 登録
+      - 登録情報
+    cn:
+      - 註冊
+      - 註冊處
+      - 註冊處資訊
+    hi:
+      - पंजीकरण
+      - पंजीकरण
+      - पंजीकरण जानकारी
+    ko:
+      - 등록하다
+      - 등록
+      - 등록 정보
+    tl:
+      - magparehistro
+      - rehistrasyon
+      - impormasyon sa pagpaparehistro
+    vi:
+      - để ghi danh
+      - ghi danh
+      - thôngtin ghi danh
+    km:
+      - ចុះឈ្មោះ
+      - ការចុះឈ្មោះ
+      - ពត៌មានការចុះឈ្មោះ
+    th:
+      - ลงทะเบียน
+      - การลงทะเบียน
+      - ข้อมูลการลงทะเบียน
 elo:
   text:
     en:
@@ -64,8 +231,40 @@ elo:
       email: "Email:"
     es:
       prefix: "Su funcionario electoral local es:"
-      phone: Teléfono
+      phone: "Teléfono:"
       email: "Correo electrónico:"
+    jp:
+      prefix: "あなたの地域の選挙管理事務所は:"
+      phone: "電話:"
+      email: "電子メール:"
+    cn:
+      prefix: "您當地的選舉機構是:"
+      phone: "電話:"
+      email: "電子郵件:"
+    hi:
+      prefix: "आपका स्थानीय चुनाव अधिकारी है :"
+      phone: "फोन:"
+      email: "ईमेल:"
+    ko:
+      prefix: "당신의 지역 선거 공식은:"
+      phone: "전화:"
+      email: "이메일:"
+    tl:
+      prefix: "Ang inyong lokal na opisyal sa halalan ay si:"
+      phone: "Telepono:"
+      email: "Mail:"
+    vi:
+      prefix: "Nhân viên bầu cử địa phương của quí vị là:"
+      phone: "Điện thoại:"
+      email: "Email (thư điện tử):"
+    km:
+      prefix: "មន្រ្តីរៀបចំការបោះឆ្នោតក្នុងមូលដ្ឋានរបស់អ្នកគឺ:"
+      phone: "ទូរស័ព្ទ៖"
+      email: "អ៊ីមែល៖ "
+    th:
+      prefix: "การเลือกตั้งท้องถิ่นอย่างเป็นทางการของท่านคือ:"
+      phone: "หมายเลขโทรศัพท์:"
+      email: "อีเมล์:"
   triggers:
     en:
       - official
@@ -83,12 +282,76 @@ elo:
       - eleccion oficial
       - elección
       - eleccion
+    jp:
+      - 当局
+      - 選挙管理事務所情報
+      - 選挙情報
+      - 選挙管理事務所
+      - 選挙
+    cn:
+      - 官員
+      - 選舉官員資訊
+      - 選舉資訊
+      - 選舉官員
+      - 選舉
+    hi:
+      - आधिकारिक
+      - चुनाव आधिकारिक सूचना
+      - चुनाव सूचना
+      - चुनाव अधिकारी
+      - चुनाव
+    ko:
+      - 공식
+      - 선거 공식 정보
+      - 선거 정보
+      - 선거 공식
+      - 선거
+    tl:
+      - opisyal
+      - impormasyon sa opisyal ng halalan
+      - impormasyon sa halalan
+      - opisyal ng halalan
+      - halalan
+    vi:
+      - nhân viên
+      - thông tin về nhân viên bầu cử
+      - thông tin bầu cử
+      - nhân viên bầu cử
+      - bầu cử
+    km:
+      - មន្រ្តី
+      - ព័ត៌មានមន្រ្តីរៀបចំការបោះឆ្នោត
+      - ព័ត៌មានការបោះឆ្នោត
+      - មន្រ្តីរៀបចំការបោះឆ្នោត
+      - ការបោះឆ្នោត
+    th:
+      - ทางการ
+      - ข้อมูลการเลือกตั้งอย่างเป็นทางการ
+      - ข้อมูลการเลือกตั้ง
+      - การเลือกตั้งอย่างเป็นทางการ
+      - การเลือกตั้ง
 about:
   text:
     en:
       all: You're using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
     es:
       all: Está utilizando la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Para obtener más información, visite http://www.votinginfoproject.org
+    jp:
+      all: The Pew Charitable Trustsの投票情報プロジェクト検索ツールをご利用中です。詳細についてお知りになりたければ、http://www.votinginfoproject.orgをご覧くださ
+    cn:
+      all: 您正在使用投票資訊項目The Pew Charitable Trusts。想了解更多資訊，請訪問http://www.votinginfoproject.org
+    hi:
+      all: आप दि पिउ चैरिटेबल ट्रस्ट से वोटिंग सूचना परियोजना खोज उपकरण का उपयोग कर रहे हैं. अधिक जानकारी के लिए http://www.votinginfoproject.org पर जाएँ
+    ko:
+      all: Pew Charitable Trusts를 투표 정보 프로젝트 조회 도구로 사용합니다. 좀더  많은 정보는 , http://www.votinginfoproject.org로 방문해 주셔요.
+    tl:
+      all: Ginagamit ninyo ang gamit-pantingin ng Proyektong Impormasyon sa Pagboto mula sa The Pew Charitable Trust. Para sa karagdagang impormasyon, bumisita sa http://www.votinginfoproject.org
+    vi:
+      all: Quí vị đang dùng công cụ Dự Án Thông Tin Bỏ Phiếu bảo trợ bởi hội từ thiện The Pew Charitable Trusts. Để biết thêm chi tiết, vào trang mạng http://www.votinginfoproject.org.
+    km:
+      all: អ្នកកំពុងប្រើឧបករណ៍រកមើលគម្រោងព័ត៌មានការបោះឆ្នោត ពីអង្គការសប្បុរសធម៌ Pew Charitable Trusts ។ ដើម្បីស្វែងយល់បន្ថែមសូមទស្សនា http://www.votinginfoproject.org
+    th:
+      all: ท่านกำลังใช้เครื่องมือค้นหาของโครงการข้อมูลการออกเสียงลงคะแนนจาก The Pew Charitable Trusts หากต้องการข้อมูลเพิ่มเติม โปรดเข้าไปที่ http://www.votinginfoproject.org
   triggers:
     en:
       - what
@@ -98,35 +361,131 @@ about:
       - acerca
       - que
       - qué
+    jp:
+      - 何
+      - 案内
+    cn:
+      - 什麼
+      - 關於
+    hi:
+      - क्या
+      - के बारे में
+    ko:
+      - 무엇
+      - 대해서
+    tl:
+      - ano
+      - tungkol
+    vi:
+      - gì
+      - giới thiệu về
+    km:
+      - តើអ្វី
+      - អំពី
+    th:
+      - อะไร
+      - เกี่ยวกับ
 help:
   text:
     en:
       menu: "Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
-      languages: Manda ESPAÑOL para cambiar el idioma.
+      languages: Text english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT to change the language.
     es:
-      menu: "Envíe por texto ENCUESTA para encontrar su lugar de votación.\nEnvíe por texto OFICIAL para obtener la información electoral oficial.\nEnvíe por texto REGISTRO para obtener la información de registro."
-      languages: Text ENGLISH to change the language.
+      menu: "Envíe un mensaje de texto con la palabra URNA para encontrar su lugar de votación.  Envíe el mensaje de texto con la palabra OFICIAL  para obtener información oficial sobre la elección. Envíe el mensaje de texto con la palabra INSCRIPCIÓN para obtener información sobre la inscripción."
+      languages: Envíe un mensaje de texto con la palabra english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para cambiar el idioma.
+    jp:
+      menu: "投票所と携帯メールを打ち、投票所を検索します。登録するには登録と携帯メールを打ちます。"
+      languages: 携帯メールで english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT と打ち、言語を変更します
+    cn:
+      menu: "發送短信投票站，以找您的投票站。發送短信官員的，以找選舉官員的資訊。發送短信註冊 ，以找註冊登記資訊。"
+      languages: 發送短信 english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT 更改語言
+    hi:
+      menu: "टेक्स्ट पोल अपने मतदान जगह खोजने के लिए. चुनाव आधिकारिक जानकारी के लिए टेक्स्ट आधिकारिक. पंजीकरण की जानकारी के लिए टेक्स्ट पंजीकरण."
+      languages: टेक्स्ट english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT भाषा बदलने के लिए.
+    ko:
+      menu: "당신에 투표소를 찾기위해선 투표를 택스트 하셔요.  선거 사무실 정보를 위해선 사무실을 택스트 하셔요. 등록 정보를 위해선 등록을 택스트 하셔요."
+      languages: 언어를 바꾸기 위해선 english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT 를 택스트 하셔요.
+    tl:
+      menu: "I-text  ang  BOTOHAN para malaman ang inyong lugar ng botohan.  I-text ang OPISYAL para sa inyong opisyal ng eleksiyon. I-text ang  REHISTRASYON  para  sa  impormasyon sa rehistrasyon."
+      languages: I-text english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para palitan ang wika.
+    vi:
+      menu: "Gửi tin nhắn PHÒNG PHIẾU để tìm địa điểm bỏ phiếu của bạn. Gửi tin nhắn CHÍNH THỨC cho thông tin chính thức cuộc bầu cử. Gửi tin nhắn ĐĂNG KÝ để biết thông tin đăng ký."
+      languages: Gửi tin nhắn english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT để thay đổi ngôn ngữ
+    km:
+      menu: "ញើសារពាក្យ កន្លែងបោះឆ្នោត ដើម្បីស្វែងរកកន្លែងបោះឆ្នោតរបស់អ្នក។ ផ្ញើសារពាក្យ មន្ត្រីការបោះឆ្នោត ដើម្បីស្វែងរកព័ត៌មានបោះឆ្នោតជាផ្លូវការ។ ផ្ញើសារពាក្យ ចុះឈ្មោះ ដើម្បីស្វែងរកព័ត៌មានការចុះឈ្មោះ។"
+      languages: ផ្ញើសារ english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT ដើម្បីផ្លាស់ប្តូរភាសា។
+    th:
+      menu: "ส่งข้อความ POLL เพื่อค้นหาสถานที่เลือกตั้ง ส่งข้อความ OFFICIAL สำหรับข้อมูลการเลือกตั้งอย่างเป็นทางการ  ส่งข้อความ REGISTER สำหรับข้อมูลการลงทะเบียน"
+      languages: พิมพ์ english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT ไทย เพื่อเปลี่ยนภาษา
   triggers:
     en:
       - help
       - menu
     es:
       - ayuda
+      - menú
+    jp:
+      - 補助
+      - メニュー
+    cn:
+      - 幫助
+      - 列表
+    hi:
+      - मदद
+      - सूची
+    ko:
+      - 도움
+      - 메뉴
+    tl:
+      - tulong
+    vi:
+      - giúp đỡ
+      - những chức năng trên lập trình điện toán
+    km:
+      - ជំនួយ
+      - ម៉ឺនុយ
+    th:
+      - ช่วยเหลือ
+      - เมนู
 lastContact:
   text:
     en:
       prefix: "Your address on file is:"
     es:
       prefix: "Su dirección registrada es:"
+    jp:
+      prefix: "登録されているあなたの住所は:"
+    cn:
+      prefix: "您檔案的地址是:"
+    hi:
+      prefix: "फाइल पर आपका पता है :"
+    ko:
+      prefix: "파일에 있는 당신의 주소는:"
+    tl:
+      prefix: "Ang inyong tirahan ayon sa talaan ay:"
+    vi:
+      prefix: "Địa chỉ của quí vị trong hồ sơ là:"
+    km:
+      prefix: "អាសយដ្ឋានរបស់អ្នកនៅលើឯកសារគឺ:"
+    th:
+      prefix: "ที่อยู่ของท่านที่ได้รับการบันทึกไว้คือ:"
   triggers:
     en:
     es:
+    jp:
+    cn:
+    hi:
+    ko:
+    tl:
+    vi:
+    km:
+    th:
 errors:
   text:
     en:
       addressParseExistingUser: That isn't a recognized command. Text HELP to see all options.
       addressParseNewUser: We need your address to provide you with local voting information. We didn't recognize that address, please try again.
-      noElectionInfo: No elections are scheduled for your area. Check to make sure your info was correctly entered, contact your election official, or try closer to Election Day.
+      noElectionInfo: No elections are scheduled for your area. Check to make sure your info was correctly entered, contact your election official, or try close to Election Day.
       generalBackend: Sorry, we were unable to find your election day polling location.
       noElectionOfficial: We don’t have election official information on file for your area.
       noRegistrationInfo: We don’t have registration information on file for your area.
@@ -134,11 +493,83 @@ errors:
     es:
       addressParseExistingUser: Este no es un comando reconocido. Envíe por texto AYUDA para ver todas las opciones.
       addressParseNewUser: Necesitamos su dirección para ofrecerle información sobre la votación local. Nosotros no reconocemos esa dirección, inténtelo nuevamente.
-      noElectionInfo: No hay elecciones programadas para su área. Para verificar en otro lugar, responda con una nueva dirección.
+      noElectionInfo: No existen elecciones programadas para su area.  Revise para asegurarse que ingreso correctamente su información, Contacte su oficial electoral, o trate  otra vez cuando se acerca el Día de la Elección.
       generalBackend: Lo sentimos, no hemos podido encontrar la ubicación de la votación del día de la elección.
-      noElectionOfficial: No tenemos elección información oficial en el archivo para su área.
-      noRegistrationInfo: No tenemos información de registro en el archivo para su área.
-      needAddress: Necesitamos su dirección para ofrecerle información sobre la votación local.
+      noElectionOfficial: No tenemos información electoral oficial archivada para su área.
+      noRegistrationInfo: No tenemos información de inscripción archivada para su área.
+      needAddress: Necesitamos su dirección para poder  proveerle con información local sobre la votación.
+    jp:
+      addressParseExistingUser: コマンドを認識できません。すべてのオプションをご覧になるには補助と携帯メールします。
+      addressParseNewUser: あなたの地元の投票情報を提供するには、あなたの住所が必要です。その住所を確認できません。もう一度入力してください。
+      noElectionInfo: お客様の地域では選挙が予定されていません。情報が正しく入力されたかご確認の上、投票当局までご連絡いただくか、投票日が近づいてきてから再度お試しください。
+      generalBackend: 申し訳ありませんが、あなたの投票日投票所が見つかりません。
+      noElectionOfficial: あなたの地域の選挙当局情報はありません。
+      noRegistrationInfo: あなたの地域の登録情報はありません。
+      needAddress: お近くの投票情報を提供するためにあなたのアドレスが必要です。
+    cn:
+      addressParseExistingUser: 這不是一個辨認指令.發送短信幫助查看所有的選項
+      addressParseNewUser: 我們需要您的地址為您查找您的選區。我們無法識別這個地址，請重試
+      noElectionInfo: 沒有任何選舉定於您所指地區。檢查您輸入是否正確，請聯繫您的選舉官員，或嘗試再查詢在接近選舉日
+      generalBackend: 很抱歉，我們無法找到您的選舉日投票站地點
+      noElectionOfficial: 我們沒有您的選舉官方資料記錄在您的區域。
+      noRegistrationInfo: 我們沒有您的選民登記資料記錄在您的區域。
+      needAddress: 我們需要您的地址為您提供當地的投票資訊。
+    hi:
+      addressParseExistingUser: "यह एक मान्यता प्राप्त कमांड नहीं है. टेक्स्ट मदद सभी विकल्पों को देखने के लिए."
+      addressParseNewUser: "हमें स्थानीय मतदान में जानकारी प्रदान करने के लिए आपके पते की जरूरत है | हमने उस पते को नहीं पहचाना, पुन: प्रयास करें |"
+      noElectionInfo: "आपके क्षेत्र के लिए कोई चुनाव  निर्धारित नही हैं. सुनिश्चित करने के लिए जाँच करेंकि आपकी जानकारी सही ढंग से दर्ज की गई थी, अपने चुनाव अधिकारी से संपर्क करें,  या चुनाव के दिन के करीब कोशिश करें."
+      generalBackend: "क्षमा करें, हम आपके चुनाव के दिन के मतदान स्थान को खोजने में असमर्थ थे |"
+      noElectionOfficial: "हमारे पास आपके क्षेत्र के लिए चुनाव आधिकारिक जानकारी फाइल पर उपलब्ध नहीं है."
+      noRegistrationInfo: "हमारे पास आपके क्षेत्र के लिए पंजीकरण जानकारी फाइल पर उपलब्ध नहीं है."
+      needAddress: "हमें स्थानीय मतदान जानकारी उपलब्ध कराने के लिए आपके पते की जरूरत है."
+    ko:
+      addressParseExistingUser: 인식되는 명령어가 아님니다. 다른 선택사항을 보기위해 도움을 택스트 하셔
+      addressParseNewUser: 지역 투표 정보를 제공하기위해 당신의 주소가 필요합니다 . 이 주소는 인식 되지 않습니다. 다시한번  입력해 주셔요.
+      noElectionInfo: 당신의 지역에는 예정된 선거가 없읍니다. 당신의 정보가 정확하게 입력됬는지 확인하기 위해, 선거 사무실에 알아보거나 또는 선거날 가까이 재시도 해보십시요
+      generalBackend: 죄송합니다. 선거날 투표소 위치를 찾을 수가 없습니다.
+      noElectionOfficial: 당신지역에 대한 선거공식 정보 파일이 없습니다.
+      noRegistrationInfo: 당신지역에 대한 유권자 정보 파일이 없습니다.
+      needAddress: 지역 선거정보를 제공하기 위해서 당신의 주소가 필요합니다.
+    tl:
+      addressParseExistingUser: Hindi matukoy ang utos na ito. I-text ang TULONG para makita ang lahat ng opsyon.
+      addressParseNewUser: Kailangan  namin  ang  inyong  tirahan para maibigay ang inyong lokal na impormasyon sa pagboto. Hindi matukoy ang ibinigay ninyong tirahan, maaring paki-ulit muli.
+      noElectionInfo: Walang mga eleksyon na magaganap sa inyong lugar. Tiyakin na ang  inyong  inilagay na impormasyon ay tama,  tumawag sa inyong opisyal ng halalan, o subukang  muli  pag mas malapit na ang  Araw ng Halalan.
+      generalBackend: Paumanhin po, hindi  makita ang inyong lugar na botohan sa araw ng halalan.
+      noElectionOfficial: Wala kaming opisyal na impormasyon sa halalan na nakatala sa inyong lugar.
+      noRegistrationInfo: Wala kaming impormasyon sa rehistrasyon na nakatala sa inyong lugar.
+      needAddress: Kailangan  naming  ang inyong  tirahan para maibigay  ang  inyong  impormasyon sa pagboto.
+    vi:
+      addressParseExistingUser: Đó không phải là một lệnh công nhận. Gửi tin nhắn GIÚP để xem tất cả sự lựa chọn
+      addressParseNewUser: Chúng tôi cần địa chỉ của quí vị để giúp quí vị về thông tin bỏ phiếu ở địa phương. Địa chỉ không đúng, quí vị thử lại lần nữa.
+      noElectionInfo: Không có cuộc bầu cử được lên kế hoạch cho khu vực của bạn. Kiểm tra để đảm bảo rằng thông tin của bạn đã được nhập chính xác, hãy liên hệ các quan chức bầu cử của bạn, hoặc nhập lại thông tin của bạn gần Ngày Bầu Cử.
+      generalBackend: Xin lổi, chúng tôi không thể tìm được phòng phiếu cho quí vị.
+      noElectionOfficial: Chúng tôi không có thông tin của nhân viên bầu cử trong hồ sơ ở khu vực quí vị.
+      noRegistrationInfo: Chúng tôi không có thông tin ghi danh bầu cử trong hồ sơ ở khu vực quí vị.
+      needAddress: Chúng tôi cần địa chỉ của quí vị để có thể cung cấp về thông tin bỏ phiếu ở địa phương đến cho quí vị.
+    km:
+      addressParseExistingUser: នោះគឺមិនមែនជាពាក្យបញ្ជាដែលមានការទទួលស្គាល់ទេ ។ ផ្ញើសារពាក្យ ជួយ ដើម្បីមើលជម្រើស    ទាំងអស់។
+      addressParseNewUser: យើងត្រូវការអាស័យដ្ឋានរបស់អ្នកដើម្បីផ្ដល់ជូនអ្នកនូវពត៌មានបោះឆ្នោតក្នុងមូលដ្ឋាន។ យើងមិនបានស្គាល់អាសយដ្ឋាននោះទេ សូមព្យាយាមម្ដងទៀត។
+      noElectionInfo: គ្មានការបោះឆ្នោតត្រូវបានកំណត់ពេលសម្រាប់តំបន់របស់អ្នកទេ ។ សូមពិនិត្យមើលដើម្បីឱ្យប្រាកដ ថាពត៌មានរបស់អ្នកបានបញ្ចូលនេះគឺត្រឹមត្រូវ សូមទាក់ទងមន្ត្រីការបោះឆ្នោតរបស់អ្នក ឬ សូម ព្យាយាមម្ដងទៀតនៅពេលជិតដល់ថ្ងៃបោះឆ្នោត។
+      generalBackend: សូមអភ័យទោស, យើងមិនអាចរកឃើញទីតាំងបោះឆ្នោត នៃថ្ងៃបោះឆ្នោតរបស់អ្នកទេ ។
+      noElectionOfficial: យើងពុំមានព័ត៌មានផ្លូវការនៃការបោះឆ្នោតនៅក្នុងឯកសារសម្រាប់តំបន់របស់អ្នកទេ។
+      noRegistrationInfo: យើងពុំមានព័ត៌មានចុះបញ្ជីនៅក្នុងឯកសារសម្រាប់តំបន់របស់អ្នកទេ។
+      needAddress: យើងត្រូវការអាស័យដ្ឋានរបស់អ្នក ដើម្បីផ្ដល់ជូនអ្នកនូវពត៌មានបោះឆ្នោតក្នុងមូលដ្ឋាន។
+    th:
+      addressParseExistingUser: นี่ไม่ใช่คำสั่งที่ถูกต้อง พิมพ์ ช่วยเหลือ เพื่อดูทุกตัวเลือก
+      addressParseNewUser: เราต้องการที่อยู่ของท่านเพื่อเตรียมข้อมูลการออกเสียงลงคะแนนท้องถิ่นของท่าน เราไม่เจอที่อยู่นี้ โปรดลองใหม่อีกครั้ง
+      noElectionInfo: ไม่มีการจัดการเลือกตั้งในพื้นที่ของท่าน ตรวจสอบเพื่อให้แน่ใจว่าท่านใส่ข้อมูลของท่านถูกต้อง ติดต่อเจ้าหน้าที่การเลือกตั้งของท่าน หรือลองอีกครั้งใกล้วันเลือกตั้ง
+      generalBackend: ขออภัย เราไม่สามารถหาสถานที่เลือกตั้งในวันเลือกตั้งของท่านได้
+      noElectionOfficial: เราไม่มีข้อมูลการเลือกตั้งอย่างเป็นทางการบันทึกไว้สำหรับพื้นที่ของท่าน
+      noRegistrationInfo: เราไม่มีข้อมูลการลงทะเบียนบันทึกไว้สำหรับพื้นที่ของท่าน
+      needAddress: เราต้องการที่อยู่ของท่านเพื่อจัดหาข้อมูลการออกเสียงลงคะแนนท้องถิ่น
   triggers:
     en:
     es:
+    jp:
+    cn:
+    hi:
+    ko:
+    tl:
+    vi:
+    km:
+    th:
