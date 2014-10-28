@@ -485,7 +485,7 @@ errors:
     en:
       addressParseExistingUser: That isn't a recognized command. Text HELP to see all options.
       addressParseNewUser: We need your address to provide you with local voting information. We didn't recognize that address, please try again.
-      noElectionInfo: No elections are scheduled for your area. Check to make sure your info was correctly entered, contact your election official, or try close to Election Day.
+      noElectionInfo: We can't find any election info for this address. Contact your election official, or try closer to Election Day.
       generalBackend: Sorry, we were unable to find your election day polling location.
       noElectionOfficial: We don’t have election official information on file for your area.
       noRegistrationInfo: We don’t have registration information on file for your area.
