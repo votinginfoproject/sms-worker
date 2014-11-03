@@ -7,7 +7,7 @@ pollingLocation:
     es:
       prefix: "Su lugar de votación es la siguiente:"
       hours: "Horario:"
-      multi: ""
+      multi: "Existen múltiples centros electorales en su área. Por favor envíe un mensaje con la palabra FUNCIONARIO  para recibir información acerca de cómo contactarse con un funcionario electoral local para obtener más información."
     jp:
       prefix: "あなたの投票所は:"
       hours: "時間:"
