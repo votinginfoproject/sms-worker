@@ -29,10 +29,12 @@ func (t *Twilio) Send(messages []string, to string) error {
 		data.Set("To", to)
 		data.Set("Body", message)
 
-		_, err := http.PostForm(t.endpoint.String(), data)
+		r, err := http.PostForm(t.endpoint.String(), data)
 		if err != nil {
 			return err
 		}
+
+		defer r.Body.Close()
 	}
 
 	return nil
