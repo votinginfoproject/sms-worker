@@ -69,7 +69,9 @@ func New(key string, electionId string, officialOnly string, makeRequest request
 func (c *CivicApi) Query(address string) (*Response, error) {
 	parameters := url.Values{}
 	parameters.Add("key", c.key)
-	parameters.Add("electionId", c.electionId)
+	if len(c.electionId) > 0 {
+		parameters.Add("electionId", c.electionId)
+	}
 	parameters.Add("address", address)
 	parameters.Add("officialOnly", c.officialOnly)
 	c.endpoint.RawQuery = parameters.Encode()
