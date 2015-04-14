@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-v1'
 require 'dotenv/tasks'
 require 'net/http'
 require 'uri'
@@ -21,6 +21,7 @@ task :deploy, [:environment] => :aws_auth do |_, args|
   puts 'uploading...'
   s3.buckets["vip-sms-#{environment}"].objects['sms-worker'].write(file: 'sms-worker')
   s3.buckets["vip-sms-#{environment}"].objects['sms-worker-env'].write(env)
+  puts '...uploaded'
 
   system('rm sms-worker')
 
