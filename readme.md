@@ -65,7 +65,7 @@ With the environment variables set, the commands are:
 
 ```
 $ docker build -t sms-worker .
-$ docker run -p 8080:8080 sms-worker
+$ docker run sms-worker
 ```
 
 [docker]: https://www.docker.com/
