@@ -81,6 +81,8 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 	var messages []string
 
 	switch action {
+	case "Stop":
+		messages = []string{r.content.Stop.Text[user.Language]["all"]}
 	case "Elo":
 		messages = r.elo(user, routine)
 	case "Registration":
