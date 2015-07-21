@@ -5,6 +5,11 @@ Grab messages from an AWS SQS queue, determine the action to take,
 generate message(s) and send them to Twilio.
 
 ## Requirements
+
+- Docker
+
+**OR**
+
 - Golang 1.3
 - A directory for Go development configured in $GOPATH, see below
 - Ruby 2.1.2
@@ -47,6 +52,25 @@ If you're not on Linux and AMD64, you'll need to compile Go for Linux since the 
 2. Find the go src path which should be nearby (/usr/local/Cellar/go/1.4.2/libexec/src if installed with homebrew)
 4. Make go for linux/AMD64 by running `GOOS=linux GOARCH=amd64 ./make.bash --no-clean`
 
+## Docker Development System Setup
+
+It is potentially easier to develop with [Docker][docker].
+
+To compile and run the project, the typical docker `build` and `run`
+commands will work. When running, you will need to have the
+environment variables above set, because the docker version does not
+use the .env file.
+
+With the environment variables set, the commands are:
+
+```
+$ docker build -t sms-worker .
+$ docker run sms-worker
+```
+
+[docker]: https://www.docker.com/
+
+
 ## Commands
 ### Run Tests
 ~~~~
@@ -71,7 +95,7 @@ Prerequisites
 - The .env file has been built. You can retrieve the current one from s3 in the bucket "vip-sms-#{environment}" name "sms-worker-env".
 - You have passwordless ssh access to the vip-sms-app-worker servers as the ubuntu user. To achieve this, obtain the private key and run `ssh-add <private-key-file>` and test it with `ssh ubuntu@<worker-public-ip>`
 
-Deploy will rebuild the code, upload the new binary to S3, figure out which EC2 instances are the right workers for the environment, and restart them with the new binary. It also uploads the current .env to the s3 bucket "vip-sms-#{env}" as "sms-worker-env", so this can be a starting point for a new .env file. 
+Deploy will rebuild the code, upload the new binary to S3, figure out which EC2 instances are the right workers for the environment, and restart them with the new binary. It also uploads the current .env to the s3 bucket "vip-sms-#{env}" as "sms-worker-env", so this can be a starting point for a new .env file.
 
 Steps of the deploy task:
 - Build the binary
