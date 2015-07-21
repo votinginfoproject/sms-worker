@@ -1,3 +1,86 @@
+stop:
+  text:
+    en:
+      all: "You are unsubscribed from Voting Information Project Alerts. No more messages will be sent. Reply HELP for help or info@votinginfoproject.org."
+    es:
+      all: "Dio de baja a las Alertas del Proyecto para brindar información sobre las votaciones. Ya no recibirá más mensajes. Responda con la palabra AYUDA para obtener ayuda o escriba ainfo@votinginfoproject.org."
+    jp:
+      all: "投票インフォメーションプロジェクトのアラートの登録を解除しました。今後、メッセージが送信されることはありません。ヘルプに関してはヘルプのメッセージを送信するか、info@votinginfoproject.orgをご覧ください。"
+    cn:
+      all: "您已取消订阅投票信息计划通知短信。将不再为您发送相关信息。请回复HELP 或发送电子邮件至info@votinginfoproject.org 以获取相关帮助。"
+    hi:
+      all: "आप मतदान जानकारी परियोजना चेतावनियों से सदस्यता समाप्त कर रहे हैं। और संदेश नहीँ भेजे जाएंगे। मदद के लिए  HELP पर उत्तर दें या  info@votinginfoproject.org देखें।"
+    ko:
+      all: "귀하는 투표 정보 프로젝트 알림 구독을 취소하셨습니다. 알림 메시지는 더 이상 전송되지 않습니다. 도움을 원하시면 ‘HELP’라고 텍스트 메시지를 전송하거나info@votinginfoproject.org로 연락해 주시기 바랍니다."
+    tl:
+      all: "Ikaw ay na-unsubscribe mula sa Mga Alerto ng Proyekto sa Impormasyon ng Pagboto. Wala nang ipapadalang mga mensahe. Mag-reply ng Tulong para sa tulong o info@votinginfoproject.org."
+    vi:
+      all: "Quý vị hủy đăng ký Cảnh báo Dự án Thông tin Bỏ phiếu. Tin nhắn sẽ không được gửi nữa. Nhắn HELP để được hỗ trợ hoặc info@votinginfoproject.org."
+    km:
+      all: "អ្នក​បានឈប់ចៀវព័ត៌មានពីគម្រោងក្រើនរំឭកព័ត៌មាន​បោះឆ្នោត ។ យើងនឹង​មិន​ផ្ញើ​សារ​ណាមួយ​ដល់​អ្នក​ទៀតទេ ។ ឆ្លើយ​សារ​ដោយ​សរសេរ​ពក្យថា ជំនួយ ដើម្បី​ទទួល​បានជំនួយ ឬផ្ញើ​សារ​មកកាន់ info@votinginfoproject.org ។"
+    th:
+      all: "คุณยกเลิกการเป็นสมาชิกสำหรับการแจ้งเตือนโครงการข้อมูลการลงคะแนนเสียงแล้ว คุณจะไม่ได้รับข้อความอีกต่อไป ตอบกลับ HELP (ความช่วยเหลือ) หากต้องการความช่วยเหลือ หรือ info@votinginfoproject.org"
+  triggers:
+    en:
+      - "stop"
+      - "end"
+      - "cancel"
+      - "unsubscribe"
+      - "quit"
+    es:
+      - "detener"
+      - "finalizar"
+      - "cancelar"
+      - "dar de baja"
+      - "salir"
+    jp:
+      - "停止"
+      - "終了"
+      - "取消"
+      - "登録解除"
+      - "中止"
+    cn:
+      - "停止"
+      - "终止"
+      - "取消"
+      - "取消订阅"
+      - "退出"
+    hi:
+      - "रुकें"
+      - "समाप्त"
+      - "रद्द"
+      - "सदस्यता समाप्त"
+      - "छोड़ना"
+    ko:
+      - "중지"
+      - "종료"
+      - "취소"
+      - "구독 취소"
+      - "끝내기"
+    tl:
+      - "ihinto"
+      - "tapusin"
+      - "kanselahin"
+      - "mag-unsubscribe"
+      - "mag-quit"
+    vi:
+      - "dừng"
+      - "kết thúc"
+      - "hủy bỏ"
+      - "hủy đăng ký"
+      - "thoát"
+    km:
+      - "ឈប់"
+      - "ចប់"
+      - "លើកលែង"
+      - "ឈប់ចៀវ"
+      - "បោះបង់"
+    th:
+      - "หยุด"
+      - "สิ้นสุด"
+      - "ยกเลิก"
+      - "ยกเลิกการเป็นสมาชิก"
+      - "ออก"
 pollingLocation:
   text:
     en:
@@ -79,7 +162,7 @@ changeLanguage:
     tl:
     vi:
     km:
-    th: 
+    th:
   triggers:
     en:
       - english
