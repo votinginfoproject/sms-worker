@@ -92,7 +92,7 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 			messages = []string{r.content.Intro.Text[user.Language]["all"]}
 		} else {
 			messages = []string{
-				r.content.Help.Text[user.Language]["menu"],
+				r.content.Help.Text[user.Language]["intro"],
 				r.content.Help.Text[user.Language]["languages"]}
 		}
 	case "About":
@@ -142,7 +142,7 @@ func (r *Generator) changeLanguage(user *users.User) []string {
 		return []string{r.content.Intro.Text[user.Language]["all"]}
 	} else {
 		return []string{
-			r.content.Help.Text[user.Language]["menu"],
+			r.content.Help.Text[user.Language]["intro"],
 			r.content.Help.Text[user.Language]["languages"]}
 	}
 }

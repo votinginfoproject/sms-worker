@@ -471,65 +471,66 @@ about:
 help:
   text:
     en:
-      menu: "Text POLL to find your polling place.\nText OFFICIAL for election official info.\nText REGISTER for registration info."
+      intro: "Voting Information Project Alerts: Help at info@votinginfoproject.org or https://www.votinginfoproject.org/projects/sms-tool/. Message & data rates may apply. 1 message/user request. Text STOP to cancel."
       languages: Text english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT to change the language.
     es:
-      menu: "Envíe un mensaje de texto con la palabra URNA para encontrar su lugar de votación.  Envíe el mensaje de texto con la palabra OFICIAL  para obtener información oficial sobre la elección. Envíe el mensaje de texto con la palabra INSCRIPCIÓN para obtener información sobre la inscripción."
+      intro: "Alertas del Proyecto para brindar información sobre las votaciones: Obtenga ayuda en info@votinginfoproject.org o https://www.votinginfoproject.org/projects/sms-tool/. Pueden regir tarifas por uso de mensajes y datos. 1 mensaje por solicitud de usuario. Envíe un mensaje de texto con la palabra DETENER para cancelar."
       languages: Envíe un mensaje de texto con la palabra english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para cambiar el idioma.
     jp:
-      menu: "投票所と携帯メールを打ち、投票所を検索します。登録するには登録と携帯メールを打ちます。"
+      intro: "投票インフォメーションプロジェクトのアラート: ヘルプに関してはinfo@votinginfoproject.org または https://www.votinginfoproject.org/projects/sms-tool/をご覧ください。メッセージ＆データ料金が適用される場合があります。ユーザー１人につき１つのメッセージのみです。取消するには停止のメッセージを送信してください。"
       languages: 携帯メールで english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT と打ち、言語を変更します
     cn:
-      menu: "發送短信投票站，以找您的投票站。發送短信官員的，以找選舉官員的資訊。發送短信註冊 ，以找註冊登記資訊。"
+      intro: "投票信息计划通知短信：发送电子邮件至info@votinginfoproject.org 或登录https://www.votinginfoproject.org/projects/sms-tool/ 以获取相关帮助。信息与数据率可适用。申请1则信息/用户请求。编辑短信 STOP 取消请求申请。"
       languages: 發送短信 english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT 更改語言
     hi:
-      menu: "टेक्स्ट पोल अपने मतदान जगह खोजने के लिए. चुनाव आधिकारिक जानकारी के लिए टेक्स्ट आधिकारिक. पंजीकरण की जानकारी के लिए टेक्स्ट पंजीकरण."
+      intro: "मतदान जानकारी परियोजना चेतावनियाँ । info@votinginfoproject.org या https://www.votinginfoproject.org/projects/sms-tool/ पर मदद प्राप्त करें। संदेश और डाटा शुल्क लग सकते हैं। 1 संदेश/यूज़र अनुरोध। रद्द करने के लिए  STOP टैक्सट करें।"
       languages: टेक्स्ट english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT भाषा बदलने के लिए.
     ko:
-      menu: "당신에 투표소를 찾기위해선 투표를 택스트 하셔요.  선거 사무실 정보를 위해선 사무실을 택스트 하셔요. 등록 정보를 위해선 등록을 택스트 하셔요."
+      intro: "투표 정보 프로젝트 알림: 도움말을 원하시면 info@votinginfoproject.org 또는 https://www.votinginfoproject.org/projects/sms-tool/.를 이용해 주시기 바랍니다.  메시지 및 데이터 요금이 부과될 수 있습니다. 1메시지/사용자 요청. 취소를 원하시면 ‘STOP’ 이라고 텍스트 메시지를 전송해 주십시오."
       languages: 언어를 바꾸기 위해선 english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT 를 택스트 하셔요.
     tl:
-      menu: "I-text  ang  BOTOHAN para malaman ang inyong lugar ng botohan.  I-text ang OPISYAL para sa inyong opisyal ng eleksiyon. I-text ang  REHISTRASYON  para  sa  impormasyon sa rehistrasyon."
+      intro: "Mga Alerto ng Proyekto sa Impormasyon ng Pagboto : Tulong sa info@votinginfoproject.org o https://www.votinginfoproject.org/projects/sms-tool/. Maaaring ilalapat ang mga rate sa mensahe at datos. 1 mensahe/user request. I-text ang IHINTO upang kanselahin."
       languages: I-text english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para palitan ang wika.
     vi:
-      menu: "Gửi tin nhắn PHÒNG PHIẾU để tìm địa điểm bỏ phiếu của bạn. Gửi tin nhắn CHÍNH THỨC cho thông tin chính thức cuộc bầu cử. Gửi tin nhắn ĐĂNG KÝ để biết thông tin đăng ký."
+      intro: "Cảnh báo Dự án Thông tin Bỏ phiếu: Hỗ trợ tại info@votinginfoproject.org hoặc https://www.votinginfoproject.org/projects/sms-tool/. Có thể áp dụng mức giá tin nhắn và dữ liệu. 1 tin nhắn/yêu cầu của người dùng. Nhắn STOP để hủy bỏ."
       languages: Gửi tin nhắn english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT để thay đổi ngôn ngữ
     km:
-      menu: "ញើសារពាក្យ កន្លែងបោះឆ្នោត ដើម្បីស្វែងរកកន្លែងបោះឆ្នោតរបស់អ្នក។ ផ្ញើសារពាក្យ មន្ត្រីការបោះឆ្នោត ដើម្បីស្វែងរកព័ត៌មានបោះឆ្នោតជាផ្លូវការ។ ផ្ញើសារពាក្យ ចុះឈ្មោះ ដើម្បីស្វែងរកព័ត៌មានការចុះឈ្មោះ។"
+      intro: គម្រោងក្រើនរំឭកព័ត៌មាន​បោះឆ្នោត ៖ អ្នកអាំចស្វែករក​ជំនួយបានពី info@votinginfoproject.org ឬ https://www.votinginfoproject.org/projects/sms-tool/ ។ អ្នកអាច​ត្រូវ​បង់​ថ្លៃប្រើ​សេវា​សារអក្សរ និងការ​ប្រើ​អ៊ិនថឺណិត ។ សារ 1​ សម្រាប់ការ​ស្នើ​សុំ​របស់​អ្នក​ប្រើ​មួយនាក់ ។ ផ្ញើសារជាពាក្យថា ឈប់ ដើម្បី​លើកលែង ។
       languages: ផ្ញើសារ english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT ដើម្បីផ្លាស់ប្តូរភាសា។
     th:
-      menu: "ส่งข้อความ POLL เพื่อค้นหาสถานที่เลือกตั้ง ส่งข้อความ OFFICIAL สำหรับข้อมูลการเลือกตั้งอย่างเป็นทางการ  ส่งข้อความ REGISTER สำหรับข้อมูลการลงทะเบียน"
+      intro: "การแจ้งเตือนโครงการข้อมูลการลงคะแนนเสียง:ขอความช่วยเหลือที่ info@votinginfoproject.org หรือ https://www.votinginfoproject.org/projects/sms-tool/ มีการเรียกเก็บค่าบริการข้อความและข้อมูล 1 ข้อความ/คำขอของผู้ใช้ ส่งข้อความ STOP (หยุด) เพื่อยกเลิก"
       languages: พิมพ์ english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT ไทย เพื่อเปลี่ยนภาษา
   triggers:
     en:
       - help
-      - menu
+      - information
     es:
       - ayuda
-      - menú
+      - información
     jp:
-      - 補助
-      - メニュー
+      - ヘルプ
+      - インフォメーション
     cn:
-      - 幫助
-      - 列表
+      - 帮助
+      - 信息
     hi:
-      - मदद
-      - सूची
+      - सहायता
+      - जानकारी
     ko:
-      - 도움
-      - 메뉴
+      - 도움말
+      - 정보
     tl:
       - tulong
+      - impormasyon
     vi:
-      - giúp đỡ
-      - những chức năng trên lập trình điện toán
+      - hỗ trợ
+      - thông tin
     km:
       - ជំនួយ
-      - ម៉ឺនុយ
+      - ព័ត៌មាន
     th:
-      - ช่วยเหลือ
-      - เมนู
+      - ความช่วยเหลือ
+      - ข้อมูล
 lastContact:
   text:
     en:
