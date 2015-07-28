@@ -34,8 +34,8 @@ func TestHelpWithCommandNotFirstContact(t *testing.T) {
 	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
-	expected := []string{content.Help.Text["en"]["menu"], content.Help.Text["en"]["languages"]}
-	assert.Equal(t, expected, g.Generate("+15551235555", "menu", 0))
+	expected := []string{content.Help.Text["en"]["intro"], content.Help.Text["en"]["languages"]}
+	assert.Equal(t, expected, g.Generate("+15551235555", "help", 0))
 }
 
 func TestHelpWithCommandFirstContact(t *testing.T) {
@@ -47,5 +47,5 @@ func TestHelpWithCommandFirstContact(t *testing.T) {
 	g := responseGenerator.New(c, u)
 
 	expected := []string{content.Intro.Text["en"]["all"]}
-	assert.Equal(t, expected, g.Generate("+15551235555", "menu", 0))
+	assert.Equal(t, expected, g.Generate("+15551235555", "help", 0))
 }
