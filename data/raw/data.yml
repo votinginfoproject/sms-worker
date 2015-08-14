@@ -486,7 +486,7 @@ help:
       intro: "मतदान जानकारी परियोजना चेतावनियाँ । info@votinginfoproject.org या https://www.votinginfoproject.org/projects/sms-tool/ पर मदद प्राप्त करें। संदेश और डाटा शुल्क लग सकते हैं। रद्द करने के लिए  STOP टैक्सट करें।"
       languages: टेक्स्ट english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT भाषा बदलने के लिए.
     ko:
-      intro: "투표 정보 프로젝트 알림: 도움말을 원하시면 info@votinginfoproject.org 또는 https://www.votinginfoproject.org/projects/sms-tool/.를 이용해 주시기 바랍니다.  메시지 및 데이터 요금이 부과될 수 있습니다. 취소를 원하시면 ‘STOP’ 이라고 텍스트 메시지를 전송해 주십시오."
+      intro: "투표 정보 프로젝트 알림: 도움말을 원하시면 info@votinginfoproject.org 또는 https://www.votinginfoproject.org/projects/sms-tool/. 를 이용해 주시기 바랍니다.  메시지 및 데이터 요금이 부과될 수 있습니다. 취소를 원하시면 ‘STOP’ 이라고 텍스트 메시지를 전송해 주십시오."
       languages: 언어를 바꾸기 위해선 english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT 를 택스트 하셔요.
     tl:
       intro: "Mga Alerto ng Proyekto sa Impormasyon ng Pagboto : Tulong sa info@votinginfoproject.org o https://www.votinginfoproject.org/projects/sms-tool/. Maaaring ilalapat ang mga rate sa mensahe at datos. I-text ang IHINTO upang kanselahin."
