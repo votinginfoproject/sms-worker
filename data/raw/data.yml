@@ -88,7 +88,7 @@ pollingLocation:
       hours: "Hours:"
       multi: "There are multiple polling locations in your area. Please text OFFICIAL for info on how to contact your local election official for more information."
     es:
-      prefix: "Su lugar de votación es la siguiente:"
+      prefix: "Su lugar de votacion es la siguiente:"
       hours: "Horario:"
       multi: "Existen múltiples centros electorales en su área. Por favor envíe un mensaje con la palabra FUNCIONARIO  para recibir información acerca de cómo contactarse con un funcionario electoral local para obtener más información."
     jp:
@@ -190,7 +190,7 @@ intro:
     en:
       all: Welcome to the Voting Information Project lookup tool. Reply with your address to find your polling location and other local info.
     es:
-      all: Bienvenido a la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Responda con su dirección para encontrar su lugar de votación y otra información local.
+      all: Bienvenido a la herramienta de busqueda del Proyecto de Informacion de Votacion de The Pew Charitable Trusts. Responda con su direccion para encontrar su lugar de votacion y otra informacion local.
     jp:
       all: The Pew Charitable Trustsの投票情報プロジェクト検索ツールへようこそ。あなたの住所を返信して投票所とその他の地元情報を見つけましょう。
     cn:
@@ -244,7 +244,7 @@ registration:
     en:
       prefix: "For registration information:"
     es:
-      prefix: "Para información de registro:"
+      prefix: "Para informacion de registro:"
     jp:
       prefix: "登録情報:"
     cn:
@@ -314,8 +314,8 @@ elo:
       email: "Email:"
     es:
       prefix: "Su funcionario electoral local es:"
-      phone: "Teléfono:"
-      email: "Correo electrónico:"
+      phone: "Telefono:"
+      email: "Correo electronico:"
     jp:
       prefix: "あなたの地域の選挙管理事務所は:"
       phone: "電話:"
@@ -418,7 +418,7 @@ about:
     en:
       all: You're using the Voting Information Project lookup tool. To learn more, visit http://www.votinginfoproject.org
     es:
-      all: Está utilizando la herramienta de búsqueda del Proyecto de Información de Votación de The Pew Charitable Trusts. Para obtener más información, visite http://www.votinginfoproject.org
+      all: Este es la herramienta de busqueda del Proyecto de Informacion de Votacion de The Pew Charitable Trusts. Para obtener mas informacion, visite http://www.votinginfoproject.org.
     jp:
       all: The Pew Charitable Trustsの投票情報プロジェクト検索ツールをご利用中です。詳細についてお知りになりたければ、http://www.votinginfoproject.orgをご覧くださ
     cn:
@@ -474,8 +474,8 @@ help:
       intro: "Voting Information Project Alerts: Help at info@votinginfoproject.org or https://www.votinginfoproject.org/projects/sms-tool/. Message & data rates may apply. Text STOP to cancel."
       languages: Text english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT to change the language.
     es:
-      intro: "Alertas del Proyecto para brindar información sobre las votaciones: Obtenga ayuda en info@votinginfoproject.org o https://www.votinginfoproject.org/projects/sms-tool/. Pueden regir tarifas por uso de mensajes y datos. Envíe un mensaje de texto con la palabra DETENER para cancelar."
-      languages: Envíe un mensaje de texto con la palabra english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para cambiar el idioma.
+      intro: "Alertas del Proyecto de informacion sobre las votaciones: Para mas informacion, escriba a info@votinginfoproject.org o visite https://www.votinginfoproject.org/projects/sms-tool/. Pueden regir tarifas por uso de mensajes y datos. Envie un mensaje de texto con la palabra DETENER para cancelar."
+      languages: Envie un mensaje de texto con la palabra english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT para cambiar el idioma.
     jp:
       intro: "投票インフォメーションプロジェクトのアラート: ヘルプに関してはinfo@votinginfoproject.org または https://www.votinginfoproject.org/projects/sms-tool/をご覧ください。メッセージ＆データ料金が適用される場合があります。取消するには停止のメッセージを送信してください。"
       languages: 携帯メールで english, español, tagalog, ไทย, ខ្មែរ, 한국어, 中文, 日本語, हिन्दी, TIẾNG VIỆT と打ち、言語を変更します
@@ -507,6 +507,7 @@ help:
     es:
       - ayuda
       - información
+      - informacion
     jp:
       - ヘルプ
       - インフォメーション
@@ -539,7 +540,7 @@ lastContact:
     en:
       prefix: "Your address on file is:"
     es:
-      prefix: "Su dirección registrada es:"
+      prefix: "Su direccion registrada es:"
     jp:
       prefix: "登録されているあなたの住所は:"
     cn:
@@ -578,13 +579,13 @@ errors:
       noRegistrationInfo: We don’t have registration information on file for your area.
       needAddress: We need your address to provide you with local voting information.
     es:
-      addressParseExistingUser: Este no es un comando reconocido. Envíe por texto AYUDA para ver todas las opciones.
-      addressParseNewUser: Necesitamos su dirección para ofrecerle información sobre la votación local. Nosotros no reconocemos esa dirección, inténtelo nuevamente.
-      noElectionInfo: No existen elecciones programadas para su area.  Revise para asegurarse que ingreso correctamente su información, Contacte su oficial electoral, o trate  otra vez cuando se acerca el Día de la Elección.
-      generalBackend: Lo sentimos, no hemos podido encontrar la ubicación de la votación del día de la elección.
+      addressParseExistingUser: Este no es un comando reconocido. Envie por texto AYUDA para ver todas las opciones.
+      addressParseNewUser: Necesitamos su direccion para ofrecerle informacion sobre la votacion local. Nosotros no reconocemos esa direccion, intentelo nuevamente.
+      noElectionInfo: No existen elecciones programadas para su area. Revise para asegurarse que ingreso correctamente su informacion, contacte su oficial electoral, o trate  otra vez cuando se acerca el Dia de la Eleccion.
+      generalBackend: Lo sentimos, no hemos podido encontrar la ubicacion de la votacion del dia de la eleccion.
       noElectionOfficial: No tenemos información electoral oficial archivada para su área.
       noRegistrationInfo: No tenemos información de inscripción archivada para su área.
-      needAddress: Necesitamos su dirección para poder  proveerle con información local sobre la votación.
+      needAddress: Necesitamos su direccion para ofrecerle informacion sobre la votacion local.
     jp:
       addressParseExistingUser: コマンドを認識できません。すべてのオプションをご覧になるには補助と携帯メールします。
       addressParseNewUser: あなたの地元の投票情報を提供するには、あなたの住所が必要です。その住所を確認できません。もう一度入力してください。
