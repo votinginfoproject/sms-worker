@@ -34,7 +34,9 @@ func TestHelpWithCommandNotFirstContact(t *testing.T) {
 	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
 	g := responseGenerator.New(c, u)
 
-	expected := []string{content.Help.Text["en"]["intro"], content.Help.Text["en"]["languages"]}
+	expected := []string{content.Help.Text["en"]["intro"],
+                       content.Help.Text["en"]["menu"],
+		                   content.Help.Text["en"]["languages"]}
 	assert.Equal(t, expected, g.Generate("+15551235555", "help", 0))
 }
 

@@ -93,6 +93,7 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 		} else {
 			messages = []string{
 				r.content.Help.Text[user.Language]["intro"],
+				r.content.Help.Text[user.Language]["menu"],
 				r.content.Help.Text[user.Language]["languages"]}
 		}
 	case "About":
