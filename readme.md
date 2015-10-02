@@ -79,33 +79,14 @@ godep go test ./...
 
 ### Generate Go Data File From YAML
 ~~~~
-rake gen_asset
+go-bindata -prefix "data" -pkg "data" -o data/data.go data/raw
 ~~~~
 
 - Generates a new data/data.go file
 
 ### Deploy
-~~~~
-rake deploy\[environment\]
-~~~~
 
-Prerequisites
-- The environment has been built with sms-infrastructure
-- AWS console access
-- The .env file has been built. You can retrieve the current one from s3 in the bucket "vip-sms-#{environment}" name "sms-worker-env".
-- You have passwordless ssh access to the vip-sms-app-worker servers as the ubuntu user. To achieve this, obtain the private key and run `ssh-add <private-key-file>` and test it with `ssh ubuntu@<worker-public-ip>`
+See the [sms-compose][sms-compose] repository for deployment
+instructions.
 
-Deploy will rebuild the code, upload the new binary to S3, figure out which EC2 instances are the right workers for the environment, and restart them with the new binary. It also uploads the current .env to the s3 bucket "vip-sms-#{env}" as "sms-worker-env", so this can be a starting point for a new .env file.
-
-Steps of the deploy task:
-- Build the binary
-- Upload the binary to S3
-- Upload all but the first THREE lines of the .env file to S3
-- Restart the sms-worker process on all instances
-
-### Send Test Message
-~~~~
-rake test\[environment,number,message\]
-~~~~
-
-- Send a test SMS from the specified number
+[sms-compose]: https://github.com/votinginfoproject/sms-compose
