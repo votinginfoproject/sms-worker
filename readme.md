@@ -12,7 +12,6 @@ generate message(s) and send them to Twilio.
 
 - Golang 1.3
 - A directory for Go development configured in $GOPATH, see below
-- Ruby 2.1.2
 - [Godep](https://github.com/tools/godep)
 - [go-bindata](https://github.com/jteeuwen/go-bindata)
 - A .env file with the following items...
