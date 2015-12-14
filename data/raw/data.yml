@@ -81,6 +81,14 @@ stop:
       - "ยกเลิก"
       - "ยกเลิกการเป็นสมาชิก"
       - "ออก"
+dropOffLocation:
+  text:
+    en:
+      prefix: "Your nearest drop box location is:"
+      hours: "Hours:"
+  triggers:
+    en:
+      - drop
 pollingLocation:
   text:
     en:

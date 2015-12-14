@@ -8,6 +8,7 @@ import (
 
 	"github.com/votinginfoproject/sms-worker/civic_api"
 	"github.com/votinginfoproject/sms-worker/data"
+	"github.com/votinginfoproject/sms-worker/response_generator/drop_off_location"
 	"github.com/votinginfoproject/sms-worker/response_generator/elo"
 	"github.com/votinginfoproject/sms-worker/response_generator/polling_location"
 	"github.com/votinginfoproject/sms-worker/response_generator/registration"
@@ -116,6 +117,16 @@ func (r *Generator) performAction(action string, user *users.User, message strin
 		} else {
 			messages = r.pollingLocation(user, user.Data["address"], routine)
 		}
+	case "DropOffLocation":
+		if user.IsNewUser() && user.FirstContact == true {
+			messages = []string{r.content.Intro.Text[user.Language]["all"]}
+		} else if user.IsNewUser() && user.FirstContact == false {
+			messages = []string{
+				r.content.Errors.Text[user.Language]["needAddress"] +
+					"\n\n" + r.content.Help.Text[user.Language]["languages"]}
+		} else {
+			messages = r.dropOffLocation(user, user.Data["address"], routine)
+		}
 	default:
 		messages = r.pollingLocation(user, message, routine)
 	}
@@ -196,6 +207,21 @@ func (r *Generator) pollingLocation(user *users.User, message string, routine in
 	}
 
 	messages, success := pollingLocation.BuildMessage(res, user, r.content)
+	if success == true {
+		r.userDb.SetAddress(user.Data["phone_number"], message)
+	}
+
+	return messages
+}
+
+func (r *Generator) dropOffLocation(user *users.User, message string, routine int) []string {
+	res, err := r.civic.Query(message)
+	if err != nil {
+		log.Printf("[ERROR] [%d] Civic API failure : %s", routine, err)
+		return []string{r.content.Errors.Text[user.Language]["generalBackend"]}
+	}
+
+	messages, success := dropOffLocation.BuildMessage(res, user, r.content)
 	if success == true {
 		r.userDb.SetAddress(user.Data["phone_number"], message)
 	}

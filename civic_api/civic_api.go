@@ -22,6 +22,21 @@ type Response struct {
 			Official bool   `json:"official"`
 		} `json:"sources"`
 	} `json:"pollingLocations"`
+	DropOffLocations []struct {
+		Address struct {
+			LocationName string `json:"locationName"`
+			Line1        string `json:"line1"`
+			City         string `json:"city"`
+			State        string `json:"state"`
+			Zip          string `json:"zip"`
+		} `json:"address"`
+		Notes        string `json:"notes"`
+		PollingHours string `json:"pollingHours"`
+		Sources      []struct {
+			Name     string `json:"name"`
+			Official bool   `json:"official"`
+		} `json:"sources"`
+	} `json:"dropOffLocations"`
 	Error struct {
 		Errors []struct {
 			Domain  string `json:"domain"`
