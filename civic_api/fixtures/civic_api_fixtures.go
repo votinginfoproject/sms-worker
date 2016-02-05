@@ -26,6 +26,12 @@ func MakeRequestSuccessMulti(endpoint string) ([]byte, error) {
 	return data, nil
 }
 
+func MakeRequestSuccessWithDropOff(endpoint string) ([]byte, error) {
+	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_with_drop_off.json"))
+
+	return data, nil
+}
+
 func MakeRequestSuccessEmpty(endpoint string) ([]byte, error) {
 	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_empty.json"))
 

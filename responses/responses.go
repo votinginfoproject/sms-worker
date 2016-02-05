@@ -15,6 +15,7 @@ type Response struct {
 type Content struct {
 	Stop             Response "stop"
 	PollingLocation  Response "pollingLocation"
+	DropOffLocation  Response "dropOffLocation"
 	ElectionOfficial Response "electionOfficial"
 	ChangeLanguage   Response "changeLanguage"
 	Registration     Response "registration"

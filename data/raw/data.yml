@@ -81,6 +81,59 @@ stop:
       - "ยกเลิก"
       - "ยกเลิกการเป็นสมาชิก"
       - "ออก"
+dropOffLocation:
+  text:
+    en:
+      prefix: "Your nearest drop box location is:"
+      hours: "Hours:"
+    es:
+      prefix: "Su urna electoral más cercana está:"
+      hours: "Horario:"
+    jp:
+      prefix: "あなたのお近くの投票箱は:"
+      hours: "時間:"
+    cn:
+      prefix: "離您最近的選票投放箱位於:"
+      hours: "時間:"
+    hi:
+      prefix: "आपका सबसे नज़दीकी ड्रॉप बॉक्स है:"
+      hours: "घंटे:"
+    ko:
+      prefix: "가까운 드롭 박스 위치:"
+      hours: "시간:"
+    tl:
+      prefix: "Ang iyong pinakamalapit na drop box ay nasa:"
+      hours: "Mga Oras:"
+    vi:
+      prefix: "Thùng bỏ phiếu gần quý vị nhất là:"
+      hours: "Giờ:"
+    km:
+      prefix: "ប្រអប់បោះឆ្នោតនៅជិតអ្នកបំផុតគឺ:"
+      hours: "ម៉ោងធ្វើការ:"
+    th:
+      prefix: "กล่องหย่อนบัตรลงคะแนนเสียงที่อยู่ใกล้คุณที่สุดคือ:"
+      hours: "เวลาทำการ:"
+  triggers:
+    en:
+      - ballot drop boxes
+    es:
+      - urnas electorales
+    tl:
+      - mga drop box ng balota
+    hi:
+      - बैलेट ड्रॉप बॉक्स
+    jp:
+      - 選挙用投票箱
+    cn:
+      - 選票投放箱
+    vi:
+      - thùng bỏ phiếu
+    th:
+      - กล่องหย่อนบัตรลงคะแนนเสียง
+    ko:
+      - 투표 용지 드롭 박스
+    kh:
+      - ប្រអប់បោះឆ្នោត
 pollingLocation:
   text:
     en:

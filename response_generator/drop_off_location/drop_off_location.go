@@ -1,53 +1,48 @@
-package pollingLocation
+package dropOffLocation
 
 import (
 	"fmt"
 
 	"github.com/votinginfoproject/sms-worker/civic_api"
-	"github.com/votinginfoproject/sms-worker/response_generator/drop_off_location"
 	"github.com/votinginfoproject/sms-worker/responses"
 	"github.com/votinginfoproject/sms-worker/users"
 )
 
 func BuildMessage(res *civicApi.Response, user *users.User, content *responses.Content) ([]string, bool) {
-	if len(res.PollingLocations) > 0 {
+	if len(res.DropOffLocations) > 0 {
 		return success(res, user.Language, content), true
-	} else if len(res.Error.Errors) == 0 && len(res.PollingLocations) == 0 {
+	} else if len(res.Error.Errors) == 0 && len(res.DropOffLocations) == 0 {
 		return []string{content.Errors.Text[user.Language]["noElectionInfo"]}, true
 	} else {
 		return failure(res, user, content), false
 	}
 }
 
-func success(res *civicApi.Response, language string, content *responses.Content) []string {
-	pl := res.PollingLocations[0]
-	response := content.PollingLocation.Text[language]["prefix"] + "\n"
+func DropOffLocationMessage(dol civicApi.DropOffLocation, language string, content *responses.Content) string {
+	response := content.DropOffLocation.Text[language]["prefix"] + "\n"
 
-	if len(pl.Address.LocationName) > 0 {
-		response = response + pl.Address.LocationName + "\n"
+	if len(dol.Address.LocationName) > 0 {
+		response = response + dol.Address.LocationName + "\n"
 	}
 
-	if len(pl.Address.Line1) > 0 {
-		response = fmt.Sprintf("%s%s\n%s, %s %s", response, pl.Address.Line1, pl.Address.City, pl.Address.State, pl.Address.Zip)
+	if len(dol.Address.Line1) > 0 {
+		response = fmt.Sprintf("%s%s\n%s, %s %s", response, dol.Address.Line1, dol.Address.City, dol.Address.State, dol.Address.Zip)
 	}
 
-	if len(pl.PollingHours) > 0 {
+	if len(dol.PollingHours) > 0 {
 		response = response + "\n" +
-			content.PollingLocation.Text[language]["hours"] +
-			" " + pl.PollingHours
+			content.DropOffLocation.Text[language]["hours"] +
+			" " + dol.PollingHours
 	}
 
-	responses := []string{response}
+	return response
+}
 
-	if len(res.DropOffLocations) > 0 {
-		responses = append(responses, dropOffLocation.DropOffLocationMessage(res.DropOffLocations[0], language, content))
-	}
+func success(res *civicApi.Response, language string, content *responses.Content) []string {
+	dol := res.DropOffLocations[0]
+	response := DropOffLocationMessage(dol, language, content)
 
-	if len(res.PollingLocations) > 1 {
-		return append(responses, content.PollingLocation.Text[language]["multi"], content.Help.Text[language]["menu"], content.Help.Text[language]["languages"])
-	} else {
-		return append(responses, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"])
-	}
+	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
 }
 
 func failure(res *civicApi.Response, user *users.User, content *responses.Content) []string {
