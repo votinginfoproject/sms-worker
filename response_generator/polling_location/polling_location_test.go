@@ -38,6 +38,22 @@ func TestPollingLocationSuccessNewUser(t *testing.T) {
 	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
+func TestPollingLocationWithDropOffSuccessNewUser(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessWithDropOff)
+	g := responseGenerator.New(c, u)
+
+	expected := []string{
+		"Your polling place is:\nFIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B\n1 BENEVOLENT ST\nPROVIDENCE, RI 02906\nHours: 7am - 7pm",
+		"Your nearest drop box location is:\nPROVIDENCE LIBRARY - GUTENBERG BRANCH\n14 40TH ST\nPROVIDENCE, RI 02906\nHours: 7am - 7pm",
+		content.Help.Text["en"]["menu"],
+		content.Help.Text["en"]["languages"]}
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
+}
+
 func TestPollingLocationSuccessNewUserFirstcontactCommand(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
@@ -83,6 +99,27 @@ func TestPollingLocationSuccessExistingUserCommand(t *testing.T) {
 
 	expected := []string{
 		fmt.Sprintf("%s\nFIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B\n1 BENEVOLENT ST\nPROVIDENCE, RI 02906\n%s 7am - 7pm", content.PollingLocation.Text["es"]["prefix"], content.PollingLocation.Text["es"]["hours"]),
+		content.Help.Text["es"]["menu"],
+		content.Help.Text["es"]["languages"]}
+	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))
+}
+
+func TestPollingLocationSuccessWithDropOffExistingUserCommand(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "es", "last_contact": timeString, "address": "exists"})
+
+	u := users.New(s)
+
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessWithDropOff)
+	g := responseGenerator.New(c, u)
+
+	expected := []string{
+		fmt.Sprintf("%s\nFIRST UNITARIAN CHURCH OF PROVIDENCE - 2ND FLR AUDITORIUM - B\n1 BENEVOLENT ST\nPROVIDENCE, RI 02906\n%s 7am - 7pm", content.PollingLocation.Text["es"]["prefix"], content.PollingLocation.Text["es"]["hours"]),
+		fmt.Sprintf("%s\nPROVIDENCE LIBRARY - GUTENBERG BRANCH\n14 40TH ST\nPROVIDENCE, RI 02906\n%s 7am - 7pm", content.DropOffLocation.Text["es"]["prefix"], content.DropOffLocation.Text["es"]["hours"]),
 		content.Help.Text["es"]["menu"],
 		content.Help.Text["es"]["languages"]}
 	assert.Equal(t, expected, g.Generate("+15551235555", "spoll", 0))

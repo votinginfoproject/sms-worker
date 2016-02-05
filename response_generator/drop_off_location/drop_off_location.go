@@ -18,8 +18,7 @@ func BuildMessage(res *civicApi.Response, user *users.User, content *responses.C
 	}
 }
 
-func success(res *civicApi.Response, language string, content *responses.Content) []string {
-	dol := res.DropOffLocations[0]
+func DropOffLocationMessage(dol civicApi.DropOffLocation, language string, content *responses.Content) string {
 	response := content.DropOffLocation.Text[language]["prefix"] + "\n"
 
 	if len(dol.Address.LocationName) > 0 {
@@ -35,6 +34,13 @@ func success(res *civicApi.Response, language string, content *responses.Content
 			content.DropOffLocation.Text[language]["hours"] +
 			" " + dol.PollingHours
 	}
+
+	return response
+}
+
+func success(res *civicApi.Response, language string, content *responses.Content) []string {
+	dol := res.DropOffLocations[0]
+	response := DropOffLocationMessage(dol, language, content)
 
 	return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
 }

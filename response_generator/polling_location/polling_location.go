@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/votinginfoproject/sms-worker/civic_api"
+	"github.com/votinginfoproject/sms-worker/response_generator/drop_off_location"
 	"github.com/votinginfoproject/sms-worker/responses"
 	"github.com/votinginfoproject/sms-worker/users"
 )
@@ -36,10 +37,16 @@ func success(res *civicApi.Response, language string, content *responses.Content
 			" " + pl.PollingHours
 	}
 
+	responses := []string{response}
+
+	if len(res.DropOffLocations) > 0 {
+		responses = append(responses, dropOffLocation.DropOffLocationMessage(res.DropOffLocations[0], language, content))
+	}
+
 	if len(res.PollingLocations) > 1 {
-		return []string{response, content.PollingLocation.Text[language]["multi"], content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+		return append(responses, content.PollingLocation.Text[language]["multi"], content.Help.Text[language]["menu"], content.Help.Text[language]["languages"])
 	} else {
-		return []string{response, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"]}
+		return append(responses, content.Help.Text[language]["menu"], content.Help.Text[language]["languages"])
 	}
 }
 
