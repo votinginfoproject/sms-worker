@@ -10,9 +10,9 @@ import (
 )
 
 func BuildMessage(res *civicApi.Response, user *users.User, content *responses.Content) ([]string, bool) {
-	if len(res.PollingLocations) > 0 {
+	if len(res.PollingLocations) > 0 || len(res.DropOffLocations) > 0 {
 		return success(res, user.Language, content), true
-	} else if len(res.Error.Errors) == 0 && len(res.PollingLocations) == 0 {
+	} else if len(res.Error.Errors) == 0 {
 		return []string{content.Errors.Text[user.Language]["noElectionInfo"]}, true
 	} else {
 		return failure(res, user, content), false
@@ -20,24 +20,28 @@ func BuildMessage(res *civicApi.Response, user *users.User, content *responses.C
 }
 
 func success(res *civicApi.Response, language string, content *responses.Content) []string {
-	pl := res.PollingLocations[0]
-	response := content.PollingLocation.Text[language]["prefix"] + "\n"
+	responses := []string{}
 
-	if len(pl.Address.LocationName) > 0 {
-		response = response + pl.Address.LocationName + "\n"
+	if len(res.PollingLocations) > 0 {
+		pl := res.PollingLocations[0]
+		response := content.PollingLocation.Text[language]["prefix"] + "\n"
+
+		if len(pl.Address.LocationName) > 0 {
+			response = response + pl.Address.LocationName + "\n"
+		}
+
+		if len(pl.Address.Line1) > 0 {
+			response = fmt.Sprintf("%s%s\n%s, %s %s", response, pl.Address.Line1, pl.Address.City, pl.Address.State, pl.Address.Zip)
+		}
+
+		if len(pl.PollingHours) > 0 {
+			response = response + "\n" +
+				content.PollingLocation.Text[language]["hours"] +
+				" " + pl.PollingHours
+		}
+
+		responses = append(responses, response)
 	}
-
-	if len(pl.Address.Line1) > 0 {
-		response = fmt.Sprintf("%s%s\n%s, %s %s", response, pl.Address.Line1, pl.Address.City, pl.Address.State, pl.Address.Zip)
-	}
-
-	if len(pl.PollingHours) > 0 {
-		response = response + "\n" +
-			content.PollingLocation.Text[language]["hours"] +
-			" " + pl.PollingHours
-	}
-
-	responses := []string{response}
 
 	if len(res.DropOffLocations) > 0 {
 		responses = append(responses, dropOffLocation.DropOffLocationMessage(res.DropOffLocations[0], language, content))
