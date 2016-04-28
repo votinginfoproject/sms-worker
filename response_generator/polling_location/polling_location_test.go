@@ -237,6 +237,22 @@ func TestPollingLocationEmpty(t *testing.T) {
 	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
 }
 
+func TestPollingLocationEmptyButHasDropOffLocations(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessNoPollingLocationsWithDropOff)
+	g := responseGenerator.New(c, u)
+
+	expected := []string{
+		fmt.Sprintf("%s\nPROVIDENCE LIBRARY - GUTENBERG BRANCH\n14 40TH ST\nPROVIDENCE, RI 02906\n%s 7am - 7pm", content.DropOffLocation.Text["en"]["prefix"], content.DropOffLocation.Text["en"]["hours"]),
+		content.Help.Text["en"]["menu"],
+		content.Help.Text["en"]["languages"]}
+
+	assert.Equal(t, expected, g.Generate("+15551235555", "111 address street", 0))
+}
+
 func TestPollingLocationFailure(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
