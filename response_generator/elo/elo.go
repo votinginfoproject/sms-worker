@@ -6,7 +6,7 @@ import (
 )
 
 func BuildMessage(res *civicApi.Response, language string, content *responses.Content) []string {
-	name, email, phone := getElo(res)
+	name, email, phone, url := getElo(res)
 	if len(name) == 0 {
 		return []string{content.Errors.Text[language]["noElectionOfficial"]}
 	}
@@ -20,10 +20,14 @@ func BuildMessage(res *civicApi.Response, language string, content *responses.Co
 		message = message + "\n" + content.Elo.Text[language]["email"] + " " + email
 	}
 
+	if len(url) > 0 {
+		message = message + "\n" + url
+	}
+
 	return []string{message}
 }
 
-func getElo(res *civicApi.Response) (string, string, string) {
+func getElo(res *civicApi.Response) (string, string, string, string) {
 	defer func() {
 		if err := recover(); err != nil {
 		}
@@ -32,12 +36,15 @@ func getElo(res *civicApi.Response) (string, string, string) {
 	var name string
 	var email string
 	var phone string
+	var url string
 
-	elo := res.State[0].LocalJurisdiction.ElectionAdministrationBody.ElectionOfficials[0]
+	eab := res.State[0].LocalJurisdiction.ElectionAdministrationBody
+	elo := eab.ElectionOfficials[0]
 
 	name = elo.Name
 	email = elo.EmailAddress
 	phone = elo.OfficePhoneNumber
+	url = eab.ElectionInfoUrl
 
-	return name, email, phone
+	return name, email, phone, url
 }
