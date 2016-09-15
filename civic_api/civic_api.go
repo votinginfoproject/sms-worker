@@ -56,6 +56,7 @@ type Response struct {
 					OfficePhoneNumber string `json:"officePhoneNumber"`
 					EmailAddress      string `json:"emailAddress"`
 				} `json:"electionOfficials"`
+				ElectionInfoUrl   string `json:"electionInfoUrl"`
 				ElectionRegistrationUrl string `json:"electionRegistrationUrl"`
 			} `json:"electionAdministrationBody"`
 		} `json:"local_jurisdiction"`

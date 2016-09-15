@@ -78,6 +78,6 @@ func TestEloSuccessExistingUser(t *testing.T) {
 	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccess)
 	g := responseGenerator.New(c, u)
 
-	expected := []string{"Your local election official is:\nDan Burk\nPhone: (775) 328-3670\nEmail: dburk@washoecounty.us"}
+	expected := []string{"Your local election official is:\nDan Burk\nPhone: (775) 328-3670\nEmail: dburk@washoecounty.us\nhttp://www.sos.ri.gov"}
 	assert.Equal(t, expected, g.Generate("+15551235555", "elo", 0))
 }
