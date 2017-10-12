@@ -76,6 +76,14 @@ $ docker run sms-worker
 godep go test ./...
 ~~~~
 
+To run the tests in docker:
+
+- `docker build -t sms-worker .` to build the Docker image
+- `docker run -ti --env-file .env sms-worker /bin/bash` to start the
+container with an interactive terminal
+- `godep go test ./...` to run the tests.
+
+
 ### Generate Go Data File From YAML
 ~~~~
 go-bindata -prefix "data" -pkg "data" -o data/data.go data/raw
