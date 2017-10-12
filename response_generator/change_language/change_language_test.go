@@ -38,6 +38,22 @@ func TestChangeLanguageWithLanguageCommandNotFirstContact(t *testing.T) {
 	assert.Equal(t, expected, g.Generate("+15551235555", "español", 0))
 }
 
+func TestChangeLanguageWithLanguageCommandNotFirstContactSpanish(t *testing.T) {
+	setup()
+	s := fakeStorage.New()
+	u := users.New(s)
+
+	time := time.Now().Unix()
+	timeString := strconv.FormatInt(time, 10)
+	s.CreateItem("+15551235555", map[string]string{"language": "en", "last_contact": timeString})
+
+	c := civicApi.New("", "", "", civicApiFixtures.MakeRequestSuccessFake)
+	g := responseGenerator.New(c, u)
+
+	expected := []string{content.Help.Text["es"]["intro"], content.Help.Text["es"]["languages"]}
+	assert.Equal(t, expected, g.Generate("+15551235555", "español", 0))
+}
+
 func TestChangeLanguageWithOtherCommandNotFirstContact(t *testing.T) {
 	setup()
 	s := fakeStorage.New()
