@@ -10,7 +10,7 @@ import (
 var root string
 
 func init() {
-	_, filename, _, _ := runtime.Caller(1)
+	_, filename, _, _ := runtime.Caller(0)
 	root = filepath.Dir(filename)
 }
 
