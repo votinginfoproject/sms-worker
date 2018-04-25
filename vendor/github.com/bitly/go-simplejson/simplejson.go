@@ -8,7 +8,7 @@ import (
 
 // returns the current implementation version
 func Version() string {
-	return "0.5.0-alpha"
+	return "0.5.0"
 }
 
 type Json struct {
@@ -225,7 +225,7 @@ func (j *Json) StringArray() ([]string, error) {
 		}
 		s, ok := a.(string)
 		if !ok {
-			return nil, err
+			return nil, errors.New("type assertion to []string failed")
 		}
 		retArr = append(retArr, s)
 	}
@@ -300,6 +300,31 @@ func (j *Json) MustString(args ...string) string {
 	s, err := j.String()
 	if err == nil {
 		return s
+	}
+
+	return def
+}
+
+// MustStringArray guarantees the return of a `[]string` (with optional default)
+//
+// useful when you want to interate over array values in a succinct manner:
+//		for i, s := range js.Get("results").MustStringArray() {
+//			fmt.Println(i, s)
+//		}
+func (j *Json) MustStringArray(args ...[]string) []string {
+	var def []string
+
+	switch len(args) {
+	case 0:
+	case 1:
+		def = args[0]
+	default:
+		log.Panicf("MustStringArray() received too many arguments %d", len(args))
+	}
+
+	a, err := j.StringArray()
+	if err == nil {
+		return a
 	}
 
 	return def
