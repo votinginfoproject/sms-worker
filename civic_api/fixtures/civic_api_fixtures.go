@@ -3,7 +3,7 @@ package civicApiFixtures
 import (
 	"errors"
 	"io/ioutil"
-	"path"
+	"path/filepath"
 	"runtime"
 )
 
@@ -11,53 +11,53 @@ var root string
 
 func init() {
 	_, filename, _, _ := runtime.Caller(1)
-	root = path.Dir(filename)
+	root = filepath.Dir(filename)
 }
 
 func MakeRequestSuccess(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success.json"))
 
 	return data, nil
 }
 
 func MakeRequestSuccessMulti(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_multi.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success_multi.json"))
 
 	return data, nil
 }
 
 func MakeRequestSuccessWithDropOff(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_with_drop_off.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success_with_drop_off.json"))
 
 	return data, nil
 }
 
 func MakeRequestSuccessNoPollingLocationsWithDropOff(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_no_polling_location_with_drop_off.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success_no_polling_location_with_drop_off.json"))
 
 	return data, nil
 }
 
 func MakeRequestSuccessEmpty(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_empty.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success_empty.json"))
 
 	return data, nil
 }
 
 func MakeRequestSuccessEmptyState(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_success_empty_state.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_success_empty_state.json"))
 
 	return data, nil
 }
 
 func MakeRequestParseError(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_parse_error.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_parse_error.json"))
 
 	return data, nil
 }
 
 func MakeRequestNotFoundError(endpoint string) ([]byte, error) {
-	data, _ := ioutil.ReadFile(path.Join(root, "google_civic_not_found_error.json"))
+	data, _ := ioutil.ReadFile(filepath.Join(root, "google_civic_not_found_error.json"))
 
 	return data, nil
 }
