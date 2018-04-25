@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/votinginfoproject/sms-worker",
-	"GoVersion": "go1.6",
+	"GoVersion": "go1.10",
 	"GodepVersion": "v80",
 	"Packages": [
 		"./..."
