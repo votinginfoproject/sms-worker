@@ -10,7 +10,7 @@ generate message(s) and send them to Twilio.
 
 **OR**
 
-- Golang 1.3
+- Golang 1.6
 - A directory for Go development configured in $GOPATH, see below
 - [Godep](https://github.com/tools/godep)
 - [go-bindata](https://github.com/jteeuwen/go-bindata)
