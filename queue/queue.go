@@ -38,7 +38,7 @@ func (s *SQS) Connect() {
 	secretKey := os.Getenv("SECRET_ACCESS_KEY")
 
 	auth := aws.Auth{AccessKey: accessKey, SecretKey: secretKey}
-	sqs := sqs.New(auth, aws.USEast)
+	sqs := sqs.New(auth, aws.USWest2)
 
 	queueName := os.Getenv("QUEUE_PREFIX") + "-" + strings.ToLower(os.Getenv("ENVIRONMENT"))
 

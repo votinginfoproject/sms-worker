@@ -23,7 +23,7 @@ func New() *Dynamo {
 	secretKey := os.Getenv("SECRET_ACCESS_KEY")
 
 	auth := aws.Auth{AccessKey: accessKey, SecretKey: secretKey}
-	server := dynamodb.Server{auth, aws.USEast}
+	server := dynamodb.Server{auth, aws.USWest2}
 
 	primary := dynamodb.NewStringAttribute("phone_number", "")
 	key := dynamodb.PrimaryKey{primary, nil}
