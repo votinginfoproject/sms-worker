@@ -38,7 +38,13 @@ func (s *SQS) Connect() {
 	secretKey := os.Getenv("SECRET_ACCESS_KEY")
 
 	auth := aws.Auth{AccessKey: accessKey, SecretKey: secretKey}
-	sqs := sqs.New(auth, aws.USEast)
+
+	regionString := os.Getenv("AWS_REGION")
+	if regionString == "" {
+		regionString = "us-east-1"
+	}
+
+	sqs := sqs.New(auth, aws.Regions[regionString])
 
 	queueName := os.Getenv("QUEUE_PREFIX") + "-" + strings.ToLower(os.Getenv("ENVIRONMENT"))
 
